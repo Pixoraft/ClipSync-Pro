@@ -25,12 +25,7 @@
   </head>
   <body>
     <div id="root"></div>
-    <script>
-      // Redirect to home.html for standalone experience
-      if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
-        window.location.replace('/home.html');
-      }
-    </script>
+    <!-- No redirect script needed, use React for home -->
     <script type="module" src="/src/main.tsx"></script>
     <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
   </body>

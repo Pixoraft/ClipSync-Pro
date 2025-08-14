@@ -16,7 +16,7 @@ export default function Navigation() {
   }, []);
 
   const navLinks = [
-    { href: "/home.html", label: "Home" },
+    { href: "/", label: "Home" },
     { href: "/about.html", label: "About" },
     { href: "/pricing.html", label: "Pricing" },
     { href: "/downloads.html", label: "Downloads" },
@@ -29,7 +29,7 @@ export default function Navigation() {
     }`}>
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between">
-          <a href="/home.html">
+          <a href="/">
             <div className="flex items-center space-x-3 cursor-pointer group">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-electric to-cyber glow-effect flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <i className="fas fa-clipboard-list text-white text-lg"></i>
@@ -48,13 +48,6 @@ export default function Navigation() {
                 </span>
               </a>
             ))}
-            <a href="/downloads.html">
-              <Button 
-                className="px-6 py-3 bg-gradient-to-r from-electric to-cyber rounded-xl font-semibold hover:scale-105 transform transition-all duration-300 glow-effect"
-              >
-                Download Free
-              </Button>
-            </a>
           </div>
 
           {/* Mobile menu button */}

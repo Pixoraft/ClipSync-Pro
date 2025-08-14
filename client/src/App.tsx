@@ -15,12 +15,10 @@ import ParticleBackground from "@/components/ui/particle-background";
 import { useEffect, useState } from "react";
 
 function Router() {
-  // Redirect to HTML pages immediately
+  // Redirect to HTML pages for specific routes only
   useEffect(() => {
     const path = window.location.pathname;
-    if (path === '/' || path === '/home') {
-      window.location.replace('/home.html');
-    } else if (path === '/about') {
+    if (path === '/about') {
       window.location.replace('/about.html');
     } else if (path === '/pricing') {
       window.location.replace('/pricing.html');
