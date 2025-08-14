@@ -17,14 +17,151 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0F1419 0%, #1A1F2E 100%); color: white; line-height: 1.6; min-height: 100vh; }
+      .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+      .text-glow { text-shadow: 0 0 20px rgba(59, 130, 246, 0.6); }
+      .btn { background: linear-gradient(45deg, #3B82F6, #06B6D4); color: white; padding: 15px 30px; border: none; border-radius: 12px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; cursor: pointer; }
+      .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3); }
+      .hero { text-align: center; padding: 80px 0; }
+      .hero h1 { font-size: 4rem; font-weight: 900; margin-bottom: 20px; }
+      .nav-links { text-align: center; padding: 20px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+      .nav-links a { color: white; text-decoration: none; margin: 0 20px; padding: 10px 20px; border-radius: 8px; transition: all 0.3s ease; }
+      .nav-links a:hover { background: rgba(59, 130, 246, 0.2); }
+      .card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 30px; }
+      @media (max-width: 768px) { .hero h1 { font-size: 2.5rem; } }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script>
-      // Force navigation to about page
-      window.location.href = '/about';
-    </script>
-    <script type="module" src="/src/main.tsx"></script>
-    <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
+    <nav class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="downloads.html">Downloads</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <section class="hero">
+      <div class="container">
+        <h1 class="text-glow">About ClipFlow Pro</h1>
+        <p style="color: #94A3B8; font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
+          Revolutionizing how professionals manage their digital workflow through 
+          intelligent clipboard management and seamless productivity tools.
+        </p>
+      </div>
+    </section>
+
+    <section style="padding: 60px 0; background: rgba(15, 20, 25, 0.5);">
+      <div class="container">
+        <div class="card" style="max-width: 800px; margin: 0 auto;">
+          <h2 style="color: #3B82F6; font-size: 2rem; margin-bottom: 25px;">Our Story</h2>
+          
+          <div style="space-y: 20px;">
+            <p style="color: #94A3B8; margin-bottom: 20px;">
+              ClipFlow Pro was born from a simple frustration: losing important text and links 
+              that were copied but never properly saved. As developers and content creators, 
+              we constantly juggle multiple pieces of information, from code snippets to URLs, 
+              from documentation to creative ideas.
+            </p>
+            
+            <p style="color: #94A3B8; margin-bottom: 20px;">
+              Traditional clipboard managers felt outdated and clunky. We envisioned something 
+              different - a premium tool that would anticipate our needs, work seamlessly in 
+              the background, and provide instant access to our digital thoughts and discoveries.
+            </p>
+            
+            <p style="color: #94A3B8;">
+              After months of development and refinement, ClipFlow Pro emerged as more than 
+              just a clipboard manager. It's an intelligent productivity companion that learns 
+              from your workflow and enhances your digital experience.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding: 60px 0;">
+      <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+          <div class="card">
+            <div style="width: 60px; height: 60px; background: linear-gradient(45deg, #3B82F6, #06B6D4); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+              <i class="fas fa-bullseye" style="color: white; font-size: 1.5rem;"></i>
+            </div>
+            <h3 style="color: #3B82F6; font-size: 1.5rem; margin-bottom: 15px;">Our Mission</h3>
+            <p style="color: #94A3B8;">
+              To empower professionals and creators with intelligent tools that seamlessly 
+              integrate into their workflow, making digital productivity effortless and intuitive.
+            </p>
+          </div>
+
+          <div class="card">
+            <div style="width: 60px; height: 60px; background: linear-gradient(45deg, #06B6D4, #3B82F6); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+              <i class="fas fa-eye" style="color: white; font-size: 1.5rem;"></i>
+            </div>
+            <h3 style="color: #3B82F6; font-size: 1.5rem; margin-bottom: 15px;">Our Vision</h3>
+            <p style="color: #94A3B8;">
+              A world where digital tools anticipate user needs, where productivity flows 
+              naturally, and where technology enhances human creativity without getting in the way.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding: 60px 0; background: rgba(15, 20, 25, 0.5);">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 40px;">
+          <h2 class="text-glow" style="font-size: 2.5rem; margin-bottom: 15px;">Core Values</h2>
+          <p style="color: #94A3B8; font-size: 1.1rem;">The principles that guide everything we do</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+          <div style="text-align: center; padding: 25px;">
+            <i class="fas fa-shield-alt" style="font-size: 3rem; color: #22C55E; margin-bottom: 15px;"></i>
+            <h3 style="color: #22C55E; margin-bottom: 10px;">Privacy First</h3>
+            <p style="color: #94A3B8; font-size: 0.9rem;">Your data belongs to you. Everything stays local and secure on your device.</p>
+          </div>
+          
+          <div style="text-align: center; padding: 25px;">
+            <i class="fas fa-heart" style="font-size: 3rem; color: #EF4444; margin-bottom: 15px;"></i>
+            <h3 style="color: #EF4444; margin-bottom: 10px;">Free Forever</h3>
+            <p style="color: #94A3B8; font-size: 0.9rem;">Powerful tools shouldn't be locked behind paywalls. ClipFlow Pro is free for everyone.</p>
+          </div>
+          
+          <div style="text-align: center; padding: 25px;">
+            <i class="fas fa-rocket" style="font-size: 3rem; color: #A855F7; margin-bottom: 15px;"></i>
+            <h3 style="color: #A855F7; margin-bottom: 10px;">Innovation</h3>
+            <p style="color: #94A3B8; font-size: 0.9rem;">We continuously push boundaries to create the most advanced clipboard experience.</p>
+          </div>
+          
+          <div style="text-align: center; padding: 25px;">
+            <i class="fas fa-users" style="font-size: 3rem; color: #3B82F6; margin-bottom: 15px;"></i>
+            <h3 style="color: #3B82F6; margin-bottom: 10px;">Community</h3>
+            <p style="color: #94A3B8; font-size: 0.9rem;">Built by users, for users. Your feedback shapes every feature and improvement.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding: 60px 0; text-align: center;">
+      <div class="container">
+        <div class="card" style="max-width: 600px; margin: 0 auto;">
+          <h2 class="text-glow" style="margin-bottom: 20px;">Ready to Experience ClipFlow Pro?</h2>
+          <p style="color: #94A3B8; margin-bottom: 30px; font-size: 1.1rem;">
+            Join thousands of professionals who have transformed their workflow with our free clipboard manager.
+          </p>
+          
+          <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+            <a href="downloads.html" class="btn">
+              <i class="fas fa-download"></i> Download Now
+            </a>
+            <a href="contact.html" class="btn" style="background: rgba(255, 255, 255, 0.1);">
+              <i class="fas fa-envelope"></i> Contact Us
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </body>
 </html>

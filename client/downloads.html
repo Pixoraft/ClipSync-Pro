@@ -17,14 +17,370 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(135deg, #0F1419 0%, #1A1F2E 100%);
+        color: white;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+      
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      
+      .text-glow {
+        text-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+      }
+      
+      .btn {
+        background: linear-gradient(45deg, #3B82F6, #06B6D4);
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+      }
+      
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+      }
+      
+      .btn-linux {
+        background: linear-gradient(45deg, #22C55E, #16A34A);
+      }
+      
+      .btn-windows {
+        background: linear-gradient(45deg, #EAB308, #CA8A04);
+      }
+      
+      .hero {
+        text-align: center;
+        padding: 80px 0;
+      }
+      
+      .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 900;
+        margin-bottom: 20px;
+      }
+      
+      .download-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 30px;
+        margin: 50px 0;
+      }
+      
+      .download-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 2px solid;
+        border-radius: 20px;
+        padding: 30px;
+        text-align: center;
+      }
+      
+      .linux-card {
+        border-color: #22C55E;
+        box-shadow: 0 0 30px rgba(34, 197, 94, 0.2);
+      }
+      
+      .windows-card {
+        border-color: #EAB308;
+        box-shadow: 0 0 30px rgba(234, 179, 8, 0.2);
+      }
+      
+      .platform-icon {
+        font-size: 4rem;
+        margin-bottom: 20px;
+      }
+      
+      .linux-icon {
+        color: #22C55E;
+      }
+      
+      .windows-icon {
+        color: #EAB308;
+      }
+      
+      .features-list {
+        text-align: left;
+        margin: 20px 0;
+      }
+      
+      .features-list li {
+        margin: 8px 0;
+        color: #94A3B8;
+      }
+      
+      .nav-links {
+        text-align: center;
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        margin: 0 20px;
+        padding: 10px 20px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+      
+      .nav-links a:hover {
+        background: rgba(59, 130, 246, 0.2);
+      }
+      
+      .requirements {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 15px;
+        margin: 20px 0;
+      }
+      
+      .warning {
+        background: rgba(234, 179, 8, 0.1);
+        border: 1px solid #EAB308;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 20px 0;
+      }
+      
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+        
+        .download-cards {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script>
-      // Force navigation to downloads page
-      window.location.href = '/downloads';
-    </script>
-    <script type="module" src="/src/main.tsx"></script>
-    <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
+    <!-- Navigation -->
+    <nav class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="downloads.html">Downloads</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <h1 class="text-glow">Download ClipFlow Pro</h1>
+        <p style="color: #94A3B8; font-size: 1.2rem; margin-bottom: 30px;">Get the world's most advanced clipboard manager - completely free forever</p>
+        
+        <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px; margin: 30px auto; max-width: 600px;">
+          <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <i class="fas fa-check" style="color: #22C55E; font-size: 1.2rem;"></i>
+              <span style="color: #94A3B8; font-weight: 600;">100% Free</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <i class="fas fa-shield-alt" style="color: #3B82F6; font-size: 1.2rem;"></i>
+              <span style="color: #94A3B8; font-weight: 600;">No Registration</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <i class="fas fa-lock" style="color: #A855F7; font-size: 1.2rem;"></i>
+              <span style="color: #94A3B8; font-weight: 600;">Secure & Private</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download Options -->
+    <section style="padding: 50px 0;">
+      <div class="container">
+        <div class="download-cards">
+          <!-- Linux Card -->
+          <div class="download-card linux-card">
+            <i class="fab fa-linux platform-icon linux-icon"></i>
+            <h3 style="font-size: 2rem; margin-bottom: 10px; color: #22C55E;">Linux</h3>
+            <p style="color: #22C55E; font-weight: 600; font-size: 1.1rem; margin-bottom: 15px;">Fully Supported</p>
+            <p style="color: #94A3B8; margin-bottom: 20px;">Native performance with complete feature support</p>
+            
+            <div class="requirements">
+              <h4 style="color: #94A3B8; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px;">System Requirements</h4>
+              <p style="color: #94A3B8;">Ubuntu 18.04+ | Debian 10+ | Fedora 32+</p>
+              <p style="color: #64748B; font-size: 0.9rem;">File Size: ~15MB</p>
+            </div>
+            
+            <div style="text-align: left; margin: 20px 0;">
+              <h4 style="color: #94A3B8; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px;">Features</h4>
+              <ul class="features-list" style="list-style: none; padding: 0;">
+                <li><i class="fas fa-check" style="color: #22C55E; margin-right: 8px;"></i> Full clipboard monitoring</li>
+                <li><i class="fas fa-check" style="color: #22C55E; margin-right: 8px;"></i> System tray integration</li>
+                <li><i class="fas fa-check" style="color: #22C55E; margin-right: 8px;"></i> Keyboard shortcuts</li>
+                <li><i class="fas fa-check" style="color: #22C55E; margin-right: 8px;"></i> Auto-start on boot</li>
+                <li><i class="fas fa-check" style="color: #22C55E; margin-right: 8px;"></i> Perfect stability</li>
+              </ul>
+            </div>
+            
+            <a href="https://drive.google.com/file/d/1RTgAfIL8G-HhNpVVwLo_-u9pJy9C9AXv/view?usp=drive_link" target="_blank" class="btn btn-linux">
+              <i class="fas fa-download"></i> Download for Linux
+            </a>
+          </div>
+
+          <!-- Windows Card -->
+          <div class="download-card windows-card">
+            <i class="fab fa-windows platform-icon windows-icon"></i>
+            <h3 style="font-size: 2rem; margin-bottom: 10px; color: #EAB308;">Windows</h3>
+            <p style="color: #EAB308; font-weight: 600; font-size: 1.1rem; margin-bottom: 15px;">Experimental</p>
+            <p style="color: #94A3B8; margin-bottom: 20px;">Limited compatibility with occasional stability issues</p>
+            
+            <div class="requirements">
+              <h4 style="color: #94A3B8; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px;">System Requirements</h4>
+              <p style="color: #94A3B8;">Windows 10+ | Windows 11</p>
+              <p style="color: #64748B; font-size: 0.9rem;">File Size: ~18MB</p>
+            </div>
+            
+            <div style="text-align: left; margin: 20px 0;">
+              <h4 style="color: #94A3B8; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px;">Features</h4>
+              <ul class="features-list" style="list-style: none; padding: 0;">
+                <li><i class="fas fa-exclamation-triangle" style="color: #EAB308; margin-right: 8px;"></i> Basic clipboard capture</li>
+                <li><i class="fas fa-exclamation-triangle" style="color: #EAB308; margin-right: 8px;"></i> Limited system integration</li>
+                <li><i class="fas fa-exclamation-triangle" style="color: #EAB308; margin-right: 8px;"></i> Reduced feature set</li>
+                <li><i class="fas fa-exclamation-triangle" style="color: #EAB308; margin-right: 8px;"></i> Community support only</li>
+                <li><i class="fas fa-exclamation-triangle" style="color: #EAB308; margin-right: 8px;"></i> May have stability issues</li>
+              </ul>
+            </div>
+            
+            <div class="warning">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                <i class="fas fa-exclamation-triangle" style="color: #EAB308;"></i>
+                <span style="color: #EAB308; font-weight: 600;">Windows Notice</span>
+              </div>
+              <p style="color: #94A3B8; font-size: 0.9rem;">
+                The Windows version is experimental and may have compatibility issues. 
+                We recommend the Linux version for the best experience.
+              </p>
+            </div>
+            
+            <a href="https://drive.google.com/file/d/1XMqhRZPbnYYs898RalbmoWVJNS7bc7sw/view?usp=drive_link" target="_blank" class="btn btn-windows">
+              <i class="fas fa-download"></i> Download for Windows
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Installation Instructions -->
+    <section style="padding: 50px 0; background: rgba(15, 20, 25, 0.5);">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 40px;">
+          <h2 class="text-glow" style="font-size: 2.5rem; margin-bottom: 15px;">Installation Instructions</h2>
+          <p style="color: #94A3B8; font-size: 1.1rem;">Simple setup process for both platforms</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px;">
+          <!-- Linux Instructions -->
+          <div style="background: rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 30px;">
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+              <i class="fab fa-linux" style="font-size: 2rem; color: #22C55E;"></i>
+              <h3 style="font-size: 1.5rem; color: #22C55E;">Linux Installation</h3>
+            </div>
+
+            <div style="space-y: 20px;">
+              <div style="display: flex; align-items: start; gap: 15px; margin-bottom: 20px;">
+                <div style="width: 30px; height: 30px; background: #22C55E; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem;">1</div>
+                <div>
+                  <p style="color: #94A3B8;"><strong>Download</strong> the .deb package file</p>
+                </div>
+              </div>
+              
+              <div style="display: flex; align-items: start; gap: 15px; margin-bottom: 20px;">
+                <div style="width: 30px; height: 30px; background: #22C55E; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem;">2</div>
+                <div>
+                  <p style="color: #94A3B8; margin-bottom: 10px;"><strong>Install</strong> using your package manager:</p>
+                  <code style="display: block; background: #0F1419; padding: 10px; border-radius: 8px; color: #22C55E; font-family: 'JetBrains Mono', monospace;">sudo dpkg -i clipflow-pro.deb</code>
+                </div>
+              </div>
+              
+              <div style="display: flex; align-items: start; gap: 15px;">
+                <div style="width: 30px; height: 30px; background: #22C55E; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem;">3</div>
+                <div>
+                  <p style="color: #94A3B8; margin-bottom: 10px;"><strong>Launch</strong> from applications menu or terminal</p>
+                  <code style="display: block; background: #0F1419; padding: 10px; border-radius: 8px; color: #22C55E; font-family: 'JetBrains Mono', monospace;">clipflow-pro</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Windows Instructions -->
+          <div style="background: rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 30px;">
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+              <i class="fab fa-windows" style="font-size: 2rem; color: #EAB308;"></i>
+              <h3 style="font-size: 1.5rem; color: #EAB308;">Windows Installation</h3>
+            </div>
+
+            <div style="space-y: 20px;">
+              <div style="display: flex; align-items: start; gap: 15px; margin-bottom: 20px;">
+                <div style="width: 30px; height: 30px; background: #EAB308; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem;">1</div>
+                <div>
+                  <p style="color: #94A3B8;"><strong>Download</strong> the executable file</p>
+                </div>
+              </div>
+              
+              <div style="display: flex; align-items: start; gap: 15px; margin-bottom: 20px;">
+                <div style="width: 30px; height: 30px; background: #EAB308; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem;">2</div>
+                <div>
+                  <p style="color: #94A3B8;"><strong>Run as Administrator</strong> and follow setup wizard</p>
+                </div>
+              </div>
+              
+              <div style="display: flex; align-items: start; gap: 15px;">
+                <div style="width: 30px; height: 30px; background: #EAB308; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem;">3</div>
+                <div>
+                  <p style="color: #94A3B8;"><strong>Note:</strong> May require Windows Defender exclusion</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Support Section -->
+    <section style="padding: 50px 0; text-align: center;">
+      <div class="container">
+        <div style="background: rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 40px; max-width: 600px; margin: 0 auto;">
+          <h2 class="text-glow" style="margin-bottom: 20px;">Need Help?</h2>
+          <p style="color: #94A3B8; margin-bottom: 30px; font-size: 1.1rem;">
+            Having trouble with installation or need support? We're here to help!
+          </p>
+          
+          <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+            <a href="contact.html" class="btn" style="width: auto;">
+              <i class="fas fa-life-ring"></i> Get Support
+            </a>
+            <a href="https://vivek-rvt.onrender.com" target="_blank" class="btn" style="background: rgba(255, 255, 255, 0.1); width: auto;">
+              <i class="fas fa-user-circle"></i> Developer Portfolio
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </body>
 </html>
