@@ -28,7 +28,7 @@
     <script>
       // Redirect to home.html for standalone experience
       if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
-        window.location.href = '/home.html';
+        window.location.replace('/home.html');
       }
     </script>
     <script type="module" src="/src/main.tsx"></script>

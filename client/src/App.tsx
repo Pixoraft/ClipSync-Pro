@@ -15,21 +15,19 @@ import ParticleBackground from "@/components/ui/particle-background";
 import { useEffect, useState } from "react";
 
 function Router() {
-  const [location] = window.location.pathname.split('/');
-  
-  // Redirect to HTML pages if available
+  // Redirect to HTML pages immediately
   useEffect(() => {
     const path = window.location.pathname;
     if (path === '/' || path === '/home') {
-      window.location.href = '/home.html';
+      window.location.replace('/home.html');
     } else if (path === '/about') {
-      window.location.href = '/about.html';
+      window.location.replace('/about.html');
     } else if (path === '/pricing') {
-      window.location.href = '/pricing.html';
+      window.location.replace('/pricing.html');
     } else if (path === '/downloads') {
-      window.location.href = '/downloads.html';
+      window.location.replace('/downloads.html');
     } else if (path === '/contact') {
-      window.location.href = '/contact.html';
+      window.location.replace('/contact.html');
     }
   }, []);
 
