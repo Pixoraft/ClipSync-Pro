@@ -8,6 +8,7 @@ import Home from "@/pages/home";
 import About from "@/pages/about";
 import Pricing from "@/pages/pricing";
 import Contact from "@/pages/contact";
+import Downloads from "@/pages/downloads";
 import Navigation from "@/components/layout/navigation";
 import Footer from "@/components/layout/footer";
 import ParticleBackground from "@/components/ui/particle-background";

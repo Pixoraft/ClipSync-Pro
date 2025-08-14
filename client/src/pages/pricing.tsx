@@ -9,54 +9,26 @@ export default function Pricing() {
 
   const pricingPlans = [
     {
-      title: "Free",
-      price: "$0",
-      description: "Perfect for getting started",
-      features: [
-        "Up to 100 clips",
-        "Basic search functionality",
-        "Local storage only",
-        "Dark theme interface",
-        "Windows & Linux support",
-        "Basic clipboard monitoring"
-      ],
-      buttonText: "Download Free",
-      onButtonClick: () => window.open('https://drive.usercontent.google.com/download?id=1RTgAfIL8G-HhNpVVwLo_-u9pJy9C9AXv&export=download&authuser=0', '_blank')
-    },
-    {
-      title: "Pro",
-      price: "$9",
-      description: "For power users and professionals",
+      title: "ClipFlow Pro",
+      price: "FREE",
+      description: "Completely free forever - all features included",
       features: [
         "Unlimited clips storage",
-        "AI-powered search & filtering",
-        "Cloud sync across devices",
-        "Priority email support",
-        "Custom keyboard shortcuts",
-        "Advanced encryption",
-        "Bulk operations",
-        "Export & import data"
+        "Auto clipboard capture with duplicate prevention",
+        "Smart search and filtering",
+        "Secure local storage with encryption",
+        "Beautiful dark theme interface", 
+        "Cross-platform support (Linux & Windows)",
+        "Real-time clipboard monitoring",
+        "Keyboard shortcuts customization",
+        "Export & import functionality",
+        "Regular updates and improvements",
+        "Community support",
+        "Open source transparency"
       ],
-      buttonText: "Upgrade to Pro",
+      buttonText: "Download Free",
       isPopular: true,
-      onButtonClick: () => console.log('Pro plan selected')
-    },
-    {
-      title: "Enterprise",
-      price: "$29",
-      description: "For teams and organizations",
-      features: [
-        "Everything in Pro plan",
-        "Team collaboration tools",
-        "Advanced security controls",
-        "API access & integrations",
-        "24/7 priority support",
-        "Custom deployment options",
-        "Compliance & audit logs",
-        "Dedicated account manager"
-      ],
-      buttonText: "Contact Sales",
-      onButtonClick: () => console.log('Enterprise plan selected')
+      onButtonClick: () => window.location.href = '/downloads'
     }
   ];
 
@@ -93,10 +65,10 @@ export default function Pricing() {
       <section className="py-20 premium-gradient">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h1 className="text-5xl lg:text-6xl font-black mb-6 text-glow">
-            Simple, Transparent Pricing
+            100% Free Forever
           </h1>
           <p className="text-xl text-gray-300 leading-relaxed mb-8">
-            Start free and scale with your needs. No hidden fees, no surprises.
+            ClipFlow Pro is completely free with all premium features included. No fees, no subscriptions.
           </p>
           
           <div className="flex items-center justify-center space-x-4 mb-8">
@@ -119,20 +91,19 @@ export default function Pricing() {
       {/* Pricing Cards */}
       <section className="py-20 bg-gradient-to-b from-midnight to-navy">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-8">
-            {pricingPlans.map((plan, index) => (
+          <div className="flex justify-center">
+            <div className="max-w-lg">
               <PricingCard
-                key={index}
-                title={plan.title}
-                price={plan.price}
-                description={plan.description}
-                features={plan.features}
-                isPopular={plan.isPopular}
-                buttonText={plan.buttonText}
-                onButtonClick={plan.onButtonClick}
-                delay={index * 200}
+                title={pricingPlans[0].title}
+                price={pricingPlans[0].price}
+                description={pricingPlans[0].description}
+                features={pricingPlans[0].features}
+                isPopular={pricingPlans[0].isPopular}
+                buttonText={pricingPlans[0].buttonText}
+                onButtonClick={pricingPlans[0].onButtonClick}
+                delay={0}
               />
-            ))}
+            </div>
           </div>
         </div>
       </section>

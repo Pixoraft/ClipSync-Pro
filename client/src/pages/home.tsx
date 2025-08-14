@@ -63,46 +63,22 @@ export default function Home() {
 
   const pricingPlans = [
     {
-      title: "Free",
-      price: "$0",
-      description: "Perfect for getting started",
+      title: "ClipFlow Pro",
+      price: "FREE",
+      description: "Completely free forever",
       features: [
-        "Up to 100 clips",
-        "Basic search",
-        "Local storage", 
-        "Dark theme"
+        "Unlimited clips storage",
+        "Auto clipboard capture",
+        "Smart search functionality",
+        "Local secure storage",
+        "Dark theme interface",
+        "Cross-platform support",
+        "Regular updates",
+        "Community support"
       ],
-      buttonText: "Get Started Free",
-      onButtonClick: () => window.open('https://drive.usercontent.google.com/download?id=1RTgAfIL8G-HhNpVVwLo_-u9pJy9C9AXv&export=download&authuser=0', '_blank')
-    },
-    {
-      title: "Pro",
-      price: "$9",
-      description: "For power users",
-      features: [
-        "Unlimited clips",
-        "AI-powered search",
-        "Cloud sync",
-        "Priority support",
-        "Custom shortcuts"
-      ],
-      buttonText: "Upgrade to Pro",
+      buttonText: "Download Free",
       isPopular: true,
-      onButtonClick: () => console.log('Pro plan selected')
-    },
-    {
-      title: "Enterprise", 
-      price: "$29",
-      description: "For teams and organizations",
-      features: [
-        "Everything in Pro",
-        "Team collaboration", 
-        "Advanced security",
-        "API access",
-        "24/7 support"
-      ],
-      buttonText: "Contact Sales",
-      onButtonClick: () => console.log('Enterprise plan selected')
+      onButtonClick: () => window.location.href = '/downloads'
     }
   ];
 
@@ -209,26 +185,25 @@ export default function Home() {
       <section id="pricing" className="py-20 bg-gradient-to-b from-navy to-midnight">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-black mb-6 text-glow">Choose Your Plan</h2>
+            <h2 className="text-5xl font-black mb-6 text-glow">100% Free Forever</h2>
             <p className="text-xl text-gray-300">
-              Start free, upgrade when you need more power
+              Download ClipFlow Pro completely free with all features included
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {pricingPlans.map((plan, index) => (
+          <div className="flex justify-center">
+            <div className="max-w-md">
               <PricingCard
-                key={index}
-                title={plan.title}
-                price={plan.price}
-                description={plan.description}
-                features={plan.features}
-                isPopular={plan.isPopular}
-                buttonText={plan.buttonText}
-                onButtonClick={plan.onButtonClick}
-                delay={index * 200}
+                title={pricingPlans[0].title}
+                price={pricingPlans[0].price}
+                description={pricingPlans[0].description}
+                features={pricingPlans[0].features}
+                isPopular={pricingPlans[0].isPopular}
+                buttonText={pricingPlans[0].buttonText}
+                onButtonClick={pricingPlans[0].onButtonClick}
+                delay={0}
               />
-            ))}
+            </div>
           </div>
         </div>
       </section>
