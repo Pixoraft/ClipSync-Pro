@@ -17,7 +17,7 @@ export default function Downloads() {
       description: "Native performance with complete feature support",
       fileSize: "~15MB",
       requirements: "Ubuntu 18.04+ | Debian 10+ | Fedora 32+",
-      downloadUrl: "https://drive.usercontent.google.com/download?id=1RTgAfIL8G-HhNpVVwLo_-u9pJy9C9AXv&export=download&authuser=0",
+      downloadUrl: "https://drive.google.com/file/d/1RTgAfIL8G-HhNpVVwLo_-u9pJy9C9AXv/view?usp=drive_link",
       features: [
         "Full clipboard monitoring",
         "System tray integration",
@@ -37,7 +37,7 @@ export default function Downloads() {
       description: "Limited compatibility with occasional stability issues",
       fileSize: "~18MB",
       requirements: "Windows 10+ | Windows 11",
-      downloadUrl: "https://drive.google.com/file/d/1XMqhRZPbnYYs898RalbmoWVJNS7bc7sw/view",
+      downloadUrl: "https://drive.google.com/file/d/1XMqhRZPbnYYs898RalbmoWVJNS7bc7sw/view?usp=drive_link",
       features: [
         "Basic clipboard capture",
         "Limited system integration",

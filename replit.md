@@ -7,6 +7,9 @@ ClipFlow Pro is a premium clipboard management application designed for Linux an
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+App should be completely free: All pricing removed, app is 100% free forever with all features included.
+Download distribution: Google Drive links for both Windows and Linux versions.
+Page structure: Separate HTML files for each page (home, about, pricing, downloads, contact).
 
 ## System Architecture
 
@@ -85,3 +88,27 @@ The application is configured for deployment on Replit with:
 - Production build optimization with Vite and esbuild
 - Static asset serving with proper caching headers
 - Development/production environment detection
+
+## Recent Changes (August 14, 2025)
+
+### Pricing Model Update
+- Updated pricing page to reflect that ClipFlow Pro is 100% free forever
+- Removed all paid plan comparisons and subscription models
+- Updated all CTAs to direct to downloads page instead of payment flows
+- Modified FAQ section to emphasize free forever model
+
+### Download Distribution
+- Updated download page with proper Google Drive links for both platforms
+- Linux version: Fully supported with complete feature set
+- Windows version: Experimental release with limited compatibility
+- Both versions available through direct Google Drive download links
+
+### Static HTML Pages
+- Created separate HTML files for all major pages:
+  - home.html - Main landing page
+  - about.html - Company story and mission
+  - pricing.html - Free forever pricing information
+  - downloads.html - Download links and installation instructions
+  - contact.html - Support and feedback contact form
+- Each HTML file has unique SEO metadata and descriptions
+- All pages redirect to appropriate React routes for functionality

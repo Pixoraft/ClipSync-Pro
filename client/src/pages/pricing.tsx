@@ -35,7 +35,7 @@ export default function Pricing() {
   const faqs = [
     {
       question: "Is ClipFlow Pro really free?",
-      answer: "Yes! The free version includes core clipboard management features with support for up to 100 clips. You can upgrade anytime for additional features."
+      answer: "Yes! ClipFlow Pro is 100% free forever. All features are included with no hidden costs, subscriptions, or premium upgrades."
     },
     {
       question: "What's the difference between Linux and Windows versions?",
@@ -46,16 +46,16 @@ export default function Pricing() {
       answer: "All your clips are stored locally on your device with enterprise-grade encryption. We never access or store your data on our servers."
     },
     {
-      question: "Can I sync between devices?",
-      answer: "Cloud sync is available with Pro and Enterprise plans, allowing you to access your clips across all your devices seamlessly."
+      question: "Do I need to create an account?",
+      answer: "No registration required! Download and start using ClipFlow Pro immediately. Your data stays completely private on your device."
     },
     {
-      question: "Do you offer refunds?",
-      answer: "Yes, we offer a 30-day money-back guarantee for all paid plans. If you're not satisfied, we'll provide a full refund."
+      question: "Will there ever be paid features?",
+      answer: "No! ClipFlow Pro is committed to being free forever. We believe everyone deserves access to powerful productivity tools."
     },
     {
-      question: "How does the AI search work?",
-      answer: "Our AI-powered search understands context and meaning, not just keywords. It can find clips based on semantic similarity and content understanding."
+      question: "How do I get support?",
+      answer: "Community support is available through our contact page. The Linux version has active community support, while Windows support is limited."
     }
   ];
 
@@ -74,15 +74,15 @@ export default function Pricing() {
           <div className="flex items-center justify-center space-x-4 mb-8">
             <div className="flex items-center space-x-2">
               <i className="fas fa-check text-green-400"></i>
-              <span className="text-gray-300">Free forever plan</span>
+              <span className="text-gray-300">Free forever</span>
             </div>
             <div className="flex items-center space-x-2">
               <i className="fas fa-check text-green-400"></i>
-              <span className="text-gray-300">30-day money back guarantee</span>
+              <span className="text-gray-300">No registration required</span>
             </div>
             <div className="flex items-center space-x-2">
               <i className="fas fa-check text-green-400"></i>
-              <span className="text-gray-300">No setup fees</span>
+              <span className="text-gray-300">No hidden costs</span>
             </div>
           </div>
         </div>
@@ -108,71 +108,34 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* Feature Comparison */}
+      {/* All Features Included */}
       <section className="py-20 premium-gradient">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-6 text-glow">Feature Comparison</h2>
+            <h2 className="text-4xl font-black mb-6 text-glow">All Features Included - Free</h2>
             <p className="text-xl text-gray-300">
-              See exactly what's included in each plan
+              Every feature is yours to use without any restrictions
             </p>
           </div>
 
-          <div className="glass-morphism rounded-3xl p-8 overflow-x-auto">
-            <table className="w-full text-left">
-              <thead>
-                <tr className="border-b border-gray-700">
-                  <th className="py-4 text-gray-300">Features</th>
-                  <th className="py-4 text-center text-gray-300">Free</th>
-                  <th className="py-4 text-center text-glow">Pro</th>
-                  <th className="py-4 text-center text-gray-300">Enterprise</th>
-                </tr>
-              </thead>
-              <tbody className="text-gray-300">
-                <tr className="border-b border-gray-800">
-                  <td className="py-4">Clipboard monitoring</td>
-                  <td className="py-4 text-center"><i className="fas fa-check text-green-400"></i></td>
-                  <td className="py-4 text-center"><i className="fas fa-check text-green-400"></i></td>
-                  <td className="py-4 text-center"><i className="fas fa-check text-green-400"></i></td>
-                </tr>
-                <tr className="border-b border-gray-800">
-                  <td className="py-4">Number of clips</td>
-                  <td className="py-4 text-center">100</td>
-                  <td className="py-4 text-center">Unlimited</td>
-                  <td className="py-4 text-center">Unlimited</td>
-                </tr>
-                <tr className="border-b border-gray-800">
-                  <td className="py-4">AI-powered search</td>
-                  <td className="py-4 text-center"><i className="fas fa-times text-red-400"></i></td>
-                  <td className="py-4 text-center"><i className="fas fa-check text-green-400"></i></td>
-                  <td className="py-4 text-center"><i className="fas fa-check text-green-400"></i></td>
-                </tr>
-                <tr className="border-b border-gray-800">
-                  <td className="py-4">Cloud sync</td>
-                  <td className="py-4 text-center"><i className="fas fa-times text-red-400"></i></td>
-                  <td className="py-4 text-center"><i className="fas fa-check text-green-400"></i></td>
-                  <td className="py-4 text-center"><i className="fas fa-check text-green-400"></i></td>
-                </tr>
-                <tr className="border-b border-gray-800">
-                  <td className="py-4">Team collaboration</td>
-                  <td className="py-4 text-center"><i className="fas fa-times text-red-400"></i></td>
-                  <td className="py-4 text-center"><i className="fas fa-times text-red-400"></i></td>
-                  <td className="py-4 text-center"><i className="fas fa-check text-green-400"></i></td>
-                </tr>
-                <tr className="border-b border-gray-800">
-                  <td className="py-4">API access</td>
-                  <td className="py-4 text-center"><i className="fas fa-times text-red-400"></i></td>
-                  <td className="py-4 text-center"><i className="fas fa-times text-red-400"></i></td>
-                  <td className="py-4 text-center"><i className="fas fa-check text-green-400"></i></td>
-                </tr>
-                <tr>
-                  <td className="py-4">Support level</td>
-                  <td className="py-4 text-center">Community</td>
-                  <td className="py-4 text-center">Email</td>
-                  <td className="py-4 text-center">24/7 Priority</td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { icon: "fas fa-clipboard", title: "Unlimited Clips", desc: "Store unlimited clipboard entries" },
+              { icon: "fas fa-search", title: "Smart Search", desc: "Find any clip instantly with smart search" },
+              { icon: "fas fa-filter", title: "Advanced Filters", desc: "Filter clips by type, date, and content" },
+              { icon: "fas fa-shield-alt", title: "Local Encryption", desc: "Your data stays secure on your device" },
+              { icon: "fas fa-keyboard", title: "Keyboard Shortcuts", desc: "Customizable hotkeys for quick access" },
+              { icon: "fas fa-eye", title: "Real-time Monitoring", desc: "Automatic clipboard tracking" },
+              { icon: "fas fa-download", title: "Export/Import", desc: "Backup and restore your clips" },
+              { icon: "fas fa-desktop", title: "Cross-Platform", desc: "Available for Linux and Windows" },
+              { icon: "fas fa-moon", title: "Dark Theme", desc: "Premium dark interface design" }
+            ].map((feature, index) => (
+              <div key={index} className="glass-morphism rounded-xl p-6 text-center opacity-0 animate-slide-up" style={{ animationDelay: `${index * 100}ms` }}>
+                <i className={`${feature.icon} text-3xl text-electric mb-4`}></i>
+                <h3 className="text-lg font-bold text-glow mb-2">{feature.title}</h3>
+                <p className="text-gray-300 text-sm">{feature.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -210,10 +173,10 @@ export default function Pricing() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 className="px-8 py-4 bg-gradient-to-r from-electric to-cyber rounded-xl font-bold text-lg hover:scale-105 transform transition-all duration-300 glow-effect"
-                onClick={() => window.open('https://drive.usercontent.google.com/download?id=1RTgAfIL8G-HhNpVVwLo_-u9pJy9C9AXv&export=download&authuser=0', '_blank')}
+                onClick={() => window.location.href = '/downloads'}
               >
                 <i className="fas fa-download mr-2"></i>
-                Start Free Today
+                Download Free
               </Button>
               
               <Button 
