@@ -19,17 +19,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0F1419 0%, #1A1F2E 100%); color: white; line-height: 1.6; min-height: 100vh; }
+      body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0F1419 0%, #1A1F2E 100%); color: white; line-height: 1.6; min-height: 100vh; overflow-x: hidden; }
+      
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar { width: 12px; }
+      ::-webkit-scrollbar-track { background: rgba(15, 20, 25, 0.8); border-radius: 6px; }
+      ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #3B82F6, #06B6D4); border-radius: 6px; border: 2px solid rgba(15, 20, 25, 0.8); }
+      ::-webkit-scrollbar-thumb:hover { background: linear-gradient(135deg, #2563EB, #0891B2); }
+      
+      @keyframes slideInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+      .animate-slide-up { animation: slideInUp 0.6s ease-out forwards; }
       .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
       .text-glow { text-shadow: 0 0 20px rgba(59, 130, 246, 0.6); }
       .btn { background: linear-gradient(45deg, #3B82F6, #06B6D4); color: white; padding: 15px 30px; border: none; border-radius: 12px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; cursor: pointer; }
-      .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3); }
+      .btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3); }
       .hero { text-align: center; padding: 80px 0; }
       .hero h1 { font-size: 4rem; font-weight: 900; margin-bottom: 20px; }
       .nav-links { text-align: center; padding: 20px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
       .nav-links a { color: white; text-decoration: none; margin: 0 20px; padding: 10px 20px; border-radius: 8px; transition: all 0.3s ease; }
       .nav-links a:hover { background: rgba(59, 130, 246, 0.2); }
-      .card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 30px; }
+      .card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 30px; transition: all 0.3s ease; }
+      .card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15); }
       .input, .textarea { width: 100%; padding: 15px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; color: white; font-size: 1rem; margin-bottom: 20px; }
       .input::placeholder, .textarea::placeholder { color: #94A3B8; }
       .input:focus, .textarea:focus { outline: none; border-color: #3B82F6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
@@ -47,8 +57,8 @@
 
     <section class="hero">
       <div class="container">
-        <h1 class="text-glow">Get In Touch</h1>
-        <p style="color: #94A3B8; font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
+        <h1 class="text-glow animate-slide-up">Get In Touch</h1>
+        <p class="animate-slide-up" style="color: #94A3B8; font-size: 1.2rem; max-width: 600px; margin: 0 auto; animation-delay: 0.2s;">
           We're here to help! Whether you need support, want to report a bug, or have 
           feature suggestions, don't hesitate to reach out.
         </p>
