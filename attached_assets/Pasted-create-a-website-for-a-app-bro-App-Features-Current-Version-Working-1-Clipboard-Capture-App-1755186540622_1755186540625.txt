@@ -1,0 +1,88 @@
+create a website for a app bro  📌 App Features (Current Version – Working)
+1. Clipboard Capture
+App automatically saves any copied text to clipboard.
+
+Avoids saving duplicate clips.
+
+Captured clips instantly appear in the list.
+
+2. Clip List
+Scrollable list of all saved clips.
+
+Each clip has:
+
+Copy button → instantly copies back to clipboard.
+
+Delete button → removes it from the list.
+
+3. Refresh Function
+Refresh button at top right reloads the list to show the latest saved clips.
+
+4. UI / Design
+Modern dark theme.
+
+Settings button at the top right.
+
+Rounded corners for smooth, modern look.
+
+Selected clip is highlighted.
+
+5. Storage
+All clips saved locally on the device.
+
+Data persists even after restarting the app.
+1. Clipboard Capture (Auto-Save)
+App automatically listens to clipboard changes in the background.
+
+Whenever a user copies text, the app instantly saves it into the clip list.
+
+Duplicate prevention: If the copied text already exists, it won’t save again.
+
+
+2. Clip List Display
+
+Full list view: All clips can be accessed after a search or full refresh.
+
+Each clip is displayed with:
+
+Copy icon → copies the text back to clipboard.
+
+Delete icon → permanently removes the clip.
+
+Smooth scrolling for long lists.
+
+
+3. Refresh Button
+Location: Top right corner, outside of settings button.
+
+Function: Reloads the list and fetches the latest saved clips from storage.
+
+Works instantly without restarting the app.
+
+
+4. Search (Keyword Filter)
+Search bar allows users to filter clips by typing any part of the text.
+
+When search is empty → only the default 3–4 latest clips are shown.
+
+When search is active → shows all matching clips.
+
+
+5. Storage System
+All clips are saved locally using persistent storage.
+
+Data is not lost when the app is closed or restarted.
+
+Fast load time even for large clip history.
+
+
+6. User Interface & Design
+Dark mode UI for better visibility and modern feel.
+
+Rounded corners and spacing for a clean, minimal design.
+
+Highlight effect on selected clip for easy identification.
+
+Responsive layout works on different window sizes.
+
+bro create a very asome website feels like create by world best website builder make it master peice bro worth 1millon dollors of websute bro every tiny thigns are so details and perfect hit user mind and satisfy by seeing and using our website very smotth very good animation and on home hero section add a 3d type model like a replika of our webapp very good ui and a box on left side little top here some randoms words come and a cureser is copy the words and in our replika of app the word is adding anding bro like very smooth animations and aslo showing enrcycted also and aslo add little bluring on corner for smotth look and on scroll the replia comes down with srcoll and antimtions to the feature section sowing all feature with very quilty incons and lesser border on cards little showign the beatuy of our website and very asome qauilty everything feels like created by  1100 years knowlder bro fully perfect human physcolgy bro , and for other pages like about, pricing and other ther are also fully masterpeice and good like home bro and bro pls user contact.html, about,html measn for all the pages use seprate html pages bro so i can dirclty open the page any with link bro and bro make our webapp alll  the pages seo frindly so google give reward to us bro and bro this app is free and our app is for linux and windows but windows may not run properly but for linux user it is fully working app but in windows sometimes problems comes little bro this is google drive of linux .deb file link( https://drive.usercontent.google.com/download?id=1RTgAfIL8G-HhNpVVwLo_-u9pJy9C9AXv&export=download&authuser=0 ) and this is windows google drive file link https://drive.google.com/file/d/1XMqhRZPbnYYs898RalbmoWVJNS7bc7sw/view bro alll things make perfect bro and use little grading background which gives premuim feeling to user and on cards like things when user take the curser the lttile burly grandiant color comes on our the card or somthing bro which give aslo very good and preuim feeling bro the gradioat circle which move with the curser bro and bro our footer should aslo very creative and cool bro and bro i created this website and app tell the peoples and give my  portfilo webste link vivek-rvt.onrender.com and bro our app aslo should responsive so much bro and our app look great on day mode also every things bro check adn test so all thing will great 
