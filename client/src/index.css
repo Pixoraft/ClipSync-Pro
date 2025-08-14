@@ -1,0 +1,168 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(210, 40%, 98%);
+  --foreground: hsl(222.2, 84%, 4.9%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(222.2, 84%, 4.9%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(222.2, 84%, 4.9%);
+  --primary: hsl(221.2, 83.2%, 53.3%);
+  --primary-foreground: hsl(210, 40%, 98%);
+  --secondary: hsl(210, 40%, 96%);
+  --secondary-foreground: hsl(222.2, 84%, 4.9%);
+  --muted: hsl(210, 40%, 96%);
+  --muted-foreground: hsl(215.4, 16.3%, 46.9%);
+  --accent: hsl(210, 40%, 96%);
+  --accent-foreground: hsl(222.2, 84%, 4.9%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --border: hsl(214.3, 31.8%, 91.4%);
+  --input: hsl(214.3, 31.8%, 91.4%);
+  --ring: hsl(221.2, 83.2%, 53.3%);
+  --radius: 0.8rem;
+  
+  /* Premium deep blue theme colors */
+  --midnight: hsl(217, 100%, 2%);
+  --navy: hsl(218, 54%, 8%);
+  --electric: hsl(220, 100%, 45%);
+  --cyber: hsl(210, 100%, 35%);
+  --glow: hsl(216, 100%, 60%);
+  --glass-bg: hsla(218, 54%, 8%, 0.15);
+  --glass-border: hsla(220, 100%, 45%, 0.3);
+}
+
+.dark {
+  --background: hsl(217, 100%, 2%);
+  --foreground: hsl(210, 40%, 98%);
+  --card: hsl(218, 54%, 8%);
+  --card-foreground: hsl(210, 40%, 98%);
+  --popover: hsl(217, 100%, 2%);
+  --popover-foreground: hsl(210, 40%, 98%);
+  --primary: hsl(220, 100%, 45%);
+  --primary-foreground: hsl(217, 100%, 2%);
+  --secondary: hsl(218, 54%, 8%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+  --muted: hsl(218, 54%, 8%);
+  --muted-foreground: hsl(215, 20.2%, 65.1%);
+  --accent: hsl(218, 54%, 8%);
+  --accent-foreground: hsl(210, 40%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --border: hsl(218, 54%, 8%);
+  --input: hsl(218, 54%, 8%);
+  --ring: hsl(220, 100%, 45%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .glass-morphism {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+  }
+  
+  .premium-gradient {
+    background: linear-gradient(135deg, var(--midnight) 0%, var(--navy) 50%, var(--midnight) 100%);
+  }
+  
+  .glow-effect {
+    box-shadow: 0 0 50px hsla(221, 83%, 53%, 0.3);
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 20px hsla(217, 91%, 69%, 0.5);
+  }
+  
+  .app-mockup {
+    transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
+    transform-style: preserve-3d;
+  }
+  
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--glow);
+    border-radius: 50%;
+    animation: particle-float 4s ease-in-out infinite;
+  }
+  
+  .cursor-animation {
+    display: inline-block;
+    background: var(--glow);
+    width: 2px;
+    height: 1.2em;
+    animation: cursor-blink 1s infinite;
+    margin-left: 2px;
+  }
+  
+  .typing-text {
+    min-height: 1.5em;
+  }
+}
+
+@layer utilities {
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotateY(0deg); }
+    50% { transform: translateY(-20px) rotateY(5deg); }
+  }
+  
+  @keyframes pulse-glow {
+    from { box-shadow: 0 0 20px hsla(221, 83%, 53%, 0.4); }
+    to { box-shadow: 0 0 40px hsla(221, 83%, 53%, 0.8); }
+  }
+  
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes cursor-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  
+  @keyframes particle-float {
+    0%, 100% { transform: translateY(0px) translateX(0px); }
+    33% { transform: translateY(-10px) translateX(5px); }
+    66% { transform: translateY(5px) translateX(-3px); }
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out forwards;
+  }
+  
+  .animate-cursor-blink {
+    animation: cursor-blink 1s infinite;
+  }
+  
+  .animate-particle-float {
+    animation: particle-float 4s ease-in-out infinite;
+  }
+}
