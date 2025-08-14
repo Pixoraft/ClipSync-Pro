@@ -1,7 +1,12 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export default function About() {
+  const storySection = useScrollAnimation({ threshold: 0.3 });
+  const missionSection = useScrollAnimation({ threshold: 0.2 });
+  const teamSection = useScrollAnimation({ threshold: 0.3 });
+
   useEffect(() => {
     document.title = "About ClipFlow Pro - The Story Behind Premium Clipboard Management";
   }, []);
@@ -11,10 +16,10 @@ export default function About() {
       {/* Hero Section */}
       <section className="py-20 premium-gradient">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-5xl lg:text-6xl font-black mb-6 text-glow">
+          <h1 className="text-5xl lg:text-6xl font-black mb-6 text-glow animate-fade-in">
             About ClipFlow Pro
           </h1>
-          <p className="text-xl text-gray-300 leading-relaxed">
+          <p className="text-xl text-gray-300 leading-relaxed animate-slide-up delay-200">
             Revolutionizing how professionals manage their digital workflow through 
             intelligent clipboard management and seamless productivity tools.
           </p>
@@ -22,10 +27,12 @@ export default function About() {
       </section>
 
       {/* Story Section */}
-      <section className="py-20 bg-gradient-to-b from-midnight to-navy">
+      <section className="py-20 bg-gradient-to-b from-midnight to-navy" ref={storySection.ref}>
         <div className="max-w-4xl mx-auto px-6">
-          <div className="glass-morphism rounded-3xl p-8 md:p-12 space-y-8">
-            <h2 className="text-3xl font-bold text-glow mb-8">Our Story</h2>
+          <div className={`glass-morphism rounded-3xl p-8 md:p-12 space-y-8 transition-all duration-1000 ${
+            storySection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            <h2 className="text-3xl font-bold text-glow mb-8 animate-slide-left">Our Story</h2>
             
             <div className="space-y-6 text-gray-300 leading-relaxed">
               <p>
@@ -52,10 +59,12 @@ export default function About() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 premium-gradient">
+      <section className="py-20 premium-gradient" ref={missionSection.ref}>
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12">
-            <div className="glass-morphism rounded-3xl p-8 space-y-6">
+            <div className={`glass-morphism rounded-3xl p-8 space-y-6 transition-all duration-1000 ${
+              missionSection.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+            }`}>
               <div className="w-16 h-16 bg-gradient-to-br from-electric to-cyber rounded-2xl flex items-center justify-center mb-6 glow-effect">
                 <i className="fas fa-bullseye text-white text-2xl"></i>
               </div>
@@ -66,8 +75,10 @@ export default function About() {
               </p>
             </div>
 
-            <div className="glass-morphism rounded-3xl p-8 space-y-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-cyber to-electric rounded-2xl flex items-center justify-center mb-6 glow-effect">
+            <div className={`glass-morphism rounded-3xl p-8 space-y-6 transition-all duration-1000 delay-200 ${
+              missionSection.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+            }`}>
+              <div className="w-16 h-16 bg-gradient-to-br from-cyber to-electric rounded-2xl flex items-center justify-center mb-6 glow-effect animate-bounce-in delay-300">
                 <i className="fas fa-eye text-white text-2xl"></i>
               </div>
               <h3 className="text-2xl font-bold text-glow">Our Vision</h3>

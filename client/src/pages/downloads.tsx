@@ -1,7 +1,11 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export default function Downloads() {
+  const downloadSection = useScrollAnimation({ threshold: 0.2 });
+  const instructionsSection = useScrollAnimation({ threshold: 0.3 });
+
   useEffect(() => {
     document.title = "Download ClipFlow Pro - Free Clipboard Manager for Linux & Windows";
   }, []);
@@ -54,10 +58,10 @@ export default function Downloads() {
       {/* Hero Section */}
       <section className="py-20 premium-gradient">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-5xl lg:text-6xl font-black mb-6 text-glow">
+          <h1 className="text-5xl lg:text-6xl font-black mb-6 text-glow animate-bounce-in">
             Download ClipFlow Pro
           </h1>
-          <p className="text-xl text-gray-300 leading-relaxed mb-8">
+          <p className="text-xl text-gray-300 leading-relaxed mb-8 animate-slide-up delay-200">
             Get the world's most advanced clipboard manager - completely free forever
           </p>
           
@@ -85,14 +89,16 @@ export default function Downloads() {
       </section>
 
       {/* Download Options */}
-      <section className="py-20 bg-gradient-to-b from-midnight to-navy">
+      <section className="py-20 bg-gradient-to-b from-midnight to-navy" ref={downloadSection.ref}>
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-8">
             {downloadOptions.map((option, index) => (
               <div 
                 key={index}
-                className={`glass-morphism rounded-3xl p-8 border-2 ${option.borderColor} ${option.glowColor} opacity-0 animate-slide-up`}
-                style={{ animationDelay: `${index * 300}ms` }}
+                className={`glass-morphism rounded-3xl p-8 border-2 ${option.borderColor} ${option.glowColor} transition-all duration-1000 ${
+                  downloadSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: `${index * 300}ms` }}
               >
                 {/* Header */}
                 <div className="flex items-center space-x-4 mb-6">

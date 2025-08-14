@@ -1,10 +1,12 @@
 import { Link, useLocation } from "wouter";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { useScrollDirection } from "@/hooks/useParallax";
 
 export default function Navigation() {
   const [location] = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
+  const scrollDirection = useScrollDirection();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,8 +25,10 @@ export default function Navigation() {
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
+    <nav className={`fixed w-full z-50 transition-all duration-500 ${
       isScrolled ? 'glass-morphism py-2' : 'py-4'
+    } ${
+      scrollDirection === 'down' && isScrolled ? '-translate-y-full' : 'translate-y-0'
     }`}>
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between">

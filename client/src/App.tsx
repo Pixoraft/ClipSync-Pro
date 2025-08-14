@@ -12,6 +12,7 @@ import Downloads from "@/pages/downloads";
 import Navigation from "@/components/layout/navigation";
 import Footer from "@/components/layout/footer";
 import ParticleBackground from "@/components/ui/particle-background";
+import ScrollToTop from "@/components/ui/scroll-to-top";
 import { useEffect, useState } from "react";
 
 function Router() {
@@ -30,6 +31,7 @@ function Router() {
         </Switch>
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }

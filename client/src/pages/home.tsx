@@ -5,9 +5,13 @@ import Hero3DDemo from "@/components/ui/hero-3d-demo";
 import FeatureCard from "@/components/ui/feature-card";
 import InteractiveDemo from "@/components/ui/interactive-demo";
 import PricingCard from "@/components/ui/pricing-card";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
+  const featuresSection = useScrollAnimation({ threshold: 0.2 });
+  const demoSection = useScrollAnimation({ threshold: 0.2 });
+  const pricingSection = useScrollAnimation({ threshold: 0.3 });
 
   useEffect(() => {
     document.title = "ClipFlow Pro - Premium Clipboard Manager for Linux & Windows";
@@ -143,11 +147,13 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-gradient-to-b from-midnight to-navy">
+      <section id="features" className="py-20 bg-gradient-to-b from-midnight to-navy" ref={featuresSection.ref}>
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-black mb-6 text-glow">Powerful Features</h2>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <div className={`text-center mb-16 transition-all duration-1000 ${
+            featuresSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            <h2 className="text-5xl font-black mb-6 text-glow animate-fade-in">Powerful Features</h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto animate-slide-up delay-200">
               Experience the most advanced clipboard management with AI-powered features
             </p>
           </div>
@@ -168,11 +174,13 @@ export default function Home() {
       </section>
 
       {/* Interactive Demo Section */}
-      <section id="demo" className="py-20 premium-gradient">
+      <section id="demo" className="py-20 premium-gradient" ref={demoSection.ref}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-black mb-6 text-glow">See It In Action</h2>
-            <p className="text-xl text-gray-300">
+          <div className={`text-center mb-16 transition-all duration-1000 ${
+            demoSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            <h2 className="text-5xl font-black mb-6 text-glow animate-bounce-in">See It In Action</h2>
+            <p className="text-xl text-gray-300 animate-slide-up delay-300">
               Experience the power of ClipFlow Pro with our interactive demo
             </p>
           </div>
@@ -182,11 +190,13 @@ export default function Home() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-gradient-to-b from-navy to-midnight">
+      <section id="pricing" className="py-20 bg-gradient-to-b from-navy to-midnight" ref={pricingSection.ref}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-black mb-6 text-glow">100% Free Forever</h2>
-            <p className="text-xl text-gray-300">
+          <div className={`text-center mb-16 transition-all duration-1000 ${
+            pricingSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            <h2 className="text-5xl font-black mb-6 text-glow animate-scale-up">100% Free Forever</h2>
+            <p className="text-xl text-gray-300 animate-slide-right delay-400">
               Download ClipFlow Pro completely free with all features included
             </p>
           </div>
