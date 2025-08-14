@@ -1,11 +1,21 @@
 import { useEffect } from "react";
 import PricingCard from "@/components/ui/pricing-card";
 import { Button } from "@/components/ui/button";
+import SEOHead from "@/components/seo/SEOHead";
 
 export default function Pricing() {
-  useEffect(() => {
-    document.title = "Pricing - ClipFlow Pro Plans & Features Comparison";
-  }, []);
+  useEffect(() => {}, []);
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "PriceSpecification",
+    "name": "ClipFlow Pro Pricing",
+    "price": "0",
+    "priceCurrency": "USD",
+    "valueAddedTaxIncluded": true,
+    "description": "ClipFlow Pro is completely free forever with all premium features included. No subscriptions, no hidden costs.",
+    "priceValidUntil": "2030-12-31"
+  };
 
   const pricingPlans = [
     {
@@ -61,6 +71,12 @@ export default function Pricing() {
 
   return (
     <div className="relative pt-20">
+      <SEOHead
+        title="Pricing - ClipFlow Pro Plans & Features Comparison"
+        description="ClipFlow Pro is 100% free forever with all premium features included. No subscriptions, no hidden costs. Download the best clipboard manager with unlimited features."
+        keywords="clipflow pro pricing, free clipboard manager, pricing plans, clipboard software cost, productivity software pricing, free forever software"
+        structuredData={structuredData}
+      />
       {/* Hero Section */}
       <section className="py-20 premium-gradient">
         <div className="max-w-4xl mx-auto px-6 text-center">

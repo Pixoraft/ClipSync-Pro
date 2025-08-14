@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import SEOHead from "@/components/seo/SEOHead";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -14,9 +15,23 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  useEffect(() => {
-    document.title = "Contact Us - ClipFlow Pro Support & Inquiries";
-  }, []);
+  useEffect(() => {}, []);
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact ClipFlow Pro",
+    "description": "Get support, provide feedback, or ask questions about ClipFlow Pro clipboard manager. We're here to help improve your productivity experience.",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "ClipFlow Pro Support",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "availableLanguage": "English"
+      }
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,6 +82,12 @@ export default function Contact() {
 
   return (
     <div className="relative pt-20">
+      <SEOHead
+        title="Contact Us - ClipFlow Pro Support & Inquiries"
+        description="Get support, provide feedback, or ask questions about ClipFlow Pro clipboard manager. Contact our team for technical assistance and general inquiries."
+        keywords="clipflow pro support, clipboard manager help, contact clipflow, technical support, software assistance, productivity software contact"
+        structuredData={structuredData}
+      />
       {/* Hero Section */}
       <section className="py-20 premium-gradient">
         <div className="max-w-4xl mx-auto px-6 text-center">

@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://clipflow.replit.app/sitemap.xml
+
+# SEO-friendly pages
+Allow: /
+Allow: /about
+Allow: /pricing  
+Allow: /downloads
+Allow: /contact
+
+# Block admin or internal pages (if any exist in future)
+# Disallow: /admin/
+
+# Crawl delay (optional - be respectful to search engines)
+Crawl-delay: 1

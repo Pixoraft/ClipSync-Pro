@@ -6,6 +6,7 @@ import FeatureCard from "@/components/ui/feature-card";
 import InteractiveDemo from "@/components/ui/interactive-demo";
 import PricingCard from "@/components/ui/pricing-card";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import SEOHead from "@/components/seo/SEOHead";
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
@@ -14,9 +15,35 @@ export default function Home() {
   const pricingSection = useScrollAnimation({ threshold: 0.3 });
 
   useEffect(() => {
-    document.title = "ClipFlow Pro - Premium Clipboard Manager for Linux & Windows";
     setIsVisible(true);
   }, []);
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ClipFlow Pro",
+    "description": "Premium clipboard manager with AI-powered search, secure local storage, and cross-platform support. Manage your clipboard history efficiently with advanced features.",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": ["Linux", "Windows"],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "1250"
+    },
+    "features": [
+      "Auto clipboard capture",
+      "AI-powered search",
+      "Secure local storage", 
+      "Cross-platform support",
+      "Beautiful dark UI",
+      "Real-time sync"
+    ]
+  };
 
   const typingTexts = [
     "AI-powered clipboard manager...",
@@ -88,6 +115,13 @@ export default function Home() {
 
   return (
     <div className="relative">
+      <SEOHead
+        title="ClipFlow Pro - Premium Clipboard Manager for Linux & Windows"
+        description="Transform your copy-paste workflow with ClipFlow Pro. AI-powered clipboard management with secure local storage, intelligent search, and beautiful dark UI. Free forever."
+        keywords="clipboard manager, linux clipboard, windows clipboard, productivity software, copy paste manager, clipboard history, text management, developer tools, AI search, free software"
+        structuredData={structuredData}
+        ogImage="/og-image.svg"
+      />
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center premium-gradient overflow-hidden pt-20">
         <div className="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">

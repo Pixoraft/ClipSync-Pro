@@ -1,18 +1,37 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import SEOHead from "@/components/seo/SEOHead";
 
 export default function About() {
   const storySection = useScrollAnimation({ threshold: 0.3 });
   const missionSection = useScrollAnimation({ threshold: 0.2 });
   const teamSection = useScrollAnimation({ threshold: 0.3 });
 
-  useEffect(() => {
-    document.title = "About ClipFlow Pro - The Story Behind Premium Clipboard Management";
-  }, []);
+  useEffect(() => {}, []);
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About ClipFlow Pro",
+    "description": "Learn about ClipFlow Pro's mission to revolutionize clipboard management through intelligent tools and seamless productivity solutions.",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "ClipFlow Pro",
+      "description": "Creators of premium clipboard management software",
+      "foundingDate": "2024",
+      "mission": "To empower professionals and creators with intelligent tools that seamlessly integrate into their workflow, making digital productivity effortless and intuitive."
+    }
+  };
 
   return (
     <div className="relative pt-20">
+      <SEOHead
+        title="About ClipFlow Pro - The Story Behind Premium Clipboard Management"
+        description="Discover how ClipFlow Pro revolutionizes digital productivity through intelligent clipboard management. Learn our mission, vision, and commitment to seamless workflow integration."
+        keywords="about clipflow pro, clipboard management story, productivity tools development, software mission, digital workflow solutions, clipboard manager creators"
+        structuredData={structuredData}
+      />
       {/* Hero Section */}
       <section className="py-20 premium-gradient">
         <div className="max-w-4xl mx-auto px-6 text-center">

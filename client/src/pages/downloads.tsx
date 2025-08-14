@@ -1,14 +1,30 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import SEOHead from "@/components/seo/SEOHead";
 
 export default function Downloads() {
   const downloadSection = useScrollAnimation({ threshold: 0.2 });
   const instructionsSection = useScrollAnimation({ threshold: 0.3 });
 
-  useEffect(() => {
-    document.title = "Download ClipFlow Pro - Free Clipboard Manager for Linux & Windows";
-  }, []);
+  useEffect(() => {}, []);
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ClipFlow Pro",
+    "description": "Download the world's most advanced clipboard manager. Free forever with full features for Linux and Windows.",
+    "downloadUrl": "https://drive.google.com/file/d/1RTgAfIL8G-HhNpVVwLo_-u9pJy9C9AXv/view",
+    "operatingSystem": ["Linux", "Windows"],
+    "applicationCategory": "ProductivityApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "fileSize": "15MB",
+    "requirements": "Ubuntu 18.04+ | Debian 10+ | Fedora 32+ | Windows 10+"
+  };
 
   const downloadOptions = [
     {
@@ -55,6 +71,12 @@ export default function Downloads() {
 
   return (
     <div className="relative pt-20">
+      <SEOHead
+        title="Download ClipFlow Pro - Free Clipboard Manager for Linux & Windows"
+        description="Download ClipFlow Pro completely free. Get the world's most advanced clipboard manager with AI-powered search, secure local storage, and beautiful dark UI. Full Linux support, experimental Windows version."
+        keywords="download clipflow pro, free clipboard manager, linux clipboard download, windows clipboard manager, productivity software download, clipboard history tool"
+        structuredData={structuredData}
+      />
       {/* Hero Section */}
       <section className="py-20 premium-gradient">
         <div className="max-w-4xl mx-auto px-6 text-center">
