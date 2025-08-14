@@ -15,20 +15,6 @@ import ParticleBackground from "@/components/ui/particle-background";
 import { useEffect, useState } from "react";
 
 function Router() {
-  // Redirect to HTML pages for specific routes only
-  useEffect(() => {
-    const path = window.location.pathname;
-    if (path === '/about') {
-      window.location.replace('/about.html');
-    } else if (path === '/pricing') {
-      window.location.replace('/pricing.html');
-    } else if (path === '/downloads') {
-      window.location.replace('/downloads.html');
-    } else if (path === '/contact') {
-      window.location.replace('/contact.html');
-    }
-  }, []);
-
   return (
     <div className="min-h-screen bg-midnight text-white relative overflow-x-hidden">
       <ParticleBackground />
@@ -39,7 +25,6 @@ function Router() {
           <Route path="/about" component={About} />
           <Route path="/pricing" component={Pricing} />
           <Route path="/contact" component={Contact} />
-          <Route path="/downloads" component={Downloads} />
           <Route component={NotFound} />
         </Switch>
       </main>

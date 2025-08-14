@@ -17,10 +17,9 @@ export default function Navigation() {
 
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/about.html", label: "About" },
-    { href: "/pricing.html", label: "Pricing" },
-    { href: "/downloads.html", label: "Downloads" },
-    { href: "/contact.html", label: "Contact" },
+    { href: "/about", label: "About" },
+    { href: "/pricing", label: "Pricing" },
+    { href: "/contact", label: "Contact" },
   ];
 
   return (
@@ -29,25 +28,31 @@ export default function Navigation() {
     }`}>
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between">
-          <a href="/">
+          <Link href="/">
             <div className="flex items-center space-x-3 cursor-pointer group">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-electric to-cyber glow-effect flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <i className="fas fa-clipboard-list text-white text-lg"></i>
               </div>
               <span className="text-2xl font-bold text-glow">ClipFlow Pro</span>
             </div>
-          </a>
+          </Link>
           
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href}>
+              <Link key={link.href} href={link.href}>
                 <span className={`hover:text-glow transition-colors duration-300 cursor-pointer ${
-                  window.location.pathname === link.href ? 'text-glow' : 'text-gray-300'
+                  location === link.href ? 'text-glow' : 'text-gray-300'
                 }`}>
                   {link.label}
                 </span>
-              </a>
+              </Link>
             ))}
+            <Button 
+              className="px-6 py-3 bg-gradient-to-r from-electric to-cyber rounded-xl font-semibold hover:scale-105 transform transition-all duration-300 glow-effect"
+              onClick={() => window.open('https://drive.usercontent.google.com/download?id=1RTgAfIL8G-HhNpVVwLo_-u9pJy9C9AXv&export=download&authuser=0', '_blank')}
+            >
+              Download Free
+            </Button>
           </div>
 
           {/* Mobile menu button */}
