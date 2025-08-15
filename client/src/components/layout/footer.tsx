@@ -3,9 +3,18 @@ import { Link } from "wouter";
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+  };
+
   return (
-    <footer className="py-12 bg-midnight border-t border-gray-800 relative z-10">
-      <div className="max-w-7xl mx-auto px-6">
+    <footer className="py-12 bg-midnight border-t border-gray-800 relative z-10 premium-glass-hover cursor-glow" onMouseMove={handleMouseMove}>
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center space-x-3">

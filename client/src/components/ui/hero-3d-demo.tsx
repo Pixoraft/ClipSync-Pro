@@ -75,9 +75,16 @@ export default function Hero3DDemo() {
             {clips.map((clip, index) => (
               <div 
                 key={clip.id}
-                className={`glass-morphism rounded-xl p-3 transition-all duration-300 group hover:bg-opacity-30 hover-3d-item relative ${
+                className={`glass-morphism rounded-xl p-3 transition-all duration-300 group hover:bg-opacity-30 hover-3d-item relative premium-glass-hover ${
                   clip.isActive ? 'bg-electric bg-opacity-20 border-electric glow-effect' : ''
                 } ${isVisible ? 'animate-slide-up' : ''}`}
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = ((e.clientX - rect.left) / rect.width) * 100;
+                  const y = ((e.clientY - rect.top) / rect.height) * 100;
+                  e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+                  e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+                }}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="flex items-center justify-between">

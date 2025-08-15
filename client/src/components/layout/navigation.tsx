@@ -17,6 +17,15 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+  };
+
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
@@ -25,12 +34,12 @@ export default function Navigation() {
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-500 ${
+    <nav className={`fixed w-full z-50 transition-all duration-500 premium-glass-hover cursor-glow ${
       isScrolled ? 'glass-morphism py-2' : 'py-4'
     } ${
       scrollDirection === 'down' && isScrolled ? '-translate-y-full' : 'translate-y-0'
-    }`}>
-      <div className="max-w-7xl mx-auto px-6">
+    }`} onMouseMove={handleMouseMove}>
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex items-center justify-between">
           <Link href="/">
             <div className="flex items-center space-x-3 cursor-pointer group">

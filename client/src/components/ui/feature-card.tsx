@@ -17,12 +17,22 @@ export default function FeatureCard({
 }: FeatureCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+  };
+
   return (
     <div 
-      className="glass-morphism rounded-3xl p-8 hover:scale-105 transform transition-all duration-500 group opacity-0 animate-slide-up"
+      className="glass-morphism rounded-3xl p-8 hover:scale-105 transform transition-all duration-500 group opacity-0 animate-slide-up premium-glass-hover"
       style={{ animationDelay: `${delay}ms` }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onMouseMove={handleMouseMove}
     >
       <div className={`w-16 h-16 bg-gradient-to-br ${gradient} rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 ${
         isHovered ? 'animate-pulse-glow scale-110' : ''

@@ -21,12 +21,22 @@ export default function PricingCard({
   onButtonClick,
   delay = 0
 }: PricingCardProps) {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+  };
+
   return (
     <div 
-      className={`glass-morphism rounded-3xl p-8 transition-all duration-500 hover:scale-105 relative opacity-0 animate-slide-up ${
+      className={`glass-morphism rounded-3xl p-8 transition-all duration-500 hover:scale-105 relative opacity-0 animate-slide-up premium-glass-hover ${
         isPopular ? 'border-2 border-electric glow-effect' : ''
       }`}
       style={{ animationDelay: `${delay}ms` }}
+      onMouseMove={handleMouseMove}
     >
       {isPopular && (
         <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
