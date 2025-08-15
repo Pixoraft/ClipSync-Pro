@@ -4,113 +4,124 @@ interface SEOHeadProps {
   title: string;
   description: string;
   keywords?: string;
-  canonical?: string;
-  ogImage?: string;
   ogType?: string;
+  ogImage?: string;
+  ogUrl?: string;
+  twitterCard?: string;
+  canonicalUrl?: string;
   articleAuthor?: string;
   articlePublishedTime?: string;
-  structuredData?: Record<string, any>;
+  articleModifiedTime?: string;
+  structuredData?: object;
 }
 
 export default function SEOHead({
   title,
   description,
-  keywords = "clipboard manager, productivity tool, linux clipboard, windows clipboard, free software, copy paste manager, text management, developer tools",
-  canonical,
-  ogImage = "/og-image.png",
+  keywords,
   ogType = "website",
+  ogImage,
+  ogUrl,
+  twitterCard = "summary_large_image",
+  canonicalUrl,
   articleAuthor,
   articlePublishedTime,
-  structuredData
+  articleModifiedTime,
+  structuredData,
 }: SEOHeadProps) {
   useEffect(() => {
     // Set document title
     document.title = title;
 
-    // Helper function to update or create meta tags
+    // Helper function to update meta tags
     const updateMeta = (property: string, content: string, useProperty = false) => {
-      const selector = useProperty ? `meta[property="${property}"]` : `meta[name="${property}"]`;
-      let meta = document.querySelector(selector) as HTMLMetaElement;
+      const attribute = useProperty ? 'property' : 'name';
+      let element = document.querySelector(`meta[${attribute}="${property}"]`);
       
-      if (!meta) {
-        meta = document.createElement('meta');
-        if (useProperty) {
-          meta.setAttribute('property', property);
-        } else {
-          meta.setAttribute('name', property);
-        }
-        document.head.appendChild(meta);
+      if (!element) {
+        element = document.createElement('meta');
+        element.setAttribute(attribute, property);
+        document.head.appendChild(element);
       }
       
-      meta.setAttribute('content', content);
-    };
-
-    // Helper function to update or create link tags
-    const updateLink = (rel: string, href: string) => {
-      let link = document.querySelector(`link[rel="${rel}"]`) as HTMLLinkElement;
-      
-      if (!link) {
-        link = document.createElement('link');
-        link.setAttribute('rel', rel);
-        document.head.appendChild(link);
-      }
-      
-      link.setAttribute('href', href);
+      element.setAttribute('content', content);
     };
 
     // Basic meta tags
     updateMeta('description', description);
-    updateMeta('keywords', keywords);
-    updateMeta('robots', 'index, follow');
-    updateMeta('viewport', 'width=device-width, initial-scale=1.0');
-    updateMeta('theme-color', '#0080FF');
+    if (keywords) updateMeta('keywords', keywords);
 
-    // Open Graph meta tags
+    // Open Graph tags
     updateMeta('og:title', title, true);
     updateMeta('og:description', description, true);
     updateMeta('og:type', ogType, true);
-    updateMeta('og:image', `${window.location.origin}${ogImage}`, true);
-    updateMeta('og:url', window.location.href, true);
-    updateMeta('og:site_name', 'ClipFlow Pro', true);
+    updateMeta('og:url', ogUrl || window.location.href, true);
+    
+    if (ogImage) {
+      const imageUrl = ogImage.startsWith('http') ? ogImage : `${window.location.origin}${ogImage}`;
+      updateMeta('og:image', imageUrl, true);
+      updateMeta('og:image:width', '1200', true);
+      updateMeta('og:image:height', '630', true);
+    }
 
-    // Twitter Card meta tags
-    updateMeta('twitter:card', 'summary_large_image');
+    // Twitter Card tags
+    updateMeta('twitter:card', twitterCard);
     updateMeta('twitter:title', title);
     updateMeta('twitter:description', description);
-    updateMeta('twitter:image', `${window.location.origin}${ogImage}`);
+    if (ogImage) {
+      const imageUrl = ogImage.startsWith('http') ? ogImage : `${window.location.origin}${ogImage}`;
+      updateMeta('twitter:image', imageUrl);
+    }
 
-    // Article meta tags (for blog posts, etc.)
-    if (articleAuthor) {
-      updateMeta('article:author', articleAuthor, true);
-    }
-    if (articlePublishedTime) {
-      updateMeta('article:published_time', articlePublishedTime, true);
-    }
+    // Article-specific meta tags
+    if (articleAuthor) updateMeta('article:author', articleAuthor, true);
+    if (articlePublishedTime) updateMeta('article:published_time', articlePublishedTime, true);
+    if (articleModifiedTime) updateMeta('article:modified_time', articleModifiedTime, true);
 
     // Canonical URL
-    if (canonical) {
-      updateLink('canonical', canonical);
-    } else {
-      updateLink('canonical', window.location.href);
+    let canonicalElement = document.querySelector('link[rel="canonical"]');
+    if (!canonicalElement) {
+      canonicalElement = document.createElement('link');
+      canonicalElement.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalElement);
     }
+    canonicalElement.setAttribute('href', canonicalUrl || window.location.href);
 
-    // Structured data (JSON-LD)
+    // Structured data
     if (structuredData) {
-      let script = document.querySelector('script[type="application/ld+json"]');
-      if (!script) {
-        script = document.createElement('script');
-        script.setAttribute('type', 'application/ld+json');
-        document.head.appendChild(script);
+      let scriptElement = document.querySelector('#structured-data');
+      if (!scriptElement) {
+        scriptElement = document.createElement('script');
+        scriptElement.id = 'structured-data';
+        scriptElement.type = 'application/ld+json';
+        document.head.appendChild(scriptElement);
       }
-      script.textContent = JSON.stringify(structuredData);
+      scriptElement.textContent = JSON.stringify(structuredData);
     }
 
-    // Favicon links
-    updateLink('icon', '/favicon.ico');
-    updateLink('icon', '/favicon.svg');
-    updateLink('apple-touch-icon', '/favicon.svg');
+    // Cleanup function to remove old structured data if component unmounts
+    return () => {
+      if (structuredData) {
+        const scriptElement = document.querySelector('#structured-data');
+        if (scriptElement) {
+          scriptElement.remove();
+        }
+      }
+    };
+  }, [
+    title,
+    description,
+    keywords,
+    ogType,
+    ogImage,
+    ogUrl,
+    twitterCard,
+    canonicalUrl,
+    articleAuthor,
+    articlePublishedTime,
+    articleModifiedTime,
+    structuredData,
+  ]);
 
-  }, [title, description, keywords, canonical, ogImage, ogType, articleAuthor, articlePublishedTime, structuredData]);
-
-  return null;
+  return null; // This component doesn't render anything visible
 }

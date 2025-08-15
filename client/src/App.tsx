@@ -9,6 +9,9 @@ import About from "@/pages/about";
 import Pricing from "@/pages/pricing";
 import Contact from "@/pages/contact";
 import Downloads from "@/pages/downloads";
+import Blog from "@/pages/blog";
+import BlogPost from "@/pages/blog-post";
+import BlogAdmin from "@/pages/blog-admin";
 import Navigation from "@/components/layout/navigation";
 import Footer from "@/components/layout/footer";
 import ParticleBackground from "@/components/ui/particle-background";
@@ -27,6 +30,9 @@ function Router() {
           <Route path="/pricing" component={Pricing} />
           <Route path="/contact" component={Contact} />
           <Route path="/downloads" component={Downloads} />
+          <Route path="/blog" component={Blog} />
+          <Route path="/blog/:slug" component={BlogPost} />
+          <Route path="/admin/blog" component={BlogAdmin} />
           <Route component={NotFound} />
         </Switch>
       </main>
