@@ -34,13 +34,13 @@ export default function FeatureCard({
       onMouseLeave={() => setIsHovered(false)}
       onMouseMove={handleMouseMove}
     >
-      <div className={`w-16 h-16 bg-gradient-to-br ${gradient} rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 ${
+      <div className={`w-16 h-16 bg-gradient-to-br ${gradient} rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 relative z-10 ${
         isHovered ? 'animate-pulse-glow scale-110' : ''
       }`}>
         <i className={`${icon} text-white text-2xl`}></i>
       </div>
-      <h3 className="text-2xl font-bold mb-4 text-glow">{title}</h3>
-      <p className="text-gray-300 leading-relaxed">
+      <h3 className="text-2xl font-bold mb-4 text-glow relative z-10">{title}</h3>
+      <p className="text-gray-300 leading-relaxed relative z-10">
         {description}
       </p>
     </div>

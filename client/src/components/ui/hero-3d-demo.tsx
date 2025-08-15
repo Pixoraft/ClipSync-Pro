@@ -87,7 +87,7 @@ export default function Hero3DDemo() {
                 }}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between relative z-10">
                   <div className="flex-1 cursor-pointer" onClick={() => handleCopyClick(clip.id)}>
                     <p className={`text-sm truncate ${
                       clip.isActive ? 'text-white font-medium' : 'text-gray-300'
