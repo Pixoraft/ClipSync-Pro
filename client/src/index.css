@@ -206,10 +206,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-      hsla(220, 100%, 45%, 0.12) 0%, 
-      hsla(210, 100%, 35%, 0.08) 30%, 
-      hsla(220, 80%, 40%, 0.04) 50%,
+    background: radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+      hsla(220, 100%, 45%, 0.08) 0%, 
+      hsla(210, 100%, 35%, 0.04) 40%, 
       transparent 70%);
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -221,40 +220,26 @@
     opacity: 1;
   }
 
-  /* Cursor following border glow */
-  .premium-glass-hover::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-      transparent 0%, 
-      transparent 45%,
-      hsla(220, 100%, 60%, 0.3) 48%,
-      hsla(220, 100%, 45%, 0.2) 50%,
-      transparent 52%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-    z-index: 2;
-    border-radius: inherit;
-  }
-
-  .premium-glass-hover:hover::after {
-    opacity: 1;
-  }
-
   /* Text content protection - no blur on text */
   .premium-glass-hover > * {
     position: relative;
     z-index: 10;
   }
 
-  /* Enhanced border on hover */
+  /* Bright border glow following cursor */
   .premium-glass-hover:hover {
-    border: 1px solid hsla(220, 100%, 45%, 0.25);
+    box-shadow: 
+      0 0 0 1px hsla(220, 100%, 45%, 0.3),
+      0 0 20px hsla(220, 100%, 60%, 0.2),
+      inset 0 0 0 1px hsla(220, 100%, 70%, 0.1);
+    border: 1px solid transparent;
+    background: 
+      radial-gradient(200px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+        hsla(220, 100%, 60%, 0.4) 0%, 
+        transparent 50%
+      ) border-box,
+      linear-gradient(var(--bg-color, transparent), var(--bg-color, transparent)) padding-box;
+    background-clip: border-box, padding-box;
   }
 
   @keyframes pulseGlow {
