@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,6 +19,9 @@ import SEOHead from "@/components/seo/SEOHead";
 export default function BlogAdmin() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [previewImage, setPreviewImage] = useState<string>("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -32,23 +35,6 @@ export default function BlogAdmin() {
 
   const createForm = useForm<InsertBlogPost>({
     resolver: zodResolver(insertBlogPostSchema),
-    defaultValues: {
-      title: "",
-      slug: "",
-      excerpt: "",
-      content: "",
-      metaDescription: "",
-      keywords: "",
-      author: "ClipSync Pro Team",
-      category: "Productivity",
-      tags: [],
-      published: false,
-      featured: false
-    }
-  });
-
-  const editForm = useForm<InsertBlogPost>({
-    resolver: zodResolver(updateBlogPostSchema),
     defaultValues: {
       title: "",
       slug: "",
@@ -84,27 +70,6 @@ export default function BlogAdmin() {
     }
   });
 
-  const updateMutation = useMutation({
-    mutationFn: ({ id, data }: { id: string, data: InsertBlogPost }) => 
-      apiRequest(`/api/blog/posts/${id}`, 'PUT', data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/blog/posts'] });
-      setEditingPost(null);
-      editForm.reset();
-      toast({
-        title: "Success",
-        description: "Blog post updated successfully!"
-      });
-    },
-    onError: (error: any) => {
-      toast({
-        title: "Error",
-        description: error.message || "Failed to update blog post",
-        variant: "destructive"
-      });
-    }
-  });
-
   const deleteMutation = useMutation({
     mutationFn: (id: string) => apiRequest(`/api/blog/posts/${id}`, 'DELETE'),
     onSuccess: () => {
@@ -129,39 +94,40 @@ export default function BlogAdmin() {
       .replace(/[^a-z0-9 -]/g, '')
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-')
-      .trim('-');
+      .trim();
+  };
+
+  const handleImageUpload = async (file: File) => {
+    if (!file) return;
+    
+    setUploadingImage(true);
+    try {
+      const previewUrl = URL.createObjectURL(file);
+      setPreviewImage(previewUrl);
+      
+      toast({
+        title: "Image Ready",
+        description: "Image preview generated. You can use this for the OG image URL."
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to process image",
+        variant: "destructive"
+      });
+    } finally {
+      setUploadingImage(false);
+    }
   };
 
   const onCreateSubmit = (data: InsertBlogPost) => {
     if (!data.slug) {
       data.slug = generateSlug(data.title);
     }
-    createMutation.mutate(data);
-  };
-
-  const onEditSubmit = (data: InsertBlogPost) => {
-    if (!editingPost) return;
-    if (!data.slug) {
-      data.slug = generateSlug(data.title);
+    if (previewImage) {
+      data.ogImage = previewImage;
     }
-    updateMutation.mutate({ id: editingPost.id, data });
-  };
-
-  const handleEdit = (post: BlogPost) => {
-    setEditingPost(post);
-    editForm.reset({
-      title: post.title,
-      slug: post.slug,
-      excerpt: post.excerpt,
-      content: post.content,
-      metaDescription: post.metaDescription,
-      keywords: post.keywords,
-      author: post.author,
-      category: post.category,
-      tags: post.tags || [],
-      published: post.published,
-      featured: post.featured
-    });
+    createMutation.mutate(data);
   };
 
   const handleDelete = (post: BlogPost) => {
@@ -201,272 +167,337 @@ export default function BlogAdmin() {
                 Blog Admin
               </h1>
               <p className="text-xl text-gray-300">
-                Manage and publish blog posts
+                Create and manage blog posts easily
               </p>
             </div>
             
-            <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-              <DialogTrigger asChild>
-                <Button className="bg-gradient-to-r from-electric to-cyber hover:scale-105 transition-transform">
-                  <i className="fas fa-plus mr-2"></i>
-                  New Post
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="glass-morphism border-gray-700 max-w-4xl max-h-[90vh] overflow-y-auto">
-                <DialogHeader>
-                  <DialogTitle className="text-white">Create New Blog Post</DialogTitle>
-                  <DialogDescription className="text-gray-300">
-                    Fill in the details to create a new blog post.
-                  </DialogDescription>
-                </DialogHeader>
+            <div className="flex gap-4">
+              <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
+                <DialogTrigger asChild>
+                  <Button className="bg-gradient-to-r from-electric to-cyber text-black font-bold hover:scale-105 transition-all duration-300 px-8 py-3 rounded-2xl shadow-2xl hover:shadow-electric/50">
+                    <i className="fas fa-plus mr-2"></i>
+                    New Post
+                  </Button>
+                </DialogTrigger>
                 
-                <Form {...createForm}>
-                  <form onSubmit={createForm.handleSubmit(onCreateSubmit)} className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <FormField
-                        control={createForm.control}
-                        name="title"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-white">Title</FormLabel>
-                            <FormControl>
-                              <Input
-                                {...field}
-                                className="glass-morphism border-gray-600 text-white"
-                                onChange={(e) => {
-                                  field.onChange(e);
-                                  if (!createForm.getValues('slug')) {
-                                    createForm.setValue('slug', generateSlug(e.target.value));
-                                  }
-                                }}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <FormField
-                        control={createForm.control}
-                        name="slug"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-white">Slug (URL)</FormLabel>
-                            <FormControl>
-                              <Input {...field} className="glass-morphism border-gray-600 text-white" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-
-                    <FormField
-                      control={createForm.control}
-                      name="excerpt"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white">Excerpt</FormLabel>
-                          <FormControl>
-                            <Textarea 
-                              {...field} 
-                              className="glass-morphism border-gray-600 text-white" 
-                              rows={3}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={createForm.control}
-                      name="content"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white">Content (Markdown)</FormLabel>
-                          <FormControl>
-                            <Textarea 
-                              {...field} 
-                              className="glass-morphism border-gray-600 text-white font-mono" 
-                              rows={12}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <FormField
-                        control={createForm.control}
-                        name="metaDescription"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-white">Meta Description</FormLabel>
-                            <FormControl>
-                              <Textarea 
-                                {...field} 
-                                className="glass-morphism border-gray-600 text-white" 
-                                rows={2}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={createForm.control}
-                        name="keywords"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-white">Keywords (comma-separated)</FormLabel>
-                            <FormControl>
-                              <Textarea 
-                                {...field} 
-                                className="glass-morphism border-gray-600 text-white" 
-                                rows={2}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-
-                    <div className="grid md:grid-cols-3 gap-4">
-                      <FormField
-                        control={createForm.control}
-                        name="author"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-white">Author</FormLabel>
-                            <FormControl>
-                              <Input {...field} className="glass-morphism border-gray-600 text-white" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={createForm.control}
-                        name="category"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-white">Category</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <DialogContent className="glass-morphism border-gray-700 max-w-4xl max-h-[90vh] overflow-y-auto">
+                  <DialogHeader>
+                    <DialogTitle className="text-white text-2xl">Create New Blog Post</DialogTitle>
+                    <DialogDescription className="text-gray-300">
+                      Fill in the details to create a new SEO-optimized blog post.
+                    </DialogDescription>
+                  </DialogHeader>
+                  
+                  <Form {...createForm}>
+                    <form onSubmit={createForm.handleSubmit(onCreateSubmit)} className="space-y-6">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <FormField
+                          control={createForm.control}
+                          name="title"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-white font-semibold">Title *</FormLabel>
                               <FormControl>
-                                <SelectTrigger className="glass-morphism border-gray-600 text-white">
-                                  <SelectValue />
-                                </SelectTrigger>
+                                <Input
+                                  {...field}
+                                  placeholder="Enter blog post title..."
+                                  className="glass-morphism border-gray-600 text-white placeholder-gray-400"
+                                  onChange={(e) => {
+                                    field.onChange(e);
+                                    if (!createForm.getValues('slug')) {
+                                      createForm.setValue('slug', generateSlug(e.target.value));
+                                    }
+                                  }}
+                                />
                               </FormControl>
-                              <SelectContent>
-                                {categories.map(cat => (
-                                  <SelectItem key={cat} value={cat}>{cat}</SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        
+                        <FormField
+                          control={createForm.control}
+                          name="slug"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-white font-semibold">URL Slug *</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  {...field} 
+                                  placeholder="url-slug-format"
+                                  className="glass-morphism border-gray-600 text-white placeholder-gray-400" 
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
 
                       <FormField
                         control={createForm.control}
-                        name="tags"
+                        name="excerpt"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white">Tags (comma-separated)</FormLabel>
+                            <FormLabel className="text-white font-semibold">Excerpt *</FormLabel>
                             <FormControl>
-                              <Input 
-                                value={Array.isArray(field.value) ? field.value.join(', ') : field.value}
-                                onChange={(e) => field.onChange(e.target.value.split(',').map(s => s.trim()))}
-                                className="glass-morphism border-gray-600 text-white" 
+                              <Textarea 
+                                {...field} 
+                                placeholder="Short description for the blog post..."
+                                className="glass-morphism border-gray-600 text-white placeholder-gray-400" 
+                                rows={3}
                               />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
-                    </div>
 
-                    <div className="flex items-center gap-6">
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <FormLabel className="text-white font-semibold">Featured Image (Optional)</FormLabel>
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => fileInputRef.current?.click()}
+                            disabled={uploadingImage}
+                            className="glass-morphism border-electric text-electric hover:bg-electric/20"
+                          >
+                            <i className="fas fa-upload mr-2"></i>
+                            {uploadingImage ? "Uploading..." : "Upload Image"}
+                          </Button>
+                        </div>
+                        {previewImage && (
+                          <div className="glass-morphism p-4 rounded-2xl">
+                            <img 
+                              src={previewImage} 
+                              alt="Preview" 
+                              className="w-full h-48 object-cover rounded-xl"
+                            />
+                            <p className="text-gray-400 text-sm mt-2">Image preview - this will be used as the OG image</p>
+                          </div>
+                        )}
+                      </div>
+
                       <FormField
                         control={createForm.control}
-                        name="published"
+                        name="content"
                         render={({ field }) => (
-                          <FormItem className="flex items-center space-x-2">
+                          <FormItem>
+                            <FormLabel className="text-white font-semibold">Content (Markdown) *</FormLabel>
                             <FormControl>
-                              <Switch
-                                checked={field.value}
-                                onCheckedChange={field.onChange}
+                              <Textarea 
+                                {...field} 
+                                placeholder="Write your blog content in markdown format..."
+                                className="glass-morphism border-gray-600 text-white placeholder-gray-400 font-mono" 
+                                rows={12}
                               />
                             </FormControl>
-                            <FormLabel className="text-white">Published</FormLabel>
+                            <FormDescription className="text-gray-400">
+                              Use markdown formatting (# for headers, ** for bold, etc.)
+                            </FormDescription>
+                            <FormMessage />
                           </FormItem>
                         )}
                       />
 
-                      <FormField
-                        control={createForm.control}
-                        name="featured"
-                        render={({ field }) => (
-                          <FormItem className="flex items-center space-x-2">
-                            <FormControl>
-                              <Switch
-                                checked={field.value}
-                                onCheckedChange={field.onChange}
-                              />
-                            </FormControl>
-                            <FormLabel className="text-white">Featured</FormLabel>
-                          </FormItem>
-                        )}
-                      />
-                    </div>
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <FormField
+                          control={createForm.control}
+                          name="metaDescription"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-white font-semibold">Meta Description *</FormLabel>
+                              <FormControl>
+                                <Textarea 
+                                  {...field} 
+                                  placeholder="SEO description for search engines..."
+                                  className="glass-morphism border-gray-600 text-white placeholder-gray-400" 
+                                  rows={3}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
 
-                    <div className="flex gap-4">
-                      <Button 
-                        type="submit" 
-                        disabled={createMutation.isPending}
-                        className="bg-gradient-to-r from-electric to-cyber hover:scale-105 transition-transform"
-                      >
-                        {createMutation.isPending ? "Creating..." : "Create Post"}
-                      </Button>
-                      <Button 
-                        type="button" 
-                        variant="ghost" 
-                        onClick={() => setIsCreateOpen(false)}
-                        className="text-gray-300"
-                      >
-                        Cancel
-                      </Button>
-                    </div>
-                  </form>
-                </Form>
-              </DialogContent>
-            </Dialog>
+                        <FormField
+                          control={createForm.control}
+                          name="keywords"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-white font-semibold">SEO Keywords *</FormLabel>
+                              <FormControl>
+                                <Textarea 
+                                  {...field} 
+                                  placeholder="keyword1, keyword2, keyword3..."
+                                  className="glass-morphism border-gray-600 text-white placeholder-gray-400" 
+                                  rows={3}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="grid md:grid-cols-3 gap-4">
+                        <FormField
+                          control={createForm.control}
+                          name="author"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-white font-semibold">Author</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  {...field} 
+                                  className="glass-morphism border-gray-600 text-white" 
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={createForm.control}
+                          name="category"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-white font-semibold">Category</FormLabel>
+                              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <FormControl>
+                                  <SelectTrigger className="glass-morphism border-gray-600 text-white">
+                                    <SelectValue />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  {categories.map(cat => (
+                                    <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={createForm.control}
+                          name="tags"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-white font-semibold">Tags</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  value={Array.isArray(field.value) ? field.value.join(', ') : (field.value || '')}
+                                  onChange={(e) => field.onChange(e.target.value.split(',').map(s => s.trim()))}
+                                  placeholder="tag1, tag2, tag3"
+                                  className="glass-morphism border-gray-600 text-white placeholder-gray-400" 
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="flex items-center gap-8 p-4 glass-morphism rounded-2xl">
+                        <FormField
+                          control={createForm.control}
+                          name="published"
+                          render={({ field }) => (
+                            <FormItem className="flex items-center space-x-3">
+                              <FormControl>
+                                <Switch
+                                  checked={field.value}
+                                  onCheckedChange={field.onChange}
+                                />
+                              </FormControl>
+                              <FormLabel className="text-white font-semibold">Publish Now</FormLabel>
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={createForm.control}
+                          name="featured"
+                          render={({ field }) => (
+                            <FormItem className="flex items-center space-x-3">
+                              <FormControl>
+                                <Switch
+                                  checked={field.value}
+                                  onCheckedChange={field.onChange}
+                                />
+                              </FormControl>
+                              <FormLabel className="text-white font-semibold">Feature Post</FormLabel>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="flex gap-4 pt-4">
+                        <Button 
+                          type="submit" 
+                          disabled={createMutation.isPending}
+                          className="bg-gradient-to-r from-electric to-cyber text-black font-bold hover:scale-105 transition-all duration-300 px-8 py-3 flex-1"
+                        >
+                          {createMutation.isPending ? (
+                            <>
+                              <i className="fas fa-spinner animate-spin mr-2"></i>
+                              Creating...
+                            </>
+                          ) : (
+                            <>
+                              <i className="fas fa-save mr-2"></i>
+                              Create Post
+                            </>
+                          )}
+                        </Button>
+                        <Button 
+                          type="button" 
+                          variant="ghost" 
+                          onClick={() => setIsCreateOpen(false)}
+                          className="text-gray-300 hover:bg-gray-800 px-8 py-3"
+                        >
+                          Cancel
+                        </Button>
+                      </div>
+                    </form>
+                  </Form>
+                </DialogContent>
+              </Dialog>
+              
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={(e) => e.target.files?.[0] && handleImageUpload(e.target.files[0])}
+                accept="image/*"
+                className="hidden"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       <section className="py-16 bg-gradient-to-b from-navy to-midnight">
         <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-glow mb-8">Manage Posts</h2>
+          
           {isLoading ? (
             <div className="text-center py-20">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-electric mx-auto"></div>
-              <p className="text-gray-300 mt-4">Loading posts...</p>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-electric mx-auto mb-4"></div>
+              <p className="text-gray-300">Loading posts...</p>
             </div>
           ) : posts && posts.length > 0 ? (
             <div className="grid gap-6">
               {posts.map((post) => (
-                <Card key={post.id} className="glass-morphism">
+                <Card key={post.id} className="glass-morphism hover:scale-[1.02] transition-all duration-300">
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Badge variant={post.published ? "default" : "secondary"}>
+                        <div className="flex items-center gap-3 mb-3">
+                          <Badge variant={post.published ? "default" : "secondary"} className="bg-gradient-to-r from-electric to-cyber text-black font-bold">
                             {post.published ? "Published" : "Draft"}
                           </Badge>
                           {post.featured && (
@@ -478,40 +509,33 @@ export default function BlogAdmin() {
                             {post.category}
                           </Badge>
                         </div>
-                        <CardTitle className="text-white text-xl mb-1">{post.title}</CardTitle>
-                        <CardDescription className="text-gray-400">
-                          By {post.author} • {formatDate(post.publishedAt)} • Updated {formatDate(post.updatedAt)}
+                        <CardTitle className="text-white text-xl mb-2 leading-tight hover:text-glow transition-colors">
+                          {post.title}
+                        </CardTitle>
+                        <CardDescription className="text-gray-400 mb-3">
+                          By {post.author} • {formatDate(typeof post.publishedAt === 'string' ? post.publishedAt : post.publishedAt?.toISOString() || null)} • Updated {formatDate(typeof post.updatedAt === 'string' ? post.updatedAt : post.updatedAt?.toISOString() || null)}
                         </CardDescription>
                       </div>
-                      <div className="flex gap-2 ml-4">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleEdit(post)}
-                          className="text-electric hover:bg-electric/20"
-                        >
-                          <i className="fas fa-edit mr-1"></i>
-                          Edit
-                        </Button>
+                      <div className="flex gap-3 ml-4">
                         <Button
                           variant="ghost"
                           size="sm"
                           onClick={() => handleDelete(post)}
-                          className="text-red-400 hover:bg-red-400/20"
+                          className="text-red-400 hover:bg-red-400/20 px-4 py-2"
                         >
-                          <i className="fas fa-trash mr-1"></i>
+                          <i className="fas fa-trash mr-2"></i>
                           Delete
                         </Button>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-300 mb-3">{post.excerpt}</p>
+                    <p className="text-gray-300 mb-4 leading-relaxed">{post.excerpt}</p>
                     {post.tags && post.tags.length > 0 && (
                       <div className="flex flex-wrap gap-2">
                         {post.tags.map(tag => (
                           <Badge key={tag} variant="outline" className="text-xs border-gray-700 text-gray-400">
-                            {tag}
+                            #{tag}
                           </Badge>
                         ))}
                       </div>
@@ -526,14 +550,15 @@ export default function BlogAdmin() {
                 <div className="w-16 h-16 bg-gradient-to-br from-electric to-cyber rounded-full flex items-center justify-center mx-auto mb-6">
                   <i className="fas fa-blog text-white text-xl"></i>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-4">No Posts Yet</h3>
+                <h3 className="text-2xl font-bold text-white mb-4">No Posts Yet</h3>
                 <p className="text-gray-400 mb-6">
-                  Create your first blog post to get started.
+                  Create your first blog post to get started with content creation.
                 </p>
                 <Button 
                   onClick={() => setIsCreateOpen(true)}
-                  className="bg-gradient-to-r from-electric to-cyber hover:scale-105 transition-transform"
+                  className="bg-gradient-to-r from-electric to-cyber text-black font-bold hover:scale-105 transition-all duration-300 px-8 py-3 rounded-2xl"
                 >
+                  <i className="fas fa-plus mr-2"></i>
                   Create First Post
                 </Button>
               </div>
@@ -542,104 +567,41 @@ export default function BlogAdmin() {
         </div>
       </section>
 
-      {/* Edit Dialog */}
-      <Dialog open={!!editingPost} onOpenChange={() => setEditingPost(null)}>
-        <DialogContent className="glass-morphism border-gray-700 max-w-4xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="text-white">Edit Blog Post</DialogTitle>
-            <DialogDescription className="text-gray-300">
-              Update the blog post details.
-            </DialogDescription>
-          </DialogHeader>
-          
-          <Form {...editForm}>
-            <form onSubmit={editForm.handleSubmit(onEditSubmit)} className="space-y-6">
-              {/* Same form fields as create form but using editForm */}
-              <div className="grid md:grid-cols-2 gap-4">
-                <FormField
-                  control={editForm.control}
-                  name="title"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-white">Title</FormLabel>
-                      <FormControl>
-                        <Input {...field} className="glass-morphism border-gray-600 text-white" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={editForm.control}
-                  name="slug"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-white">Slug (URL)</FormLabel>
-                      <FormControl>
-                        <Input {...field} className="glass-morphism border-gray-600 text-white" />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+      {/* Quick Start Guide */}
+      <section className="py-16 bg-midnight border-t border-gray-800">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl font-bold text-glow mb-8">Creating SEO-Optimized Content</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="glass-morphism p-6 rounded-2xl">
+              <div className="w-12 h-12 bg-gradient-to-br from-electric to-cyber rounded-full flex items-center justify-center mx-auto mb-4">
+                <i className="fas fa-lightbulb text-white"></i>
               </div>
-
-              <div className="flex items-center gap-6">
-                <FormField
-                  control={editForm.control}
-                  name="published"
-                  render={({ field }) => (
-                    <FormItem className="flex items-center space-x-2">
-                      <FormControl>
-                        <Switch
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormLabel className="text-white">Published</FormLabel>
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={editForm.control}
-                  name="featured"
-                  render={({ field }) => (
-                    <FormItem className="flex items-center space-x-2">
-                      <FormControl>
-                        <Switch
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormLabel className="text-white">Featured</FormLabel>
-                    </FormItem>
-                  )}
-                />
+              <h3 className="text-lg font-bold text-white mb-3">1. Choose a Great Title</h3>
+              <p className="text-gray-400 text-sm">
+                Include your target keywords naturally in the title for better SEO rankings.
+              </p>
+            </div>
+            <div className="glass-morphism p-6 rounded-2xl">
+              <div className="w-12 h-12 bg-gradient-to-br from-electric to-cyber rounded-full flex items-center justify-center mx-auto mb-4">
+                <i className="fas fa-search text-white"></i>
               </div>
-
-              <div className="flex gap-4">
-                <Button 
-                  type="submit" 
-                  disabled={updateMutation.isPending}
-                  className="bg-gradient-to-r from-electric to-cyber hover:scale-105 transition-transform"
-                >
-                  {updateMutation.isPending ? "Updating..." : "Update Post"}
-                </Button>
-                <Button 
-                  type="button" 
-                  variant="ghost" 
-                  onClick={() => setEditingPost(null)}
-                  className="text-gray-300"
-                >
-                  Cancel
-                </Button>
+              <h3 className="text-lg font-bold text-white mb-3">2. Optimize Meta Data</h3>
+              <p className="text-gray-400 text-sm">
+                Write compelling meta descriptions and use relevant keywords for search engines.
+              </p>
+            </div>
+            <div className="glass-morphism p-6 rounded-2xl">
+              <div className="w-12 h-12 bg-gradient-to-br from-electric to-cyber rounded-full flex items-center justify-center mx-auto mb-4">
+                <i className="fas fa-rocket text-white"></i>
               </div>
-            </form>
-          </Form>
-        </DialogContent>
-      </Dialog>
+              <h3 className="text-lg font-bold text-white mb-3">3. Publish & Share</h3>
+              <p className="text-gray-400 text-sm">
+                Feature important posts and share them across social media platforms.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

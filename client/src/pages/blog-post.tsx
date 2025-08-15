@@ -147,7 +147,7 @@ export default function BlogPostPage() {
         ogType="article"
         ogImage={post.ogImage || undefined}
         articleAuthor={post.author}
-        articlePublishedTime={post.publishedAt || undefined}
+        articlePublishedTime={typeof post.publishedAt === 'string' ? post.publishedAt : post.publishedAt?.toISOString()}
         structuredData={structuredData}
       />
 
@@ -190,7 +190,7 @@ export default function BlogPostPage() {
           <div className="flex items-center gap-4 text-gray-300">
             <span>By {post.author}</span>
             <span>•</span>
-            <span>{formatDate(post.publishedAt)}</span>
+            <span>{formatDate(typeof post.publishedAt === 'string' ? post.publishedAt : post.publishedAt?.toISOString() || null)}</span>
             <span>•</span>
             <span>{Math.ceil(post.content.split(' ').length / 200)} min read</span>
           </div>
@@ -281,7 +281,7 @@ export default function BlogPostPage() {
                       }
                     </p>
                     <p className="text-xs text-gray-500">
-                      {formatDate(relatedPost.publishedAt)} • By {relatedPost.author}
+                      {formatDate(typeof relatedPost.publishedAt === 'string' ? relatedPost.publishedAt : relatedPost.publishedAt?.toISOString() || null)} • By {relatedPost.author}
                     </p>
                   </CardContent>
                 </Card>
@@ -292,26 +292,47 @@ export default function BlogPostPage() {
       )}
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-electric to-cyber">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-black mb-4">
-            Ready to Transform Your Clipboard Management?
-          </h2>
-          <p className="text-black/80 mb-8 text-lg">
-            Join thousands of professionals who've supercharged their productivity with ClipSync Pro.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/downloads">
-              <Button className="bg-black text-white hover:bg-gray-800 px-8 py-3">
-                <i className="fas fa-download mr-2"></i>
-                Download Free
-              </Button>
-            </Link>
-            <Link href="/blog">
-              <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white px-8 py-3">
-                Read More Articles
-              </Button>
-            </Link>
+      <section className="py-20 bg-gradient-to-r from-midnight via-navy to-midnight relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-electric/10 to-cyber/10"></div>
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
+          <div className="glass-morphism rounded-3xl p-8 md:p-12 premium-glass-hover backdrop-blur-xl border border-electric/20" onMouseMove={handleMouseMove}>
+            <div className="w-20 h-20 bg-gradient-to-br from-electric to-cyber rounded-full flex items-center justify-center mx-auto mb-8 glow-effect animate-pulse">
+              <i className="fas fa-rocket text-white text-2xl"></i>
+            </div>
+            <h2 className="text-4xl font-bold text-glow mb-6 leading-tight">
+              Ready to Transform Your Clipboard Management?
+            </h2>
+            <p className="text-gray-300 mb-10 text-xl leading-relaxed max-w-2xl mx-auto">
+              Join thousands of professionals who've supercharged their productivity with ClipSync Pro.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Link href="/downloads">
+                <Button className="bg-gradient-to-r from-electric to-cyber text-black font-bold hover:scale-110 transform transition-all duration-300 px-10 py-4 text-lg rounded-2xl shadow-2xl hover:shadow-electric/50">
+                  <i className="fas fa-download mr-3"></i>
+                  Download Free
+                </Button>
+              </Link>
+              <Link href="/blog">
+                <Button className="glass-morphism border-2 border-electric text-electric hover:bg-electric hover:text-black font-bold px-10 py-4 text-lg rounded-2xl transition-all duration-300 hover:scale-110 transform">
+                  <i className="fas fa-book-open mr-3"></i>
+                  Read More Articles
+                </Button>
+              </Link>
+            </div>
+            <div className="mt-8 flex items-center justify-center gap-6 text-sm text-gray-400">
+              <div className="flex items-center gap-2">
+                <i className="fas fa-check-circle text-electric"></i>
+                <span>Free Forever</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <i className="fas fa-shield-alt text-electric"></i>
+                <span>Secure & Private</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <i className="fas fa-bolt text-electric"></i>
+                <span>Lightning Fast</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
