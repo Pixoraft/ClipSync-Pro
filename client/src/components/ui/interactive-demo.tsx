@@ -19,7 +19,7 @@ export default function InteractiveDemo() {
     setDemoClips(prev => [newClip, ...prev.slice(0, 4)]);
     
     // Show notification
-    showNotification('Text copied to ClipFlow Pro!');
+    showNotification('Text copied to ClipSync Pro!');
   };
 
   const showNotification = (message: string) => {

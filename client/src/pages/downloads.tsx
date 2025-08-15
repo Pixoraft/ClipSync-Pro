@@ -12,7 +12,7 @@ export default function Downloads() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "ClipFlow Pro",
+    "name": "ClipSync Pro",
     "description": "Download the world's most advanced clipboard manager. Free forever with full features for Linux and Windows.",
     "downloadUrl": "https://drive.google.com/file/d/1RTgAfIL8G-HhNpVVwLo_-u9pJy9C9AXv/view",
     "operatingSystem": ["Linux", "Windows"],
@@ -72,9 +72,9 @@ export default function Downloads() {
   return (
     <div className="relative pt-20">
       <SEOHead
-        title="Download ClipFlow Pro - Free Clipboard Manager for Linux & Windows"
-        description="Download ClipFlow Pro completely free. Get the world's most advanced clipboard manager with AI-powered search, secure local storage, and beautiful dark UI. Full Linux support, experimental Windows version."
-        keywords="download clipflow pro, free clipboard manager, linux clipboard download, windows clipboard manager, productivity software download, clipboard history tool"
+        title="Download ClipSync Pro - Free Clipboard Manager for Linux & Windows"
+        description="Download ClipSync Pro completely free. Get the world's most advanced clipboard manager with AI-powered search, secure local storage, and beautiful dark UI. Full Linux support, experimental Windows version."
+        keywords="download clipsync pro, free clipboard manager, linux clipboard download, windows clipboard manager, productivity software download, clipboard history tool"
         structuredData={structuredData}
       />
       {/* Hero Section */}

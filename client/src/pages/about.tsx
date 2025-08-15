@@ -13,11 +13,11 @@ export default function About() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    "name": "About ClipFlow Pro",
-    "description": "Learn about ClipFlow Pro's mission to revolutionize clipboard management through intelligent tools and seamless productivity solutions.",
+    "name": "About ClipSync Pro",
+    "description": "Learn about ClipSync Pro's mission to revolutionize clipboard management through intelligent tools and seamless productivity solutions.",
     "mainEntity": {
       "@type": "Organization",
-      "name": "ClipFlow Pro",
+      "name": "ClipSync Pro",
       "description": "Creators of premium clipboard management software",
       "foundingDate": "2024",
       "mission": "To empower professionals and creators with intelligent tools that seamlessly integrate into their workflow, making digital productivity effortless and intuitive."
@@ -27,16 +27,16 @@ export default function About() {
   return (
     <div className="relative pt-20">
       <SEOHead
-        title="About ClipFlow Pro - The Story Behind Premium Clipboard Management"
-        description="Discover how ClipFlow Pro revolutionizes digital productivity through intelligent clipboard management. Learn our mission, vision, and commitment to seamless workflow integration."
-        keywords="about clipflow pro, clipboard management story, productivity tools development, software mission, digital workflow solutions, clipboard manager creators"
+        title="About ClipSync Pro - The Story Behind Premium Clipboard Management"
+        description="Discover how ClipSync Pro revolutionizes digital productivity through intelligent clipboard management. Learn our mission, vision, and commitment to seamless workflow integration."
+        keywords="about clipsync pro, clipboard management story, productivity tools development, software mission, digital workflow solutions, clipboard manager creators"
         structuredData={structuredData}
       />
       {/* Hero Section */}
       <section className="py-20 premium-gradient">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h1 className="text-5xl lg:text-6xl font-black mb-6 text-glow animate-fade-in">
-            About ClipFlow Pro
+            About ClipSync Pro
           </h1>
           <p className="text-xl text-gray-300 leading-relaxed animate-slide-up delay-200">
             Revolutionizing how professionals manage their digital workflow through 
@@ -206,7 +206,7 @@ export default function About() {
             <h2 className="text-3xl font-bold text-glow">Meet the Developer</h2>
             
             <p className="text-gray-300 leading-relaxed text-lg">
-              ClipFlow Pro is crafted with passion by Vivek, a dedicated developer who believes 
+              ClipSync Pro is crafted with passion by Vivek, a dedicated developer who believes 
               in creating tools that truly enhance productivity. With years of experience in 
               software development and a deep understanding of user workflow patterns, 
               every feature is designed with purpose and precision.

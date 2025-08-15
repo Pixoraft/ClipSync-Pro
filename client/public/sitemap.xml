@@ -4,19 +4,19 @@
   
   <!-- Homepage -->
   <url>
-    <loc>https://clipflow.replit.app/</loc>
+    <loc>https://clipsync.replit.app/</loc>
     <lastmod>2025-08-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://clipflow.replit.app/og-image.svg</image:loc>
-      <image:caption>ClipFlow Pro - Premium Clipboard Manager</image:caption>
+      <image:loc>https://clipsync.replit.app/og-image.svg</image:loc>
+      <image:caption>ClipSync Pro - Premium Clipboard Manager</image:caption>
     </image:image>
   </url>
   
   <!-- About Page -->
   <url>
-    <loc>https://clipflow.replit.app/about</loc>
+    <loc>https://clipsync.replit.app/about</loc>
     <lastmod>2025-08-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -24,7 +24,7 @@
   
   <!-- Downloads Page -->
   <url>
-    <loc>https://clipflow.replit.app/downloads</loc>
+    <loc>https://clipsync.replit.app/downloads</loc>
     <lastmod>2025-08-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -32,7 +32,7 @@
   
   <!-- Pricing Page -->
   <url>
-    <loc>https://clipflow.replit.app/pricing</loc>
+    <loc>https://clipsync.replit.app/pricing</loc>
     <lastmod>2025-08-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -40,7 +40,7 @@
   
   <!-- Contact Page -->
   <url>
-    <loc>https://clipflow.replit.app/contact</loc>
+    <loc>https://clipsync.replit.app/contact</loc>
     <lastmod>2025-08-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

@@ -1,8 +1,8 @@
-# ClipFlow Pro - Premium Clipboard Manager
+# ClipSync Pro - Premium Clipboard Manager
 
 ## Overview
 
-ClipFlow Pro is a premium clipboard management application designed for Linux and Windows users who need efficient copy-paste workflow automation. The project is built as a full-stack web application featuring a marketing website with modern design, AI-powered features, and comprehensive clipboard management capabilities. The application emphasizes premium user experience with a dark theme interface, glassmorphism design elements, and professional branding.
+ClipSync Pro is a premium clipboard management application designed for Linux and Windows users who need efficient copy-paste workflow automation. The project is built as a full-stack web application featuring a marketing website with modern design, AI-powered features, and comprehensive clipboard management capabilities. The application emphasizes premium user experience with a dark theme interface, glassmorphism design elements, and professional branding.
 
 ## User Preferences
 

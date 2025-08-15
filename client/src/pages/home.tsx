@@ -21,7 +21,7 @@ export default function Home() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "ClipFlow Pro",
+    "name": "ClipSync Pro",
     "description": "Premium clipboard manager with AI-powered search, secure local storage, and cross-platform support. Manage your clipboard history efficiently with advanced features.",
     "applicationCategory": "ProductivityApplication",
     "operatingSystem": ["Linux", "Windows"],
@@ -116,8 +116,8 @@ export default function Home() {
   return (
     <div className="relative">
       <SEOHead
-        title="ClipFlow Pro - Premium Clipboard Manager for Linux & Windows"
-        description="Transform your copy-paste workflow with ClipFlow Pro. AI-powered clipboard management with secure local storage, intelligent search, and beautiful dark UI. Free forever."
+        title="ClipSync Pro - Premium Clipboard Manager for Linux & Windows"
+        description="Transform your copy-paste workflow with ClipSync Pro. AI-powered clipboard management with secure local storage, intelligent search, and beautiful dark UI. Free forever."
         keywords="clipboard manager, linux clipboard, windows clipboard, productivity software, copy paste manager, clipboard history, text management, developer tools, AI search, free software"
         structuredData={structuredData}
         ogImage="/og-image.svg"
@@ -152,7 +152,7 @@ export default function Home() {
               <div className="space-y-3">
                 <TypingAnimation texts={typingTexts} />
                 <div className="text-sm text-gray-400">
-                  ↑ Auto-captured to ClipFlow Pro
+                  ↑ Auto-captured to ClipSync Pro
                 </div>
               </div>
             </div>

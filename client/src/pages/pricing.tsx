@@ -9,11 +9,11 @@ export default function Pricing() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "PriceSpecification",
-    "name": "ClipFlow Pro Pricing",
+    "name": "ClipSync Pro Pricing",
     "price": "0",
     "priceCurrency": "USD",
     "valueAddedTaxIncluded": true,
-    "description": "ClipFlow Pro is completely free forever with all premium features included. No subscriptions, no hidden costs.",
+    "description": "ClipSync Pro is completely free forever with all premium features included. No subscriptions, no hidden costs.",
     "priceValidUntil": "2030-12-31"
   };
 

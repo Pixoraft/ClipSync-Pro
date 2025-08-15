@@ -37,7 +37,7 @@ export default function Navigation() {
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-electric to-cyber glow-effect flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <i className="fas fa-clipboard-list text-white text-lg"></i>
               </div>
-              <span className="text-2xl font-bold text-glow">ClipFlow Pro</span>
+              <span className="text-2xl font-bold text-glow">ClipSync Pro</span>
             </div>
           </Link>
           

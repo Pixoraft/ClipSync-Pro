@@ -12,7 +12,7 @@ export default function Footer() {
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-electric to-cyber glow-effect flex items-center justify-center">
                 <i className="fas fa-clipboard-list text-white"></i>
               </div>
-              <span className="text-xl font-bold text-glow">ClipFlow Pro</span>
+              <span className="text-xl font-bold text-glow">ClipSync Pro</span>
             </div>
             <p className="text-gray-400">
               The world's most advanced clipboard manager, designed for professionals who value efficiency.
@@ -72,7 +72,7 @@ export default function Footer() {
         
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © {currentYear} ClipFlow Pro. All rights reserved.
+            © {currentYear} ClipSync Pro. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="https://vivek-rvt.onrender.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-glow transition-colors">
