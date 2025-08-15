@@ -11,7 +11,7 @@
   --popover: hsl(0, 0%, 100%);
   --popover-foreground: hsl(222.2, 84%, 4.9%);
   --primary: hsl(221.2, 83.2%, 53.3%);
-  --primary-foreground: hsl(210, 40%, 98%);
+  --primary-foreground: hsl(0, 0%, 100%);
   --secondary: hsl(210, 40%, 96%);
   --secondary-foreground: hsl(222.2, 84%, 4.9%);
   --muted: hsl(210, 40%, 96%);
@@ -43,7 +43,7 @@
   --popover: hsl(217, 100%, 2%);
   --popover-foreground: hsl(210, 40%, 98%);
   --primary: hsl(220, 100%, 45%);
-  --primary-foreground: hsl(217, 100%, 2%);
+  --primary-foreground: hsl(0, 0%, 100%);
   --secondary: hsl(218, 54%, 8%);
   --secondary-foreground: hsl(210, 40%, 98%);
   --muted: hsl(218, 54%, 8%);
@@ -170,6 +170,26 @@
   /* Pulse animation for interactive elements */
   .pulse-glow {
     animation: pulseGlow 2s ease-in-out infinite alternate;
+  }
+
+  /* 3D rotation effects for buttons */
+  .hover\:rotate-3d:hover {
+    transform: perspective(1000px) rotateX(10deg) rotateY(5deg) scale(1.1);
+  }
+
+  /* Enhanced 3D hover container */
+  .hover-3d-container {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+
+  .hover-3d-item {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+
+  .hover-3d-item:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) translateZ(20px);
   }
 
   @keyframes pulseGlow {

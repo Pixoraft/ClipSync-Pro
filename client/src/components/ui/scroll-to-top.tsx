@@ -30,7 +30,7 @@ export default function ScrollToTop() {
     }`}>
       <Button
         onClick={scrollToTop}
-        className="w-14 h-14 bg-gradient-to-r from-electric to-cyber rounded-full shadow-lg hover:shadow-2xl hover:scale-110 transform transition-all duration-300 glow-effect"
+        className="w-14 h-14 bg-gradient-to-r from-electric to-cyber rounded-full shadow-lg hover:shadow-2xl hover:scale-110 transform transition-all duration-300 glow-effect text-white"
         data-testid="button-scroll-to-top"
       >
         <i className="fas fa-chevron-up text-lg"></i>

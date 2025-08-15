@@ -71,34 +71,44 @@ export default function Hero3DDemo() {
           </div>
 
           {/* Clip List */}
-          <div className="space-y-3">
+          <div className="space-y-3 hover-3d-container">
             {clips.map((clip, index) => (
               <div 
                 key={clip.id}
-                className={`glass-morphism rounded-xl p-3 transition-all duration-300 group hover:bg-opacity-30 ${
-                  clip.isActive ? 'bg-electric bg-opacity-20 border-electric' : ''
+                className={`glass-morphism rounded-xl p-3 transition-all duration-300 group hover:bg-opacity-30 hover-3d-item relative ${
+                  clip.isActive ? 'bg-electric bg-opacity-20 border-electric glow-effect' : ''
                 } ${isVisible ? 'animate-slide-up' : ''}`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex-1">
+                  <div className="flex-1 cursor-pointer" onClick={() => handleCopyClick(clip.id)}>
                     <p className={`text-sm truncate ${
-                      clip.isActive ? 'text-white' : 'text-gray-300'
+                      clip.isActive ? 'text-white font-medium' : 'text-gray-300'
                     }`}>
                       {clip.text}
                     </p>
                     <p className="text-xs text-gray-500">{clip.timestamp}</p>
                   </div>
-                  <div className="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex space-x-1 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-0 translate-x-4">
                     <button 
-                      className="p-1 hover:text-glow transition-colors"
-                      onClick={() => handleCopyClick(clip.id)}
+                      className="p-2 rounded-lg glass-morphism hover:bg-electric hover:bg-opacity-30 hover:text-white hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:rotate-3d text-gray-400 hover:text-glow bg-opacity-80 backdrop-blur-sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleCopyClick(clip.id);
+                      }}
+                      style={{ transformStyle: 'preserve-3d' }}
+                      title="Copy to clipboard"
                     >
                       <i className="fas fa-copy text-xs"></i>
                     </button>
                     <button 
-                      className="p-1 hover:text-red-400 transition-colors"
-                      onClick={() => handleDeleteClick(clip.id)}
+                      className="p-2 rounded-lg glass-morphism hover:bg-red-500 hover:bg-opacity-30 hover:text-white hover:shadow-xl hover:scale-110 transition-all duration-300 transform hover:rotate-3d text-gray-400 hover:text-red-300 bg-opacity-80 backdrop-blur-sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteClick(clip.id);
+                      }}
+                      style={{ transformStyle: 'preserve-3d' }}
+                      title="Delete clip"
                     >
                       <i className="fas fa-trash text-xs"></i>
                     </button>

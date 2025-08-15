@@ -54,7 +54,7 @@ export default function PricingCard({
       <Button 
         className={`w-full py-3 font-semibold transition-all duration-300 ${
           isPopular 
-            ? 'bg-gradient-to-r from-electric to-cyber rounded-xl hover:scale-105 glow-effect'
+            ? 'bg-gradient-to-r from-electric to-cyber rounded-xl hover:scale-105 glow-effect text-white'
             : 'glass-morphism rounded-xl hover:bg-opacity-30'
         }`}
         onClick={onButtonClick}

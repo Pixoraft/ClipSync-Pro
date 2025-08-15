@@ -159,7 +159,7 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
-                className="px-8 py-4 bg-gradient-to-r from-electric to-cyber rounded-xl font-bold text-lg hover:scale-105 transform transition-all duration-300 glow-effect"
+                className="px-8 py-4 bg-gradient-to-r from-electric to-cyber rounded-xl font-bold text-lg text-white hover:scale-105 transform transition-all duration-300 glow-effect"
                 onClick={() => window.open('https://drive.usercontent.google.com/download?id=1RTgAfIL8G-HhNpVVwLo_-u9pJy9C9AXv&export=download&authuser=0', '_blank')}
               >
                 <i className="fas fa-download mr-2"></i>

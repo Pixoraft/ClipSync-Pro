@@ -53,7 +53,7 @@ export default function Navigation() {
             ))}
             <Link href="/downloads">
               <Button 
-                className="px-6 py-3 bg-gradient-to-r from-electric to-cyber rounded-xl font-semibold hover:scale-105 transform transition-all duration-300 glow-effect"
+                className="px-6 py-3 bg-gradient-to-r from-electric to-cyber rounded-xl font-semibold text-white hover:scale-105 transform transition-all duration-300 glow-effect"
                 data-testid="button-download-nav"
               >
                 Download Free
