@@ -107,9 +107,16 @@ export default function Contact() {
             {contactMethods.map((method, index) => (
               <div 
                 key={index}
-                className="glass-morphism rounded-3xl p-8 hover:scale-105 transform transition-all duration-500 cursor-pointer group opacity-0 animate-slide-up"
+                className="glass-morphism rounded-3xl p-8 hover:scale-105 transform transition-all duration-500 cursor-pointer group opacity-0 animate-slide-up premium-glass-hover"
                 style={{ animationDelay: `${index * 200}ms` }}
                 onClick={method.action}
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = ((e.clientX - rect.left) / rect.width) * 100;
+                  const y = ((e.clientY - rect.top) / rect.height) * 100;
+                  e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+                  e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+                }}
               >
                 <div className="w-16 h-16 bg-gradient-to-br from-electric to-cyber rounded-2xl flex items-center justify-center mb-6 group-hover:animate-pulse-glow">
                   <i className={`${method.icon} text-white text-2xl`}></i>
@@ -135,7 +142,16 @@ export default function Contact() {
             </p>
           </div>
 
-          <div className="glass-morphism rounded-3xl p-8 md:p-12">
+          <div 
+            className="glass-morphism rounded-3xl p-8 md:p-12 premium-glass-hover"
+            onMouseMove={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const x = ((e.clientX - rect.left) / rect.width) * 100;
+              const y = ((e.clientY - rect.top) / rect.height) * 100;
+              e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+              e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+            }}
+          >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>

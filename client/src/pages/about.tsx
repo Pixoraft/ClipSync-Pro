@@ -48,9 +48,18 @@ export default function About() {
       {/* Story Section */}
       <section className="py-20 bg-gradient-to-b from-midnight to-navy" ref={storySection.ref}>
         <div className="max-w-4xl mx-auto px-6">
-          <div className={`glass-morphism rounded-3xl p-8 md:p-12 space-y-8 transition-all duration-1000 ${
-            storySection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>
+          <div 
+            className={`glass-morphism rounded-3xl p-8 md:p-12 space-y-8 transition-all duration-1000 premium-glass-hover ${
+              storySection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+            onMouseMove={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const x = ((e.clientX - rect.left) / rect.width) * 100;
+              const y = ((e.clientY - rect.top) / rect.height) * 100;
+              e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+              e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+            }}
+          >
             <h2 className="text-3xl font-bold text-glow mb-8 animate-slide-left">Our Story</h2>
             
             <div className="space-y-6 text-gray-300 leading-relaxed">
@@ -81,9 +90,18 @@ export default function About() {
       <section className="py-20 premium-gradient" ref={missionSection.ref}>
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12">
-            <div className={`glass-morphism rounded-3xl p-8 space-y-6 transition-all duration-1000 ${
-              missionSection.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
-            }`}>
+            <div 
+              className={`glass-morphism rounded-3xl p-8 space-y-6 transition-all duration-1000 premium-glass-hover ${
+                missionSection.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+              }`}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+                e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+              }}
+            >
               <div className="w-16 h-16 bg-gradient-to-br from-electric to-cyber rounded-2xl flex items-center justify-center mb-6 glow-effect">
                 <i className="fas fa-bullseye text-white text-2xl"></i>
               </div>
@@ -94,9 +112,18 @@ export default function About() {
               </p>
             </div>
 
-            <div className={`glass-morphism rounded-3xl p-8 space-y-6 transition-all duration-1000 delay-200 ${
-              missionSection.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-            }`}>
+            <div 
+              className={`glass-morphism rounded-3xl p-8 space-y-6 transition-all duration-1000 delay-200 premium-glass-hover ${
+                missionSection.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+              }`}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+                e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+              }}
+            >
               <div className="w-16 h-16 bg-gradient-to-br from-cyber to-electric rounded-2xl flex items-center justify-center mb-6 glow-effect animate-bounce-in delay-300">
                 <i className="fas fa-eye text-white text-2xl"></i>
               </div>
@@ -121,7 +148,16 @@ export default function About() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="glass-morphism rounded-3xl p-8 border-2 border-green-500 glow-effect">
+            <div 
+              className="glass-morphism rounded-3xl p-8 border-2 border-green-500 glow-effect premium-glass-hover"
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+                e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+              }}
+            >
               <div className="flex items-center space-x-4 mb-6">
                 <i className="fab fa-linux text-4xl text-green-400"></i>
                 <div>
@@ -156,7 +192,16 @@ export default function About() {
               </Button>
             </div>
 
-            <div className="glass-morphism rounded-3xl p-8 border border-yellow-500">
+            <div 
+              className="glass-morphism rounded-3xl p-8 border border-yellow-500 premium-glass-hover"
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+                e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+              }}
+            >
               <div className="flex items-center space-x-4 mb-6">
                 <i className="fab fa-windows text-4xl text-yellow-400"></i>
                 <div>

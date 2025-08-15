@@ -13,7 +13,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="py-12 bg-midnight border-t border-gray-800 relative z-10 premium-glass-hover cursor-glow" onMouseMove={handleMouseMove}>
+    <footer className="py-12 bg-midnight border-t border-gray-800 relative premium-glass-hover" onMouseMove={handleMouseMove}>
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="space-y-4">

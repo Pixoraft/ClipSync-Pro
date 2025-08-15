@@ -146,7 +146,18 @@ export default function Pricing() {
               { icon: "fas fa-desktop", title: "Cross-Platform", desc: "Available for Linux and Windows" },
               { icon: "fas fa-moon", title: "Dark Theme", desc: "Premium dark interface design" }
             ].map((feature, index) => (
-              <div key={index} className="glass-morphism rounded-xl p-6 text-center opacity-0 animate-slide-up" style={{ animationDelay: `${index * 100}ms` }}>
+              <div 
+                key={index} 
+                className="glass-morphism rounded-xl p-6 text-center opacity-0 animate-slide-up premium-glass-hover" 
+                style={{ animationDelay: `${index * 100}ms` }}
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = ((e.clientX - rect.left) / rect.width) * 100;
+                  const y = ((e.clientY - rect.top) / rect.height) * 100;
+                  e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+                  e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+                }}
+              >
                 <i className={`${feature.icon} text-3xl text-electric mb-4`}></i>
                 <h3 className="text-lg font-bold text-glow mb-2">{feature.title}</h3>
                 <p className="text-gray-300 text-sm">{feature.desc}</p>
@@ -168,7 +179,18 @@ export default function Pricing() {
 
           <div className="space-y-6">
             {faqs.map((faq, index) => (
-              <div key={index} className="glass-morphism rounded-2xl p-6 opacity-0 animate-slide-up" style={{ animationDelay: `${index * 100}ms` }}>
+              <div 
+                key={index} 
+                className="glass-morphism rounded-2xl p-6 opacity-0 animate-slide-up premium-glass-hover" 
+                style={{ animationDelay: `${index * 100}ms` }}
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = ((e.clientX - rect.left) / rect.width) * 100;
+                  const y = ((e.clientY - rect.top) / rect.height) * 100;
+                  e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+                  e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+                }}
+              >
                 <h3 className="text-xl font-semibold text-glow mb-3">{faq.question}</h3>
                 <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
               </div>
@@ -180,7 +202,16 @@ export default function Pricing() {
       {/* CTA Section */}
       <section className="py-20 premium-gradient">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="glass-morphism rounded-3xl p-12 space-y-8">
+          <div 
+            className="glass-morphism rounded-3xl p-12 space-y-8 premium-glass-hover"
+            onMouseMove={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const x = ((e.clientX - rect.left) / rect.width) * 100;
+              const y = ((e.clientY - rect.top) / rect.height) * 100;
+              e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+              e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+            }}
+          >
             <h2 className="text-4xl font-black text-glow">Ready to Get Started?</h2>
             <p className="text-xl text-gray-300">
               Join thousands of professionals who trust ClipFlow Pro for their daily workflow
