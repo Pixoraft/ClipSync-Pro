@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Build the application
-RUN npm run build
+RUN node build.js
 
 # Expose port
 EXPOSE 10000
