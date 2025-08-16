@@ -152,14 +152,14 @@ export default function BlogAdmin() {
   useEffect(() => {}, []);
 
   return (
-    <div className="relative pt-20 min-h-screen">
+    <div className="relative pt-20 min-h-screen bg-gradient-to-br from-midnight via-navy to-midnight">
       <SEOHead
         title="Blog Admin - ClipSync Pro"
         description="Manage blog posts and content for ClipSync Pro blog."
         keywords="blog admin, content management, clipsync pro admin"
       />
 
-      <section className="py-20 premium-gradient">
+      <section className="py-20 bg-gradient-to-br from-midnight via-navy to-navy">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between">
             <div>
@@ -180,7 +180,7 @@ export default function BlogAdmin() {
                   </Button>
                 </DialogTrigger>
                 
-                <DialogContent className="glass-morphism border-gray-700 max-w-4xl max-h-[90vh] overflow-y-auto">
+                <DialogContent className="bg-gray-900 border-gray-700 max-w-4xl max-h-[90vh] overflow-y-auto text-white">
                   <DialogHeader>
                     <DialogTitle className="text-white text-2xl">Create New Blog Post</DialogTitle>
                     <DialogDescription className="text-gray-300">
@@ -201,7 +201,7 @@ export default function BlogAdmin() {
                                 <Input
                                   {...field}
                                   placeholder="Enter blog post title..."
-                                  className="glass-morphism border-gray-600 text-white placeholder-gray-400"
+                                  className="bg-gray-800 border-gray-600 text-white placeholder-gray-400"
                                   onChange={(e) => {
                                     field.onChange(e);
                                     if (!createForm.getValues('slug')) {
@@ -225,7 +225,7 @@ export default function BlogAdmin() {
                                 <Input 
                                   {...field} 
                                   placeholder="url-slug-format"
-                                  className="glass-morphism border-gray-600 text-white placeholder-gray-400" 
+                                  className="bg-gray-800 border-gray-600 text-white placeholder-gray-400" 
                                 />
                               </FormControl>
                               <FormMessage />
@@ -244,7 +244,7 @@ export default function BlogAdmin() {
                               <Textarea 
                                 {...field} 
                                 placeholder="Short description for the blog post..."
-                                className="glass-morphism border-gray-600 text-white placeholder-gray-400" 
+                                className="bg-gray-800 border-gray-600 text-white placeholder-gray-400" 
                                 rows={3}
                               />
                             </FormControl>
@@ -261,14 +261,14 @@ export default function BlogAdmin() {
                             variant="outline"
                             onClick={() => fileInputRef.current?.click()}
                             disabled={uploadingImage}
-                            className="glass-morphism border-electric text-electric hover:bg-electric/20"
+                            className="bg-gray-800 border-electric text-electric hover:bg-electric/20"
                           >
                             <i className="fas fa-upload mr-2"></i>
                             {uploadingImage ? "Uploading..." : "Upload Image"}
                           </Button>
                         </div>
                         {previewImage && (
-                          <div className="glass-morphism p-4 rounded-2xl">
+                          <div className="bg-gray-800 p-4 rounded-2xl border border-gray-600">
                             <img 
                               src={previewImage} 
                               alt="Preview" 
@@ -289,7 +289,7 @@ export default function BlogAdmin() {
                               <Textarea 
                                 {...field} 
                                 placeholder="Write your blog content in markdown format..."
-                                className="glass-morphism border-gray-600 text-white placeholder-gray-400 font-mono" 
+                                className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 font-mono" 
                                 rows={12}
                               />
                             </FormControl>
@@ -312,7 +312,7 @@ export default function BlogAdmin() {
                                 <Textarea 
                                   {...field} 
                                   placeholder="SEO description for search engines..."
-                                  className="glass-morphism border-gray-600 text-white placeholder-gray-400" 
+                                  className="bg-gray-800 border-gray-600 text-white placeholder-gray-400" 
                                   rows={3}
                                 />
                               </FormControl>
@@ -331,7 +331,7 @@ export default function BlogAdmin() {
                                 <Textarea 
                                   {...field} 
                                   placeholder="keyword1, keyword2, keyword3..."
-                                  className="glass-morphism border-gray-600 text-white placeholder-gray-400" 
+                                  className="bg-gray-800 border-gray-600 text-white placeholder-gray-400" 
                                   rows={3}
                                 />
                               </FormControl>
@@ -351,7 +351,7 @@ export default function BlogAdmin() {
                               <FormControl>
                                 <Input 
                                   {...field} 
-                                  className="glass-morphism border-gray-600 text-white" 
+                                  className="bg-gray-800 border-gray-600 text-white" 
                                 />
                               </FormControl>
                               <FormMessage />
@@ -367,7 +367,7 @@ export default function BlogAdmin() {
                               <FormLabel className="text-white font-semibold">Category</FormLabel>
                               <Select onValueChange={field.onChange} defaultValue={field.value}>
                                 <FormControl>
-                                  <SelectTrigger className="glass-morphism border-gray-600 text-white">
+                                  <SelectTrigger className="bg-gray-800 border-gray-600 text-white">
                                     <SelectValue />
                                   </SelectTrigger>
                                 </FormControl>
@@ -393,7 +393,7 @@ export default function BlogAdmin() {
                                   value={Array.isArray(field.value) ? field.value.join(', ') : (field.value || '')}
                                   onChange={(e) => field.onChange(e.target.value.split(',').map(s => s.trim()))}
                                   placeholder="tag1, tag2, tag3"
-                                  className="glass-morphism border-gray-600 text-white placeholder-gray-400" 
+                                  className="bg-gray-800 border-gray-600 text-white placeholder-gray-400" 
                                 />
                               </FormControl>
                               <FormMessage />
@@ -402,7 +402,7 @@ export default function BlogAdmin() {
                         />
                       </div>
 
-                      <div className="flex items-center gap-8 p-4 glass-morphism rounded-2xl">
+                      <div className="flex items-center gap-8 p-4 bg-gray-800 rounded-2xl border border-gray-600">
                         <FormField
                           control={createForm.control}
                           name="published"
@@ -480,7 +480,7 @@ export default function BlogAdmin() {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-b from-navy to-midnight">
+      <section className="py-16 bg-gradient-to-b from-navy to-midnight min-h-screen">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-glow mb-8">Manage Posts</h2>
           
