@@ -74,5 +74,16 @@
       "ogImage": null
     }
   ],
-  "blogComments": []
+  "blogComments": [
+    {
+      "blogPostId": "8eb6e508-5831-4e46-8d97-1579fe963d8c",
+      "name": "Vivek",
+      "email": "vivekrvt84@gmail.com",
+      "comment": "great",
+      "rating": "1",
+      "id": "be62ad23-7ed4-4e52-80f2-55559f19aead",
+      "approved": false,
+      "createdAt": "2025-08-16T06:13:15.166Z"
+    }
+  ]
 }
