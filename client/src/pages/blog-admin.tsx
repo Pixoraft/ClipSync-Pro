@@ -49,7 +49,8 @@ export default function BlogAdmin() {
     queryFn: async () => {
       const response = await fetch('/api/blog/posts?published=false');
       return response.json();
-    }
+    },
+    enabled: isAuthenticated
   });
 
   const createForm = useForm<InsertBlogPost>({
@@ -219,7 +220,7 @@ export default function BlogAdmin() {
   }
 
   return (
-    <div className="relative pt-20 min-h-screen bg-gradient-to-br from-midnight via-navy to-midnight">
+    <div className="relative min-h-screen bg-gradient-to-br from-midnight via-navy to-midnight">
       <SEOHead
         title="Blog Admin - ClipSync Pro"
         description="Manage blog posts and content for ClipSync Pro blog."
