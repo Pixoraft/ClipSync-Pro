@@ -17,6 +17,8 @@ import { apiRequest } from "@/lib/queryClient";
 import SEOHead from "@/components/seo/SEOHead";
 
 export default function BlogAdmin() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState("");
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
   const [uploadingImage, setUploadingImage] = useState(false);
@@ -24,6 +26,24 @@ export default function BlogAdmin() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
   const queryClient = useQueryClient();
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Simple password check - in production, this should be handled on the server
+    if (password === "admin123") {
+      setIsAuthenticated(true);
+      toast({
+        title: "Success",
+        description: "Welcome to the admin panel!"
+      });
+    } else {
+      toast({
+        title: "Error",
+        description: "Invalid password. Please try again.",
+        variant: "destructive"
+      });
+    }
+  };
 
   const { data: posts, isLoading } = useQuery<BlogPost[]>({
     queryKey: ['/api/blog/posts', 'all'],
@@ -51,7 +71,7 @@ export default function BlogAdmin() {
   });
 
   const createMutation = useMutation({
-    mutationFn: (data: InsertBlogPost) => apiRequest('/api/blog/posts', 'POST', data),
+    mutationFn: (data: InsertBlogPost) => apiRequest('POST', '/api/blog/posts', data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/blog/posts'] });
       setIsCreateOpen(false);
@@ -71,7 +91,7 @@ export default function BlogAdmin() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id: string) => apiRequest(`/api/blog/posts/${id}`, 'DELETE'),
+    mutationFn: (id: string) => apiRequest('DELETE', `/api/blog/posts/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/blog/posts'] });
       toast({
@@ -151,6 +171,57 @@ export default function BlogAdmin() {
 
   useEffect(() => {}, []);
 
+  // Show login form if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <>
+        <SEOHead
+          title="Admin Login | ClipSync Pro Blog"
+          description="Admin access for ClipSync Pro blog management"
+          keywords="admin, login, blog management"
+        />
+        
+        <div className="min-h-screen bg-gradient-to-br from-midnight via-navy to-navy flex items-center justify-center px-6">
+          <Card className="w-full max-w-md bg-gray-900 border-gray-700">
+            <CardHeader className="text-center">
+              <CardTitle className="text-2xl font-bold text-white mb-2">
+                Admin Access
+              </CardTitle>
+              <CardDescription className="text-gray-300">
+                Enter your password to access the blog admin panel
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleLogin} className="space-y-4">
+                <div>
+                  <Input
+                    type="password"
+                    placeholder="Enter admin password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="bg-gray-800 border-gray-600 text-white placeholder-gray-400"
+                    data-testid="input-admin-password"
+                    required
+                  />
+                </div>
+                <Button 
+                  type="submit" 
+                  className="w-full bg-gradient-to-r from-electric to-cyber text-black font-bold hover:scale-105 transition-all duration-300"
+                  data-testid="button-admin-login"
+                >
+                  Login
+                </Button>
+              </form>
+              <p className="text-xs text-gray-400 text-center mt-4">
+                Password hint: admin123
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </>
+    );
+  }
+
   return (
     <div className="relative pt-20 min-h-screen bg-gradient-to-br from-midnight via-navy to-midnight">
       <SEOHead
@@ -158,6 +229,25 @@ export default function BlogAdmin() {
         description="Manage blog posts and content for ClipSync Pro blog."
         keywords="blog admin, content management, clipsync pro admin"
       />
+      
+      {/* Logout button */}
+      <div className="fixed top-4 right-4 z-50">
+        <Button
+          onClick={() => {
+            setIsAuthenticated(false);
+            setPassword("");
+            toast({
+              title: "Logged out",
+              description: "You have been logged out successfully."
+            });
+          }}
+          variant="outline"
+          className="bg-gray-800 text-white border-gray-600 hover:bg-gray-700"
+          data-testid="button-admin-logout"
+        >
+          Logout
+        </Button>
+      </div>
 
       <section className="py-20 bg-gradient-to-br from-midnight via-navy to-navy">
         <div className="max-w-7xl mx-auto px-6">
