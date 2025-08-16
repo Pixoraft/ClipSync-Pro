@@ -116,9 +116,10 @@ export default function Home() {
   return (
     <div className="relative">
       <SEOHead
-        title="ClipSync Pro - Premium Clipboard Manager for Linux & Windows"
-        description="Transform your copy-paste workflow with ClipSync Pro. AI-powered clipboard management with secure local storage, intelligent search, and beautiful dark UI. Free forever."
-        keywords="clipboard manager, linux clipboard, windows clipboard, productivity software, copy paste manager, clipboard history, text management, developer tools, AI search, free software"
+        title="ClipSync Pro - Best Clipboard Manager for Windows & Linux | Free Download 2025"
+        description="Download the world's most advanced clipboard manager. AI-powered search, secure local storage, cross-platform sync. Free forever with all premium features for Windows and Linux."
+        keywords="clipboard manager, copy paste app, ClipSync Pro, clipboard sync, Windows clipboard, Linux clipboard, best clipboard software, productivity tools, clipboard history, free clipboard manager, clipboard utility, text manager"
+        canonical="https://clipsync-pro.replit.app/"
         structuredData={structuredData}
         ogImage="/og-image.svg"
       />
@@ -131,8 +132,8 @@ export default function Home() {
           }`}>
             <div className="space-y-4">
               <h1 className="text-6xl lg:text-7xl font-black leading-tight">
-                <span className="text-glow">Clipboard</span><br />
-                <span className="bg-gradient-to-r from-electric to-cyber bg-clip-text text-transparent">Revolution</span>
+                <span className="text-glow">Best Clipboard Manager</span><br />
+                <span className="bg-gradient-to-r from-electric to-cyber bg-clip-text text-transparent">Windows & Linux</span>
               </h1>
               <p className="text-xl text-gray-300 leading-relaxed max-w-lg">
                 Transform your copy-paste workflow with AI-powered clipboard management. 

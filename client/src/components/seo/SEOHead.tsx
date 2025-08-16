@@ -4,124 +4,99 @@ interface SEOHeadProps {
   title: string;
   description: string;
   keywords?: string;
-  ogType?: string;
+  canonical?: string;
   ogImage?: string;
-  ogUrl?: string;
-  twitterCard?: string;
-  canonicalUrl?: string;
-  articleAuthor?: string;
-  articlePublishedTime?: string;
-  articleModifiedTime?: string;
+  ogType?: string;
   structuredData?: object;
+  noIndex?: boolean;
 }
 
 export default function SEOHead({
   title,
   description,
-  keywords,
+  keywords = "clipboard manager, copy paste app, ClipSync Pro, clipboard sync, Windows clipboard, Linux clipboard, best clipboard software, productivity tools, clipboard history",
+  canonical,
+  ogImage = "https://clipsync-pro.replit.app/og-image.svg",
   ogType = "website",
-  ogImage,
-  ogUrl,
-  twitterCard = "summary_large_image",
-  canonicalUrl,
-  articleAuthor,
-  articlePublishedTime,
-  articleModifiedTime,
   structuredData,
+  noIndex = false
 }: SEOHeadProps) {
+  
   useEffect(() => {
-    // Set document title
+    // Update document title
     document.title = title;
-
-    // Helper function to update meta tags
-    const updateMeta = (property: string, content: string, useProperty = false) => {
-      const attribute = useProperty ? 'property' : 'name';
-      let element = document.querySelector(`meta[${attribute}="${property}"]`);
-      
-      if (!element) {
-        element = document.createElement('meta');
-        element.setAttribute(attribute, property);
-        document.head.appendChild(element);
-      }
-      
-      element.setAttribute('content', content);
-    };
-
-    // Basic meta tags
-    updateMeta('description', description);
-    if (keywords) updateMeta('keywords', keywords);
-
-    // Open Graph tags
-    updateMeta('og:title', title, true);
-    updateMeta('og:description', description, true);
-    updateMeta('og:type', ogType, true);
-    updateMeta('og:url', ogUrl || window.location.href, true);
     
-    if (ogImage) {
-      const imageUrl = ogImage.startsWith('http') ? ogImage : `${window.location.origin}${ogImage}`;
-      updateMeta('og:image', imageUrl, true);
-      updateMeta('og:image:width', '1200', true);
-      updateMeta('og:image:height', '630', true);
-    }
-
-    // Twitter Card tags
-    updateMeta('twitter:card', twitterCard);
-    updateMeta('twitter:title', title);
-    updateMeta('twitter:description', description);
-    if (ogImage) {
-      const imageUrl = ogImage.startsWith('http') ? ogImage : `${window.location.origin}${ogImage}`;
-      updateMeta('twitter:image', imageUrl);
-    }
-
-    // Article-specific meta tags
-    if (articleAuthor) updateMeta('article:author', articleAuthor, true);
-    if (articlePublishedTime) updateMeta('article:published_time', articlePublishedTime, true);
-    if (articleModifiedTime) updateMeta('article:modified_time', articleModifiedTime, true);
-
-    // Canonical URL
-    let canonicalElement = document.querySelector('link[rel="canonical"]');
-    if (!canonicalElement) {
-      canonicalElement = document.createElement('link');
-      canonicalElement.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonicalElement);
-    }
-    canonicalElement.setAttribute('href', canonicalUrl || window.location.href);
-
-    // Structured data
-    if (structuredData) {
-      let scriptElement = document.querySelector('#structured-data');
-      if (!scriptElement) {
-        scriptElement = document.createElement('script');
-        scriptElement.id = 'structured-data';
-        scriptElement.type = 'application/ld+json';
-        document.head.appendChild(scriptElement);
-      }
-      scriptElement.textContent = JSON.stringify(structuredData);
-    }
-
-    // Cleanup function to remove old structured data if component unmounts
-    return () => {
-      if (structuredData) {
-        const scriptElement = document.querySelector('#structured-data');
-        if (scriptElement) {
-          scriptElement.remove();
-        }
+    // Helper function to update or create meta tags
+    const updateMetaTag = (name: string, content: string, property = false) => {
+      const attribute = property ? 'property' : 'name';
+      let meta = document.querySelector(`meta[${attribute}="${name}"]`) as HTMLMetaElement;
+      
+      if (meta) {
+        meta.content = content;
+      } else {
+        meta = document.createElement('meta');
+        meta.setAttribute(attribute, name);
+        meta.content = content;
+        document.head.appendChild(meta);
       }
     };
-  }, [
-    title,
-    description,
-    keywords,
-    ogType,
-    ogImage,
-    ogUrl,
-    twitterCard,
-    canonicalUrl,
-    articleAuthor,
-    articlePublishedTime,
-    articleModifiedTime,
-    structuredData,
-  ]);
-
-  return null; // This component doesn't render anything visible
+    
+    // Update basic meta tags
+    updateMetaTag('description', description);
+    updateMetaTag('keywords', keywords);
+    updateMetaTag('robots', noIndex ? 'noindex, nofollow' : 'index, follow');
+    updateMetaTag('author', 'ClipSync Pro Team');
+    updateMetaTag('viewport', 'width=device-width, initial-scale=1.0');
+    
+    // Open Graph tags
+    updateMetaTag('og:title', title, true);
+    updateMetaTag('og:description', description, true);
+    updateMetaTag('og:type', ogType, true);
+    updateMetaTag('og:url', window.location.href, true);
+    updateMetaTag('og:image', ogImage, true);
+    updateMetaTag('og:site_name', 'ClipSync Pro - Best Clipboard Manager', true);
+    updateMetaTag('og:locale', 'en_US', true);
+    
+    // Twitter Card tags
+    updateMetaTag('twitter:card', 'summary_large_image');
+    updateMetaTag('twitter:title', title);
+    updateMetaTag('twitter:description', description);
+    updateMetaTag('twitter:image', ogImage);
+    updateMetaTag('twitter:creator', '@ClipSyncPro');
+    
+    // Additional SEO meta tags
+    updateMetaTag('theme-color', '#0066ff');
+    updateMetaTag('apple-mobile-web-app-capable', 'yes');
+    updateMetaTag('apple-mobile-web-app-status-bar-style', 'black-translucent');
+    updateMetaTag('application-name', 'ClipSync Pro');
+    
+    // Canonical URL
+    let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (canonical) {
+      if (canonicalLink) {
+        canonicalLink.href = canonical;
+      } else {
+        canonicalLink = document.createElement('link');
+        canonicalLink.rel = 'canonical';
+        canonicalLink.href = canonical;
+        document.head.appendChild(canonicalLink);
+      }
+    }
+    
+    // Structured Data (JSON-LD)
+    if (structuredData) {
+      let script = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
+      if (script) {
+        script.textContent = JSON.stringify(structuredData);
+      } else {
+        script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify(structuredData);
+        document.head.appendChild(script);
+      }
+    }
+    
+  }, [title, description, keywords, canonical, ogImage, ogType, structuredData, noIndex]);
+  
+  return null; // This component doesn't render anything
 }

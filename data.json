@@ -23,7 +23,8 @@
       "createdAt": "2024-08-10T00:00:00.000Z",
       "updatedAt": "2024-08-10T00:00:00.000Z",
       "id": "6bb3f67b-2a34-46ed-8d1d-e5c180621923",
-      "ogImage": null
+      "ogImage": null,
+      "viewCount": "2"
     },
     {
       "title": "Why Linux Users Are Switching to ClipSync Pro: Complete Review",
@@ -82,8 +83,18 @@
       "comment": "great",
       "rating": "1",
       "id": "be62ad23-7ed4-4e52-80f2-55559f19aead",
-      "approved": false,
+      "approved": true,
       "createdAt": "2025-08-16T06:13:15.166Z"
+    },
+    {
+      "blogPostId": "6bb3f67b-2a34-46ed-8d1d-e5c180621923",
+      "name": "vivek",
+      "email": "jeyes37120@forexru.com",
+      "comment": "nice",
+      "rating": "5",
+      "id": "c620c4e7-df2a-48b9-a532-ccf20df273ca",
+      "approved": true,
+      "createdAt": "2025-08-16T07:16:54.794Z"
     }
   ]
 }

@@ -83,9 +83,10 @@ export default function Contact() {
   return (
     <div className="relative pt-20">
       <SEOHead
-        title="Contact Us - ClipFlow Pro Support & Inquiries"
-        description="Get support, provide feedback, or ask questions about ClipFlow Pro clipboard manager. Contact our team for technical assistance and general inquiries."
-        keywords="clipflow pro support, clipboard manager help, contact clipflow, technical support, software assistance, productivity software contact"
+        title="Contact ClipSync Pro Support - Help, Feedback & Questions"
+        description="Get support for ClipSync Pro clipboard manager. Submit feedback, report issues, or ask questions about our free Windows and Linux clipboard software. Fast, helpful customer service."
+        keywords="contact ClipSync Pro, clipboard manager support, Windows Linux clipboard help, software support, productivity tools feedback, customer service, clipboard software questions"
+        canonical="https://clipsync-pro.replit.app/contact"
         structuredData={structuredData}
       />
       {/* Hero Section */}

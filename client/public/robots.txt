@@ -1,18 +1,20 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://clipflow.replit.app/sitemap.xml
-
-# SEO-friendly pages
+# Priority pages for clipboard manager software
 Allow: /
 Allow: /about
-Allow: /pricing  
+Allow: /pricing
 Allow: /downloads
+Allow: /blog
 Allow: /contact
 
-# Block admin or internal pages (if any exist in future)
-# Disallow: /admin/
+# Block admin areas
+Disallow: /admin
+Disallow: /blog-admin
 
-# Crawl delay (optional - be respectful to search engines)
+# Sitemap location
+Sitemap: https://clipsync-pro.replit.app/sitemap.xml
+
+# Crawl delay for better server performance
 Crawl-delay: 1

@@ -72,9 +72,10 @@ export default function Pricing() {
   return (
     <div className="relative pt-20">
       <SEOHead
-        title="Pricing - ClipFlow Pro Plans & Features Comparison"
-        description="ClipFlow Pro is 100% free forever with all premium features included. No subscriptions, no hidden costs. Download the best clipboard manager with unlimited features."
-        keywords="clipflow pro pricing, free clipboard manager, pricing plans, clipboard software cost, productivity software pricing, free forever software"
+        title="ClipSync Pro Pricing - 100% Free Clipboard Manager | No Subscription Required"
+        description="ClipSync Pro is completely free forever with all premium clipboard management features. Best free clipboard software for Windows and Linux with unlimited storage and AI search."
+        keywords="free clipboard manager, ClipSync Pro pricing, best free clipboard software, Windows Linux free tools, no subscription clipboard app, free copy paste app, clipboard manager cost"
+        canonical="https://clipsync-pro.replit.app/pricing"
         structuredData={structuredData}
       />
       {/* Hero Section */}

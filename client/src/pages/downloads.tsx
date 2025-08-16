@@ -72,9 +72,10 @@ export default function Downloads() {
   return (
     <div className="relative pt-20">
       <SEOHead
-        title="Download ClipSync Pro - Free Clipboard Manager for Linux & Windows"
-        description="Download ClipSync Pro completely free. Get the world's most advanced clipboard manager with AI-powered search, secure local storage, and beautiful dark UI. Full Linux support, experimental Windows version."
-        keywords="download clipsync pro, free clipboard manager, linux clipboard download, windows clipboard manager, productivity software download, clipboard history tool"
+        title="Download ClipSync Pro - Best Free Clipboard Manager for Windows & Linux"
+        description="Download the world's most advanced clipboard manager free. Full Linux support, experimental Windows version. AI-powered search, secure local storage, unlimited clipboard history."
+        keywords="download clipboard manager, ClipSync Pro download, Windows clipboard software download, Linux clipboard app download, free clipboard utility, best clipboard manager download"
+        canonical="https://clipsync-pro.replit.app/downloads"
         structuredData={structuredData}
       />
       {/* Hero Section */}

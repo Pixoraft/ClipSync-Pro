@@ -27,9 +27,10 @@ export default function About() {
   return (
     <div className="relative pt-20">
       <SEOHead
-        title="About ClipSync Pro - The Story Behind Premium Clipboard Management"
-        description="Discover how ClipSync Pro revolutionizes digital productivity through intelligent clipboard management. Learn our mission, vision, and commitment to seamless workflow integration."
-        keywords="about clipsync pro, clipboard management story, productivity tools development, software mission, digital workflow solutions, clipboard manager creators"
+        title="About ClipSync Pro - Premium Clipboard Manager Company | Our Story"
+        description="Learn about ClipSync Pro's mission to revolutionize clipboard management for Windows and Linux users. Discover our commitment to free, secure, and powerful productivity software."
+        keywords="about ClipSync Pro, clipboard manager company, productivity software developers, Windows Linux clipboard tools, free software mission, clipboard management innovation"
+        canonical="https://clipsync-pro.replit.app/about"
         structuredData={structuredData}
       />
       {/* Hero Section */}
