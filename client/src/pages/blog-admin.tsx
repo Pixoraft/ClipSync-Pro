@@ -29,7 +29,6 @@ export default function BlogAdmin() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simple password check - in production, this should be handled on the server
     if (password === "admin123") {
       setIsAuthenticated(true);
       toast({
@@ -212,9 +211,6 @@ export default function BlogAdmin() {
                   Login
                 </Button>
               </form>
-              <p className="text-xs text-gray-400 text-center mt-4">
-                Password hint: admin123
-              </p>
             </CardContent>
           </Card>
         </div>
