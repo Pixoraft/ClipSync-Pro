@@ -160,17 +160,36 @@ export default function BlogAdmin() {
     
     setUploadingImage(true);
     try {
-      const previewUrl = URL.createObjectURL(file);
-      setPreviewImage(previewUrl);
+      const formData = new FormData();
+      formData.append('image', file);
+      
+      const response = await fetch('/api/upload/image', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to upload image');
+      }
+      
+      const data = await response.json();
+      setPreviewImage(data.imageUrl);
+      
+      // Update the form with the uploaded image URL
+      if (editingPost) {
+        editForm.setValue('ogImage', data.imageUrl);
+      } else {
+        createForm.setValue('ogImage', data.imageUrl);
+      }
       
       toast({
-        title: "Image Ready",
-        description: "Image preview generated. You can use this for the OG image URL."
+        title: "Image Uploaded",
+        description: "Image uploaded successfully and ready to use!"
       });
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to process image",
+        description: "Failed to upload image",
         variant: "destructive"
       });
     } finally {

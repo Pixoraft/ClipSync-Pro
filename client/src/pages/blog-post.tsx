@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent } from "@/components/ui/card";
 import SEOHead from "@/components/seo/SEOHead";
+import CommentsSection from "@/components/blog/comments-section";
 import { BlogPost } from "@shared/schema";
 
 export default function BlogPostPage() {
@@ -201,6 +202,22 @@ export default function BlogPostPage() {
         </div>
       </section>
 
+      {/* Featured Image */}
+      {post.ogImage && (
+        <section className="py-8 bg-gradient-to-b from-navy to-midnight">
+          <div className="max-w-4xl mx-auto px-6">
+            <div className="glass-morphism rounded-3xl p-4 md:p-6 premium-glass-hover" onMouseMove={handleMouseMove}>
+              <img 
+                src={post.ogImage} 
+                alt={post.title} 
+                className="w-full h-64 md:h-96 object-cover rounded-2xl shadow-2xl"
+                data-testid="img-blog-featured"
+              />
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Article Content */}
       <section className="py-16 bg-gradient-to-b from-navy to-midnight">
         <div className="max-w-4xl mx-auto px-6">
@@ -212,6 +229,9 @@ export default function BlogPostPage() {
               }}
             />
           </article>
+
+          {/* Comments Section */}
+          <CommentsSection blogPostId={post.id} />
 
           {/* Social Share */}
           <div className="mt-12 text-center">

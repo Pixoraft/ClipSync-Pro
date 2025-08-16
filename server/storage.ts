@@ -1,5 +1,7 @@
-import { type User, type InsertUser, type BlogPost, type InsertBlogPost, type UpdateBlogPost } from "@shared/schema";
+import { type User, type InsertUser, type BlogPost, type InsertBlogPost, type UpdateBlogPost, type BlogComment, type InsertBlogComment } from "@shared/schema";
 import { randomUUID } from "crypto";
+import fs from "fs/promises";
+import path from "path";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -16,16 +18,26 @@ export interface IStorage {
   getFeaturedBlogPosts(): Promise<BlogPost[]>;
   getBlogPostsByCategory(category: string): Promise<BlogPost[]>;
   searchBlogPosts(query: string): Promise<BlogPost[]>;
+  
+  // Comment methods
+  getCommentsByBlogPost(blogPostId: string): Promise<BlogComment[]>;
+  createComment(comment: InsertBlogComment): Promise<BlogComment>;
+  approveComment(id: string): Promise<boolean>;
+  deleteComment(id: string): Promise<boolean>;
 }
 
 export class MemStorage implements IStorage {
   private users: Map<string, User>;
   private blogPosts: Map<string, BlogPost>;
+  private blogComments: Map<string, BlogComment>;
+  private dataFile: string;
 
   constructor() {
     this.users = new Map();
     this.blogPosts = new Map();
-    this.seedBlogPosts();
+    this.blogComments = new Map();
+    this.dataFile = path.join(process.cwd(), 'data.json');
+    this.loadData();
   }
 
   async getUser(id: string): Promise<User | undefined> {
@@ -70,11 +82,13 @@ export class MemStorage implements IStorage {
       id,
       ogImage: insertPost.ogImage || null,
       author: insertPost.author || "ClipSync Pro Team",
+      tags: insertPost.tags || [],
       publishedAt: insertPost.published ? now : null,
       createdAt: now,
       updatedAt: now
     };
     this.blogPosts.set(id, post);
+    await this.saveData();
     return post;
   }
 
@@ -91,11 +105,16 @@ export class MemStorage implements IStorage {
     };
     
     this.blogPosts.set(id, updated);
+    await this.saveData();
     return updated;
   }
 
   async deleteBlogPost(id: string): Promise<boolean> {
-    return this.blogPosts.delete(id);
+    const result = this.blogPosts.delete(id);
+    if (result) {
+      await this.saveData();
+    }
+    return result;
   }
 
   async getFeaturedBlogPosts(): Promise<BlogPost[]> {
@@ -122,6 +141,62 @@ export class MemStorage implements IStorage {
          post.category.toLowerCase().includes(searchTerm))
       )
       .sort((a, b) => new Date(b.publishedAt || b.createdAt).getTime() - new Date(a.publishedAt || a.createdAt).getTime());
+  }
+
+  private async loadData(): Promise<void> {
+    try {
+      const data = await fs.readFile(this.dataFile, 'utf-8');
+      const parsed = JSON.parse(data);
+      
+      // Load users
+      if (parsed.users) {
+        this.users = new Map(parsed.users);
+      }
+      
+      // Load blog posts
+      if (parsed.blogPosts) {
+        this.blogPosts = new Map(parsed.blogPosts.map((post: any) => [
+          post.id,
+          {
+            ...post,
+            createdAt: new Date(post.createdAt),
+            updatedAt: new Date(post.updatedAt),
+            publishedAt: post.publishedAt ? new Date(post.publishedAt) : null
+          }
+        ]));
+      } else {
+        this.seedBlogPosts();
+        await this.saveData();
+      }
+      
+      // Load comments
+      if (parsed.blogComments) {
+        this.blogComments = new Map(parsed.blogComments.map((comment: any) => [
+          comment.id,
+          {
+            ...comment,
+            createdAt: new Date(comment.createdAt)
+          }
+        ]));
+      }
+    } catch (error) {
+      console.log('No existing data file, starting fresh');
+      this.seedBlogPosts();
+      await this.saveData();
+    }
+  }
+
+  private async saveData(): Promise<void> {
+    try {
+      const data = {
+        users: Array.from(this.users.entries()),
+        blogPosts: Array.from(this.blogPosts.values()),
+        blogComments: Array.from(this.blogComments.values())
+      };
+      await fs.writeFile(this.dataFile, JSON.stringify(data, null, 2));
+    } catch (error) {
+      console.error('Failed to save data:', error);
+    }
   }
 
   private seedBlogPosts(): void {
@@ -185,6 +260,46 @@ export class MemStorage implements IStorage {
       };
       this.blogPosts.set(id, blogPost);
     });
+  }
+  
+  // Comment Methods
+  async getCommentsByBlogPost(blogPostId: string): Promise<BlogComment[]> {
+    return Array.from(this.blogComments.values())
+      .filter(comment => comment.blogPostId === blogPostId && comment.approved)
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  }
+
+  async createComment(insertComment: InsertBlogComment): Promise<BlogComment> {
+    const id = randomUUID();
+    const now = new Date();
+    const comment: BlogComment = {
+      ...insertComment,
+      id,
+      rating: insertComment.rating || "5",
+      approved: false, // Comments need approval
+      createdAt: now
+    };
+    this.blogComments.set(id, comment);
+    await this.saveData();
+    return comment;
+  }
+
+  async approveComment(id: string): Promise<boolean> {
+    const comment = this.blogComments.get(id);
+    if (!comment) return false;
+    
+    const updated = { ...comment, approved: true };
+    this.blogComments.set(id, updated);
+    await this.saveData();
+    return true;
+  }
+
+  async deleteComment(id: string): Promise<boolean> {
+    const result = this.blogComments.delete(id);
+    if (result) {
+      await this.saveData();
+    }
+    return result;
   }
 }
 
