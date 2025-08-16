@@ -1,0 +1,50 @@
+2025-08-16T18:13:15.331400607Z     at async handleMainPromise (node:internal/modules/run_main:106:12) {
+2025-08-16T18:13:15.331404948Z   code: 'ERR_INVALID_ARG_TYPE'
+2025-08-16T18:13:15.331409157Z }
+2025-08-16T18:13:15.331412948Z 
+2025-08-16T18:13:15.331416938Z Node.js v18.20.8
+2025-08-16T18:14:27.214231854Z ==> Deploying...
+2025-08-16T18:14:42.454217545Z   code: 'ERR_INVALID_ARG_TYPE'
+2025-08-16T18:14:42.454219315Z }
+2025-08-16T18:14:42.454220875Z 
+2025-08-16T18:14:42.454222555Z Node.js v18.20.8
+2025-08-16T18:14:44.994007569Z ==> Exited with status 1
+2025-08-16T18:14:45.008044949Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+2025-08-16T18:14:46.665400315Z 
+2025-08-16T18:14:46.665435596Z > rest-express@1.0.0 start
+2025-08-16T18:14:46.665440786Z > NODE_ENV=production node dist/index.js
+2025-08-16T18:14:46.665442976Z 
+2025-08-16T18:14:48.973801428Z node:internal/errors:496
+2025-08-16T18:14:48.973822989Z     ErrorCaptureStackTrace(err);
+2025-08-16T18:14:48.973826609Z     ^
+2025-08-16T18:14:48.973828949Z 
+2025-08-16T18:14:48.973832539Z TypeError [ERR_INVALID_ARG_TYPE]: The "paths[0]" argument must be of type string. Received undefined
+2025-08-16T18:14:48.973837379Z     at new NodeError (node:internal/errors:405:5)
+2025-08-16T18:14:48.973840159Z     at validateString (node:internal/validators:162:11)
+2025-08-16T18:14:48.973843309Z     at Object.resolve (node:path:1115:7)
+2025-08-16T18:14:48.973845819Z     at file:///app/dist/index.js:25:17
+2025-08-16T18:14:48.973849089Z     at ModuleJob.run (node:internal/modules/esm/module_job:195:25)
+2025-08-16T18:14:48.97385169Z     at async ModuleLoader.import (node:internal/modules/esm/loader:337:24)
+2025-08-16T18:14:48.973854419Z     at async loadESM (node:internal/process/esm_loader:34:7)
+2025-08-16T18:14:48.973857219Z     at async handleMainPromise (node:internal/modules/run_main:106:12) {
+2025-08-16T18:14:48.97385989Z   code: 'ERR_INVALID_ARG_TYPE'
+2025-08-16T18:14:48.97386258Z }
+2025-08-16T18:14:48.97386518Z 
+2025-08-16T18:14:48.97386765Z Node.js v18.20.8
+2025-08-16T19:11:34.516048181Z ==> Deploying...
+2025-08-16T19:11:47.805310648Z 
+2025-08-16T19:11:47.805351098Z > rest-express@1.0.0 start
+2025-08-16T19:11:47.805356258Z > NODE_ENV=production node dist/index.js
+2025-08-16T19:11:47.805358018Z 
+2025-08-16T19:11:51.627307702Z 7:11:51 PM [express] serving on port 10000
+2025-08-16T19:11:52.103271426Z Error: ENOENT: no such file or directory, stat '/app/public/index.html'
+2025-08-16T19:11:55.982196044Z ==> Your service is live 🎉
+2025-08-16T19:11:56.021582249Z ==> 
+2025-08-16T19:11:56.046409106Z ==> ///////////////////////////////////////////////////////////
+2025-08-16T19:11:56.079130821Z ==> 
+2025-08-16T19:11:56.103506078Z ==> Available at your primary URL https://clipsync-pro.onrender.com
+2025-08-16T19:11:56.131943184Z ==> 
+2025-08-16T19:11:56.157319011Z ==> ///////////////////////////////////////////////////////////
+2025-08-16T19:11:57.142731882Z Error: ENOENT: no such file or directory, stat '/app/public/index.html'
+2025-08-16T19:12:01.603875014Z Error: ENOENT: no such file or directory, stat '/app/public/index.html'
+2025-08-16T19:12:24.436729949Z Error: ENOENT: no such file or directory, stat '/app/public/index.html'
