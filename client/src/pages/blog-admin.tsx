@@ -47,13 +47,30 @@ export default function BlogAdmin() {
   const { data: posts, isLoading } = useQuery<BlogPost[]>({
     queryKey: ['/api/blog/posts', 'all'],
     queryFn: async () => {
-      const response = await fetch('/api/blog/posts?published=false');
+      const response = await fetch('/api/blog/posts');
       return response.json();
     },
     enabled: isAuthenticated
   });
 
   const createForm = useForm<InsertBlogPost>({
+    resolver: zodResolver(insertBlogPostSchema),
+    defaultValues: {
+      title: "",
+      slug: "",
+      excerpt: "",
+      content: "",
+      metaDescription: "",
+      keywords: "",
+      author: "ClipSync Pro Team",
+      category: "Productivity",
+      tags: [],
+      published: false,
+      featured: false
+    }
+  });
+
+  const editForm = useForm<InsertBlogPost>({
     resolver: zodResolver(insertBlogPostSchema),
     defaultValues: {
       title: "",
@@ -108,6 +125,27 @@ export default function BlogAdmin() {
     }
   });
 
+  const updateMutation = useMutation({
+    mutationFn: ({ id, data }: { id: string, data: Partial<InsertBlogPost> }) => 
+      apiRequest('PUT', `/api/blog/posts/${id}`, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/blog/posts'] });
+      setEditingPost(null);
+      editForm.reset();
+      toast({
+        title: "Success",
+        description: "Blog post updated successfully!"
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to update blog post",
+        variant: "destructive"
+      });
+    }
+  });
+
   const generateSlug = (title: string) => {
     return title
       .toLowerCase()
@@ -155,6 +193,31 @@ export default function BlogAdmin() {
       deleteMutation.mutate(post.id);
     }
   };
+
+  const onEditSubmit = (data: InsertBlogPost) => {
+    if (editingPost) {
+      updateMutation.mutate({ id: editingPost.id, data });
+    }
+  };
+
+  // Populate edit form when editing post is set
+  useEffect(() => {
+    if (editingPost) {
+      editForm.reset({
+        title: editingPost.title,
+        slug: editingPost.slug,
+        excerpt: editingPost.excerpt || "",
+        content: editingPost.content,
+        metaDescription: editingPost.metaDescription || "",
+        keywords: editingPost.keywords || "",
+        author: editingPost.author,
+        category: editingPost.category,
+        tags: editingPost.tags || [],
+        published: editingPost.published,
+        featured: editingPost.featured
+      });
+    }
+  }, [editingPost, editForm]);
 
   const formatDate = (dateString: string | null) => {
     if (!dateString) return "Not published";
@@ -554,6 +617,206 @@ export default function BlogAdmin() {
                   </Form>
                 </DialogContent>
               </Dialog>
+
+              {/* Edit Blog Post Dialog */}
+              <Dialog open={!!editingPost} onOpenChange={() => setEditingPost(null)}>
+                <DialogContent className="bg-gray-900 border-gray-700 max-w-4xl max-h-[90vh] overflow-y-auto text-white">
+                  <DialogHeader>
+                    <DialogTitle className="text-white text-2xl">Edit Blog Post</DialogTitle>
+                    <DialogDescription className="text-gray-300">
+                      Update the blog post details.
+                    </DialogDescription>
+                  </DialogHeader>
+                  
+                  <Form {...editForm}>
+                    <form onSubmit={editForm.handleSubmit(onEditSubmit)} className="space-y-6">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <FormField
+                          control={editForm.control}
+                          name="title"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-white font-semibold">Title *</FormLabel>
+                              <FormControl>
+                                <Input
+                                  {...field}
+                                  placeholder="Enter blog post title..."
+                                  className="bg-gray-800 border-gray-600 text-white placeholder-gray-400"
+                                  onChange={(e) => {
+                                    field.onChange(e);
+                                    if (!editForm.getValues('slug')) {
+                                      editForm.setValue('slug', generateSlug(e.target.value));
+                                    }
+                                  }}
+                                />
+                              </FormControl>
+                              <FormMessage className="text-red-400" />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={editForm.control}
+                          name="slug"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-white font-semibold">Slug *</FormLabel>
+                              <FormControl>
+                                <Input
+                                  {...field}
+                                  placeholder="url-friendly-slug"
+                                  className="bg-gray-800 border-gray-600 text-white placeholder-gray-400"
+                                />
+                              </FormControl>
+                              <FormMessage className="text-red-400" />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <FormField
+                        control={editForm.control}
+                        name="excerpt"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-white font-semibold">Excerpt</FormLabel>
+                            <FormControl>
+                              <Textarea
+                                {...field}
+                                placeholder="Brief description of the blog post..."
+                                className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 min-h-[80px]"
+                              />
+                            </FormControl>
+                            <FormMessage className="text-red-400" />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={editForm.control}
+                        name="content"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-white font-semibold">Content *</FormLabel>
+                            <FormControl>
+                              <Textarea
+                                {...field}
+                                placeholder="Write your blog post content here..."
+                                className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 min-h-[200px]"
+                              />
+                            </FormControl>
+                            <FormMessage className="text-red-400" />
+                          </FormItem>
+                        )}
+                      />
+
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <FormField
+                          control={editForm.control}
+                          name="category"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-white font-semibold">Category</FormLabel>
+                              <Select onValueChange={field.onChange} value={field.value}>
+                                <FormControl>
+                                  <SelectTrigger className="bg-gray-800 border-gray-600 text-white">
+                                    <SelectValue placeholder="Select a category" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent className="bg-gray-800 border-gray-600">
+                                  {categories.map(category => (
+                                    <SelectItem key={category} value={category} className="text-white hover:bg-gray-700">
+                                      {category}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                              <FormMessage className="text-red-400" />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={editForm.control}
+                          name="author"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-white font-semibold">Author</FormLabel>
+                              <FormControl>
+                                <Input
+                                  {...field}
+                                  className="bg-gray-800 border-gray-600 text-white placeholder-gray-400"
+                                />
+                              </FormControl>
+                              <FormMessage className="text-red-400" />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="flex items-center justify-between gap-4 p-4 bg-gray-800 rounded-lg">
+                        <div className="flex items-center gap-6">
+                          <FormField
+                            control={editForm.control}
+                            name="published"
+                            render={({ field }) => (
+                              <FormItem className="flex items-center space-x-3">
+                                <FormControl>
+                                  <Switch
+                                    checked={field.value}
+                                    onCheckedChange={field.onChange}
+                                    className="data-[state=checked]:bg-green-600"
+                                  />
+                                </FormControl>
+                                <FormLabel className="text-white font-medium cursor-pointer">
+                                  Published
+                                </FormLabel>
+                              </FormItem>
+                            )}
+                          />
+
+                          <FormField
+                            control={editForm.control}
+                            name="featured"
+                            render={({ field }) => (
+                              <FormItem className="flex items-center space-x-3">
+                                <FormControl>
+                                  <Switch
+                                    checked={field.value}
+                                    onCheckedChange={field.onChange}
+                                    className="data-[state=checked]:bg-yellow-600"
+                                  />
+                                </FormControl>
+                                <FormLabel className="text-white font-medium cursor-pointer">
+                                  Featured
+                                </FormLabel>
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+
+                        <div className="flex gap-3">
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => setEditingPost(null)}
+                            className="border-gray-600 text-gray-300 hover:bg-gray-700"
+                          >
+                            Cancel
+                          </Button>
+                          <Button 
+                            type="submit" 
+                            disabled={updateMutation.isPending}
+                            className="bg-gradient-to-r from-electric to-cyber text-black font-bold hover:scale-105 transition-all duration-300"
+                          >
+                            {updateMutation.isPending ? "Updating..." : "Update Post"}
+                          </Button>
+                        </div>
+                      </div>
+                    </form>
+                  </Form>
+                </DialogContent>
+              </Dialog>
               
               <input
                 type="file"
@@ -607,8 +870,19 @@ export default function BlogAdmin() {
                         <Button
                           variant="ghost"
                           size="sm"
+                          onClick={() => setEditingPost(post)}
+                          className="text-blue-400 hover:bg-blue-400/20 px-4 py-2"
+                          data-testid={`button-edit-${post.id}`}
+                        >
+                          <i className="fas fa-edit mr-2"></i>
+                          Edit
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
                           onClick={() => handleDelete(post)}
                           className="text-red-400 hover:bg-red-400/20 px-4 py-2"
+                          data-testid={`button-delete-${post.id}`}
                         >
                           <i className="fas fa-trash mr-2"></i>
                           Delete
@@ -617,6 +891,19 @@ export default function BlogAdmin() {
                     </div>
                   </CardHeader>
                   <CardContent>
+                    <div className="flex items-center gap-2 mb-3">
+                      <Badge 
+                        variant={post.published ? "default" : "secondary"} 
+                        className={post.published ? "bg-green-600 text-white" : "bg-gray-600 text-gray-200"}
+                      >
+                        {post.published ? "Published" : "Draft"}
+                      </Badge>
+                      {post.featured && (
+                        <Badge variant="outline" className="text-yellow-400 border-yellow-400">
+                          Featured
+                        </Badge>
+                      )}
+                    </div>
                     <p className="text-gray-300 mb-4 leading-relaxed">{post.excerpt}</p>
                     {post.tags && post.tags.length > 0 && (
                       <div className="flex flex-wrap gap-2">
