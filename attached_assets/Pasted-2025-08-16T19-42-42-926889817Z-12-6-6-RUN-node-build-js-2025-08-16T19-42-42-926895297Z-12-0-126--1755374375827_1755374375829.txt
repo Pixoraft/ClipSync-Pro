@@ -1,0 +1,50 @@
+2025-08-16T19:42:42.926889817Z #12 [6/6] RUN node build.js
+2025-08-16T19:42:42.926895297Z #12 0.126 Modifying vite config for production build...
+2025-08-16T19:42:43.077447231Z #12 0.133 Building frontend...
+2025-08-16T19:42:49.962065924Z #12 7.161 Restoring vite config...
+2025-08-16T19:42:50.113030256Z #12 7.163 Building server...
+2025-08-16T19:42:50.564291379Z #12 7.698 Build completed successfully!
+2025-08-16T19:42:50.666484184Z #12 DONE 7.9s
+2025-08-16T19:42:50.666505524Z 
+2025-08-16T19:42:50.666510474Z #13 exporting to docker image format
+2025-08-16T19:42:50.816793352Z #13 exporting layers
+2025-08-16T19:42:50.979621152Z #13 exporting layers 0.2s done
+2025-08-16T19:42:50.979679873Z #13 exporting manifest sha256:f836cc93cbbaca1495e9230420f2f9ed87ec6262d76c91fe6fa241eb7481156b 0.0s done
+2025-08-16T19:42:50.979685613Z #13 exporting config sha256:f999574db5549f8f5c439012af06b3e7b8eaa0160631ea0d342a5355356ed184 done
+2025-08-16T19:42:53.430807258Z #13 DONE 2.7s
+2025-08-16T19:42:53.430835458Z 
+2025-08-16T19:42:53.430844878Z #14 exporting cache to client directory
+2025-08-16T19:42:53.430850599Z #14 preparing build cache for export
+2025-08-16T19:42:55.446955232Z #14 writing cache manifest sha256:9a13b270a9af0246294205414d55361572a6a4bb071e31a6fba494ac5fd72c67
+2025-08-16T19:42:55.597016565Z #14 writing cache manifest sha256:9a13b270a9af0246294205414d55361572a6a4bb071e31a6fba494ac5fd72c67 0.2s done
+2025-08-16T19:42:55.597036246Z #14 DONE 2.2s
+2025-08-16T19:42:59.712326634Z Pushing image to registry...
+2025-08-16T19:43:01.593553974Z Upload succeeded
+2025-08-16T19:44:40.293076754Z ==> Deploying...
+2025-08-16T19:44:55.009297785Z > rest-express@1.0.0 start
+2025-08-16T19:44:55.009302705Z > NODE_ENV=production node dist/index.js
+2025-08-16T19:44:55.009304515Z 
+2025-08-16T19:44:58.682815609Z file:///app/dist/index.js:863
+2025-08-16T19:44:58.682839009Z     throw new Error(
+2025-08-16T19:44:58.68285479Z           ^
+2025-08-16T19:44:58.68285898Z 
+2025-08-16T19:44:58.68286389Z Error: Could not find the build directory: /public, make sure to build the client first
+2025-08-16T19:44:58.6828686Z     at serveStatic (file:///app/dist/index.js:863:11)
+2025-08-16T19:44:58.68287342Z     at file:///app/dist/index.js:914:5
+2025-08-16T19:44:58.682884571Z 
+2025-08-16T19:44:58.682889401Z Node.js v18.20.8
+2025-08-16T19:44:59.632509604Z ==> Exited with status 1
+2025-08-16T19:44:59.650086604Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+2025-08-16T19:45:00.994934156Z 
+2025-08-16T19:45:00.994980827Z > rest-express@1.0.0 start
+2025-08-16T19:45:00.994986837Z > NODE_ENV=production node dist/index.js
+2025-08-16T19:45:00.994989737Z 
+2025-08-16T19:45:04.386112117Z file:///app/dist/index.js:863
+2025-08-16T19:45:04.386134677Z     throw new Error(
+2025-08-16T19:45:04.386138327Z           ^
+2025-08-16T19:45:04.386140948Z 
+2025-08-16T19:45:04.386144128Z Error: Could not find the build directory: /public, make sure to build the client first
+2025-08-16T19:45:04.386147237Z     at serveStatic (file:///app/dist/index.js:863:11)
+2025-08-16T19:45:04.386151928Z     at file:///app/dist/index.js:914:5
+2025-08-16T19:45:04.386154718Z 
+2025-08-16T19:45:04.386157468Z Node.js v18.20.8
