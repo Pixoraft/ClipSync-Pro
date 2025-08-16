@@ -12,7 +12,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { insertBlogPostSchema, updateBlogPostSchema, BlogPost, InsertBlogPost } from "@shared/schema";
+import { insertBlogPostSchema, updateBlogPostSchema, BlogPost, InsertBlogPost, BlogComment } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import SEOHead from "@/components/seo/SEOHead";
 
@@ -23,6 +23,7 @@ export default function BlogAdmin() {
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [previewImage, setPreviewImage] = useState<string>("");
+  const [activeTab, setActiveTab] = useState<"posts" | "reviews">("posts");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -48,6 +49,15 @@ export default function BlogAdmin() {
     queryKey: ['/api/blog/posts', 'all'],
     queryFn: async () => {
       const response = await fetch('/api/blog/posts');
+      return response.json();
+    },
+    enabled: isAuthenticated
+  });
+
+  const { data: comments, isLoading: commentsLoading } = useQuery<BlogComment[]>({
+    queryKey: ['/api/blog/admin/comments'],
+    queryFn: async () => {
+      const response = await fetch('/api/blog/admin/comments');
       return response.json();
     },
     enabled: isAuthenticated
@@ -141,6 +151,42 @@ export default function BlogAdmin() {
       toast({
         title: "Error",
         description: error.message || "Failed to update blog post",
+        variant: "destructive"
+      });
+    }
+  });
+
+  const approveCommentMutation = useMutation({
+    mutationFn: (id: string) => apiRequest('PUT', `/api/blog/comments/${id}/approve`),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/blog/admin/comments'] });
+      toast({
+        title: "Success",
+        description: "Review approved successfully!"
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to approve review",
+        variant: "destructive"
+      });
+    }
+  });
+
+  const deleteCommentMutation = useMutation({
+    mutationFn: (id: string) => apiRequest('DELETE', `/api/blog/comments/${id}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/blog/admin/comments'] });
+      toast({
+        title: "Success",
+        description: "Review deleted successfully!"
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to delete review",
         variant: "destructive"
       });
     }
@@ -851,9 +897,34 @@ export default function BlogAdmin() {
 
       <section className="py-16 bg-gradient-to-b from-navy to-midnight min-h-screen">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-glow mb-8">Manage Posts</h2>
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold text-glow">Admin Dashboard</h2>
+            <div className="flex gap-2">
+              <Button
+                variant={activeTab === "posts" ? "default" : "ghost"}
+                onClick={() => setActiveTab("posts")}
+                className={activeTab === "posts" ? "bg-gradient-to-r from-electric to-cyber text-black font-bold" : "text-gray-300 hover:text-white"}
+                data-testid="button-tab-posts"
+              >
+                <i className="fas fa-newspaper mr-2"></i>
+                Posts ({posts?.length || 0})
+              </Button>
+              <Button
+                variant={activeTab === "reviews" ? "default" : "ghost"}
+                onClick={() => setActiveTab("reviews")}
+                className={activeTab === "reviews" ? "bg-gradient-to-r from-electric to-cyber text-black font-bold" : "text-gray-300 hover:text-white"}
+                data-testid="button-tab-reviews"
+              >
+                <i className="fas fa-comments mr-2"></i>
+                Reviews ({comments?.length || 0})
+              </Button>
+            </div>
+          </div>
           
-          {isLoading ? (
+          {/* Posts Tab */}
+          {activeTab === "posts" && (
+            <>
+              {isLoading ? (
             <div className="text-center py-20">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-electric mx-auto mb-4"></div>
               <p className="text-gray-300">Loading posts...</p>
@@ -882,7 +953,7 @@ export default function BlogAdmin() {
                           {post.title}
                         </CardTitle>
                         <CardDescription className="text-gray-400 mb-3">
-                          By {post.author} • {formatDate(typeof post.publishedAt === 'string' ? post.publishedAt : post.publishedAt?.toISOString() || null)} • Updated {formatDate(typeof post.updatedAt === 'string' ? post.updatedAt : post.updatedAt?.toISOString() || null)}
+                          By {post.author} • {formatDate(typeof post.publishedAt === 'string' ? post.publishedAt : post.publishedAt?.toISOString() || null)} • {parseInt(post.viewCount || '0').toLocaleString()} views • Updated {formatDate(typeof post.updatedAt === 'string' ? post.updatedAt : post.updatedAt?.toISOString() || null)}
                         </CardDescription>
                       </div>
                       <div className="flex gap-3 ml-4">
@@ -957,11 +1028,113 @@ export default function BlogAdmin() {
               </div>
             </div>
           )}
+            </>
+          )}
+
+          {/* Reviews Tab */}
+          {activeTab === "reviews" && (
+            <>
+              {commentsLoading ? (
+                <div className="text-center py-20">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-electric mx-auto mb-4"></div>
+                  <p className="text-gray-300">Loading reviews...</p>
+                </div>
+              ) : comments && comments.length > 0 ? (
+                <div className="grid gap-6">
+                  {comments.map((comment) => (
+                    <Card key={comment.id} className="glass-morphism hover:scale-[1.01] transition-all duration-300">
+                      <CardHeader>
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-3 mb-3">
+                              <Badge variant={comment.approved ? "default" : "secondary"} className={comment.approved ? "bg-green-600 text-white" : "bg-orange-600 text-white"}>
+                                {comment.approved ? "Approved" : "Pending"}
+                              </Badge>
+                              <div className="flex items-center">
+                                {[...Array(5)].map((_, i) => (
+                                  <i
+                                    key={i}
+                                    className={`fas fa-star text-sm ${i < parseInt(comment.rating) ? 'text-yellow-400' : 'text-gray-400'}`}
+                                  />
+                                ))}
+                                <span className="ml-2 text-gray-300">({comment.rating}/5)</span>
+                              </div>
+                            </div>
+                            <CardTitle className="text-white text-lg mb-2">
+                              {comment.name} <span className="text-gray-400 text-sm font-normal">({comment.email})</span>
+                            </CardTitle>
+                            <CardDescription className="text-gray-400 mb-3">
+                              {new Date(comment.createdAt).toLocaleDateString('en-US', { 
+                                year: 'numeric', 
+                                month: 'short', 
+                                day: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                              })}
+                            </CardDescription>
+                          </div>
+                          <div className="flex gap-3 ml-4">
+                            {!comment.approved && (
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => approveCommentMutation.mutate(comment.id)}
+                                disabled={approveCommentMutation.isPending}
+                                className="text-green-400 hover:bg-green-400/20 px-4 py-2"
+                                data-testid={`button-approve-${comment.id}`}
+                              >
+                                <i className="fas fa-check mr-2"></i>
+                                Approve
+                              </Button>
+                            )}
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => {
+                                if (confirm('Are you sure you want to delete this review?')) {
+                                  deleteCommentMutation.mutate(comment.id);
+                                }
+                              }}
+                              disabled={deleteCommentMutation.isPending}
+                              className="text-red-400 hover:bg-red-400/20 px-4 py-2"
+                              data-testid={`button-delete-comment-${comment.id}`}
+                            >
+                              <i className="fas fa-trash mr-2"></i>
+                              Delete
+                            </Button>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-gray-300 leading-relaxed mb-4">{comment.comment}</p>
+                        <div className="text-sm text-gray-500">
+                          <span>Blog Post ID: {comment.blogPostId}</span>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-20">
+                  <div className="glass-morphism rounded-3xl p-12 max-w-md mx-auto">
+                    <div className="w-16 h-16 bg-gradient-to-br from-electric to-cyber rounded-full flex items-center justify-center mx-auto mb-6">
+                      <i className="fas fa-comments text-white text-xl"></i>
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-4">No Reviews Yet</h3>
+                    <p className="text-gray-400 mb-6">
+                      Reviews and comments will appear here once visitors start engaging with your blog posts.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </>
+          )}
         </div>
       </section>
 
       {/* Quick Start Guide */}
-      <section className="py-16 bg-midnight border-t border-gray-800">
+      {activeTab === "posts" && (
+        <section className="py-16 bg-midnight border-t border-gray-800">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold text-glow mb-8">Creating SEO-Optimized Content</h2>
           <div className="grid md:grid-cols-3 gap-6">
@@ -994,7 +1167,8 @@ export default function BlogAdmin() {
             </div>
           </div>
         </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 }

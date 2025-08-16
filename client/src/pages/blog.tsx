@@ -178,7 +178,7 @@ export default function Blog() {
                       </Link>
                     </CardTitle>
                     <CardDescription className="text-gray-300 text-sm">
-                      {formatDate(post.publishedAt)} • By {post.author}
+                      {formatDate(typeof post.publishedAt === 'string' ? post.publishedAt : post.publishedAt?.toISOString() || null)} • By {post.author} • {parseInt(post.viewCount || '0').toLocaleString()} views
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -248,7 +248,7 @@ export default function Blog() {
                       </Link>
                     </CardTitle>
                     <CardDescription className="text-gray-300 text-sm">
-                      {formatDate(post.publishedAt)} • By {post.author}
+                      {formatDate(typeof post.publishedAt === 'string' ? post.publishedAt : post.publishedAt?.toISOString() || null)} • By {post.author} • {parseInt(post.viewCount || '0').toLocaleString()} views
                     </CardDescription>
                   </CardHeader>
                   <CardContent>

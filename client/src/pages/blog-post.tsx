@@ -194,6 +194,8 @@ export default function BlogPostPage() {
             <span>{formatDate(typeof post.publishedAt === 'string' ? post.publishedAt : post.publishedAt?.toISOString() || null)}</span>
             <span>•</span>
             <span>{Math.ceil(post.content.split(' ').length / 200)} min read</span>
+            <span>•</span>
+            <span><i className="fas fa-eye mr-1"></i>{parseInt(post.viewCount || '0').toLocaleString()} views</span>
           </div>
           
           <p className="text-xl text-gray-300 mt-6 leading-relaxed">

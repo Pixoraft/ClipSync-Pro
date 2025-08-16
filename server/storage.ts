@@ -18,9 +18,11 @@ export interface IStorage {
   getFeaturedBlogPosts(): Promise<BlogPost[]>;
   getBlogPostsByCategory(category: string): Promise<BlogPost[]>;
   searchBlogPosts(query: string): Promise<BlogPost[]>;
+  incrementViewCount(postId: string): Promise<boolean>;
   
   // Comment methods
   getCommentsByBlogPost(blogPostId: string): Promise<BlogComment[]>;
+  getAllComments(): Promise<BlogComment[]>;
   createComment(comment: InsertBlogComment): Promise<BlogComment>;
   approveComment(id: string): Promise<boolean>;
   deleteComment(id: string): Promise<boolean>;
@@ -83,6 +85,9 @@ export class MemStorage implements IStorage {
       ogImage: insertPost.ogImage || null,
       author: insertPost.author || "ClipSync Pro Team",
       tags: insertPost.tags || [],
+      published: insertPost.published || false,
+      featured: insertPost.featured || false,
+      viewCount: "0",
       publishedAt: insertPost.published ? now : null,
       createdAt: now,
       updatedAt: now
@@ -256,7 +261,10 @@ export class MemStorage implements IStorage {
       const blogPost: BlogPost = {
         ...post,
         id,
-        ogImage: null
+        ogImage: null,
+        published: post.published,
+        featured: post.featured,
+        viewCount: "0"
       };
       this.blogPosts.set(id, blogPost);
     });
@@ -300,6 +308,26 @@ export class MemStorage implements IStorage {
       await this.saveData();
     }
     return result;
+  }
+
+  async getAllComments(): Promise<BlogComment[]> {
+    return Array.from(this.blogComments.values())
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  }
+
+  async incrementViewCount(postId: string): Promise<boolean> {
+    const post = this.blogPosts.get(postId);
+    if (!post) return false;
+    
+    const currentViews = parseInt(post.viewCount) || 0;
+    const updated: BlogPost = {
+      ...post,
+      viewCount: (currentViews + 1).toString()
+    };
+    
+    this.blogPosts.set(postId, updated);
+    await this.saveData();
+    return true;
   }
 }
 

@@ -90,7 +90,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ error: "Blog post not published" });
       }
       
-      res.json(post);
+      // Increment view count
+      await storage.incrementViewCount(post.id);
+      
+      // Get updated post with new view count
+      const updatedPost = await storage.getBlogPost(post.id);
+      
+      res.json(updatedPost || post);
     } catch (error) {
       console.error("Error fetching blog post:", error);
       res.status(500).json({ error: "Failed to fetch blog post" });
@@ -187,7 +193,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/blog/categories", async (req, res) => {
     try {
       const posts = await storage.getAllBlogPosts(true);
-      const categories = [...new Set(posts.map(post => post.category))];
+      const categories = Array.from(new Set(posts.map(post => post.category)));
       res.json(categories);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -266,6 +272,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error approving comment:", error);
       res.status(500).json({ error: "Failed to approve comment" });
+    }
+  });
+
+  // Admin: Get all comments
+  app.get("/api/blog/admin/comments", async (req, res) => {
+    try {
+      const comments = await storage.getAllComments();
+      res.json(comments);
+    } catch (error) {
+      console.error("Error fetching all comments:", error);
+      res.status(500).json({ error: "Failed to fetch comments" });
     }
   });
 

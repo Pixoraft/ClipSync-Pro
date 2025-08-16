@@ -23,6 +23,7 @@ export const blogPosts = pgTable("blog_posts", {
   tags: text("tags").array(),
   published: boolean("published").notNull().default(false),
   featured: boolean("featured").notNull().default(false),
+  viewCount: varchar("view_count").notNull().default("0"),
   publishedAt: timestamp("published_at").defaultNow(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
