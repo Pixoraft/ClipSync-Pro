@@ -9,7 +9,7 @@ interface ClipItem {
 
 export default function Hero3DDemo() {
   const [clips, setClips] = useState<ClipItem[]>([
-    { id: 1, text: "https://clipsync.pro/features...", timestamp: "2 minutes ago" },
+    { id: 1, text: "https://clipsync-pro.replit.app/features...", timestamp: "2 minutes ago" },
     { id: 2, text: "Premium clipboard manager app", timestamp: "5 minutes ago", isActive: true },
     { id: 3, text: "AI-powered workflow automation", timestamp: "1 hour ago" },
   ]);

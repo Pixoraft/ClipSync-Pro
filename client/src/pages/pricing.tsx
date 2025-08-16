@@ -19,7 +19,7 @@ export default function Pricing() {
 
   const pricingPlans = [
     {
-      title: "ClipFlow Pro",
+      title: "ClipSync Pro",
       price: "FREE",
       description: "Completely free forever - all features included",
       features: [
@@ -44,8 +44,8 @@ export default function Pricing() {
 
   const faqs = [
     {
-      question: "Is ClipFlow Pro really free?",
-      answer: "Yes! ClipFlow Pro is 100% free forever. All features are included with no hidden costs, subscriptions, or premium upgrades."
+      question: "Is ClipSync Pro really free?",
+      answer: "Yes! ClipSync Pro is 100% free forever. All features are included with no hidden costs, subscriptions, or premium upgrades."
     },
     {
       question: "What's the difference between Linux and Windows versions?",
@@ -57,11 +57,11 @@ export default function Pricing() {
     },
     {
       question: "Do I need to create an account?",
-      answer: "No registration required! Download and start using ClipFlow Pro immediately. Your data stays completely private on your device."
+      answer: "No registration required! Download and start using ClipSync Pro immediately. Your data stays completely private on your device."
     },
     {
       question: "Will there ever be paid features?",
-      answer: "No! ClipFlow Pro is committed to being free forever. We believe everyone deserves access to powerful productivity tools."
+      answer: "No! ClipSync Pro is committed to being free forever. We believe everyone deserves access to powerful productivity tools."
     },
     {
       question: "How do I get support?",

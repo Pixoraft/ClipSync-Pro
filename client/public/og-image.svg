@@ -30,7 +30,7 @@
   <path d="M185 240L188 243L195 236" stroke="#0066CC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
   
   <!-- Title -->
-  <text x="280" y="220" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="url(#logoGrad)" filter="url(#glow)">ClipFlow Pro</text>
+  <text x="280" y="220" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="url(#logoGrad)" filter="url(#glow)">ClipSync Pro</text>
   <text x="280" y="270" font-family="Arial, sans-serif" font-size="32" fill="#CCCCCC">Premium Clipboard Manager</text>
   <text x="280" y="320" font-family="Arial, sans-serif" font-size="28" fill="#999999">Free • Secure • Cross-Platform</text>
   

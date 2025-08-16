@@ -20,8 +20,8 @@ export default function Contact() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    "name": "Contact ClipFlow Pro",
-    "description": "Get support, provide feedback, or ask questions about ClipFlow Pro clipboard manager. We're here to help improve your productivity experience.",
+    "name": "Contact ClipSync Pro",
+    "description": "Get support, provide feedback, or ask questions about ClipSync Pro clipboard manager. We're here to help improve your productivity experience.",
     "mainEntity": {
       "@type": "Organization", 
       "name": "ClipSync Pro Support",
@@ -117,7 +117,7 @@ export default function Contact() {
             Get In Touch
           </h1>
           <p className="text-xl text-gray-300 leading-relaxed">
-            Have questions about ClipFlow Pro? Need support? We're here to help.
+            Have questions about ClipSync Pro? Need support? We're here to help.
           </p>
         </div>
       </section>

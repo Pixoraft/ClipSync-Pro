@@ -94,7 +94,7 @@ export default function Home() {
 
   const pricingPlans = [
     {
-      title: "ClipFlow Pro",
+      title: "ClipSync Pro",
       price: "FREE",
       description: "Completely free forever",
       features: [
@@ -216,7 +216,7 @@ export default function Home() {
           }`}>
             <h2 className="text-5xl font-black mb-6 text-glow animate-bounce-in">See It In Action</h2>
             <p className="text-xl text-gray-300 animate-slide-up delay-300">
-              Experience the power of ClipFlow Pro with our interactive demo
+              Experience the power of ClipSync Pro with our interactive demo
             </p>
           </div>
 
@@ -232,7 +232,7 @@ export default function Home() {
           }`}>
             <h2 className="text-5xl font-black mb-6 text-glow animate-scale-up">100% Free Forever</h2>
             <p className="text-xl text-gray-300 animate-slide-right delay-400">
-              Download ClipFlow Pro completely free with all features included
+              Download ClipSync Pro completely free with all features included
             </p>
           </div>
 

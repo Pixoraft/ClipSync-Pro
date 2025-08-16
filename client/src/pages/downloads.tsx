@@ -82,7 +82,7 @@ export default function Downloads() {
       <section className="py-20 premium-gradient">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h1 className="text-5xl lg:text-6xl font-black mb-6 text-glow animate-bounce-in">
-            Download ClipFlow Pro
+            Download ClipSync Pro
           </h1>
           <p className="text-xl text-gray-300 leading-relaxed mb-8 animate-slide-up delay-200">
             Get the world's most advanced clipboard manager - completely free forever
