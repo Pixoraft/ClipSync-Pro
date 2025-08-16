@@ -8,10 +8,10 @@ const execAsync = promisify(exec);
 async function build() {
   try {
     console.log('Building frontend...');
-    await execAsync('vite build');
+    await execAsync('npx vite build');
     
     console.log('Building server...');
-    await execAsync('esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist --define:import.meta.dirname=\'"."\'');
+    await execAsync('npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist --define:import.meta.dirname=\'"."\'');
     
     console.log('Build completed successfully!');
   } catch (error) {

@@ -1,0 +1,50 @@
+2025-08-16T19:07:03.628589096Z #9 [4/6] RUN npm install
+2025-08-16T19:07:08.137247161Z #9 4.498 npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+2025-08-16T19:07:08.287741649Z #9 4.668 npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+2025-08-16T19:07:13.53037643Z #9 10.00 
+2025-08-16T19:07:13.530404641Z #9 10.00 added 492 packages, and audited 493 packages in 10s
+2025-08-16T19:07:13.530408901Z #9 10.00 
+2025-08-16T19:07:13.681187633Z #9 10.00 65 packages are looking for funding
+2025-08-16T19:07:13.724121561Z #9 10.00   run `npm fund` for details
+2025-08-16T19:07:13.724141542Z #9 10.04 
+2025-08-16T19:07:13.724144702Z #9 10.04 11 vulnerabilities (3 low, 8 moderate)
+2025-08-16T19:07:13.724147522Z #9 10.04 
+2025-08-16T19:07:13.724150742Z #9 10.04 To address issues that do not require attention, run:
+2025-08-16T19:07:13.724154172Z #9 10.04   npm audit fix
+2025-08-16T19:07:13.724156942Z #9 10.04 
+2025-08-16T19:07:13.724162392Z #9 10.04 To address all issues (including breaking changes), run:
+2025-08-16T19:07:13.724165773Z #9 10.04   npm audit fix --force
+2025-08-16T19:07:13.724168483Z #9 10.04 
+2025-08-16T19:07:13.724171163Z #9 10.04 Run `npm audit` for details.
+2025-08-16T19:07:13.724174543Z #9 10.04 npm notice
+2025-08-16T19:07:13.724177373Z #9 10.04 npm notice New major version of npm available! 10.8.2 -> 11.5.2
+2025-08-16T19:07:13.724180093Z #9 10.04 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.5.2
+2025-08-16T19:07:13.724188404Z #9 10.04 npm notice To update run: npm install -g npm@11.5.2
+2025-08-16T19:07:13.724194384Z #9 10.04 npm notice
+2025-08-16T19:07:17.112355443Z #9 DONE 13.6s
+2025-08-16T19:07:17.262918813Z 
+2025-08-16T19:07:17.262939414Z #10 [5/6] COPY . .
+2025-08-16T19:07:17.713919986Z #10 DONE 0.5s
+2025-08-16T19:07:17.713938497Z 
+2025-08-16T19:07:17.713944908Z #11 [6/6] RUN node build.js
+2025-08-16T19:07:17.788350692Z #11 0.115 Building frontend...
+2025-08-16T19:07:17.788377994Z #11 0.125 Build failed: Command failed: vite build
+2025-08-16T19:07:17.788385314Z #11 0.125 /bin/sh: vite: not found
+2025-08-16T19:07:17.788389804Z #11 0.125 
+2025-08-16T19:07:17.788395865Z #11 ERROR: process "/bin/sh -c node build.js" did not complete successfully: exit code: 1
+2025-08-16T19:07:17.788400245Z ------
+2025-08-16T19:07:17.788404735Z  > [6/6] RUN node build.js:
+2025-08-16T19:07:17.788409005Z 0.115 Building frontend...
+2025-08-16T19:07:17.788413305Z 0.125 Build failed: Command failed: vite build
+2025-08-16T19:07:17.788417656Z 0.125 /bin/sh: vite: not found
+2025-08-16T19:07:17.788422036Z 0.125 
+2025-08-16T19:07:17.788426326Z ------
+2025-08-16T19:07:17.78967903Z Dockerfile:17
+2025-08-16T19:07:17.789699702Z --------------------
+2025-08-16T19:07:17.789704702Z   15 |     
+2025-08-16T19:07:17.789710662Z   16 |     # Build the application
+2025-08-16T19:07:17.789717312Z   17 | >>> RUN node build.js
+2025-08-16T19:07:17.789819468Z   18 |     
+2025-08-16T19:07:17.789828008Z   19 |     # Expose port
+2025-08-16T19:07:17.789832658Z --------------------
+2025-08-16T19:07:17.789839519Z error: failed to solve: process "/bin/sh -c node build.js" did not complete successfully: exit code: 1
