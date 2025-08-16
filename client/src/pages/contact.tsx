@@ -23,11 +23,12 @@ export default function Contact() {
     "name": "Contact ClipFlow Pro",
     "description": "Get support, provide feedback, or ask questions about ClipFlow Pro clipboard manager. We're here to help improve your productivity experience.",
     "mainEntity": {
-      "@type": "Organization",
-      "name": "ClipFlow Pro Support",
+      "@type": "Organization", 
+      "name": "ClipSync Pro Support",
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer service",
+        "email": "vivekrvt84@gmail.com",
         "availableLanguage": "English"
       }
     }
@@ -37,15 +38,35 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for your message. We'll get back to you soon.",
-    });
+    try {
+      // Create mailto link with form data
+      const subject = encodeURIComponent(`ClipSync Pro Contact: ${formData.subject}`);
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\n` +
+        `Email: ${formData.email}\n` +
+        `Subject: ${formData.subject}\n\n` +
+        `Message:\n${formData.message}\n\n` +
+        `--\nSent from ClipSync Pro website contact form`
+      );
+      
+      const mailtoLink = `mailto:vivekrvt84@gmail.com?subject=${subject}&body=${body}`;
+      
+      // Open email client
+      window.location.href = mailtoLink;
+      
+      toast({
+        title: "Email Client Opened!",
+        description: "Your email client should open with the message pre-filled. Please send the email to complete your inquiry.",
+      });
 
-    setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Unable to open email client. Please contact vivekrvt84@gmail.com directly.",
+      });
+    }
+    
     setIsSubmitting(false);
   };
 
@@ -61,8 +82,8 @@ export default function Contact() {
       icon: "fas fa-envelope",
       title: "Email Support",
       description: "Get help with technical issues and general inquiries",
-      contact: "support@clipflow.pro",
-      action: () => window.open('mailto:support@clipflow.pro', '_blank')
+      contact: "vivekrvt84@gmail.com",
+      action: () => window.open('mailto:vivekrvt84@gmail.com', '_blank')
     },
     {
       icon: "fas fa-globe",

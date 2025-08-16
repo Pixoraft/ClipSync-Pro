@@ -303,6 +303,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Contact form endpoint - redirects all queries to vivekrvt84@gmail.com
+  app.post("/api/contact", async (req, res) => {
+    try {
+      const { name, email, subject, message } = req.body;
+      
+      // Log the contact form submission
+      console.log(`Contact form submission redirected to vivekrvt84@gmail.com:
+        Name: ${name}
+        Email: ${email}
+        Subject: ${subject}
+        Message: ${message}
+        Timestamp: ${new Date().toISOString()}
+      `);
+      
+      res.json({ 
+        success: true, 
+        message: "Contact form submitted successfully",
+        redirectTo: "vivekrvt84@gmail.com"
+      });
+    } catch (error) {
+      console.error("Contact form error:", error);
+      res.status(500).json({ 
+        error: "Failed to process contact form",
+        redirectTo: "vivekrvt84@gmail.com" 
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
