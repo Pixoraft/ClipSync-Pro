@@ -1,0 +1,71 @@
+2025-08-16T16:51:02.920009219Z #11 6.833 
+2025-08-16T16:51:02.920012859Z #11 6.833 (!) Some chunks are larger than 500 kB after minification. Consider:
+2025-08-16T16:51:02.920016269Z #11 6.833 - Using dynamic import() to code-split the application
+2025-08-16T16:51:02.920019519Z #11 6.833 - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+2025-08-16T16:51:02.920022659Z #11 6.833 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+2025-08-16T16:51:02.920025839Z #11 6.833 ✓ built in 6.31s
+2025-08-16T16:51:03.070189891Z #11 6.894 
+2025-08-16T16:51:03.070210281Z #11 6.894   dist/index.js  39.0kb
+2025-08-16T16:51:03.070214791Z #11 6.894 
+2025-08-16T16:51:03.070219042Z #11 6.894 ⚡ Done in 5ms
+2025-08-16T16:51:03.221099531Z #11 DONE 7.0s
+2025-08-16T16:51:03.221121061Z 
+2025-08-16T16:51:03.221130052Z #12 exporting to docker image format
+2025-08-16T16:51:03.221134881Z #12 exporting layers
+2025-08-16T16:51:19.753370675Z #12 exporting layers 16.6s done
+2025-08-16T16:51:19.753399156Z #12 exporting manifest sha256:914c739e1fb9b3d0a291283599b8db3fc84a8f219f535b21fe830926be7c35c7
+2025-08-16T16:51:19.894323013Z #12 exporting manifest sha256:914c739e1fb9b3d0a291283599b8db3fc84a8f219f535b21fe830926be7c35c7 0.2s done
+2025-08-16T16:51:20.071554163Z #12 exporting config sha256:39c3709b4d48218e8a1356d5ba794f04003cd4ae1c812898ea762b14c8e76fe8 0.0s done
+2025-08-16T16:51:22.390635851Z #12 DONE 19.3s
+2025-08-16T16:51:22.390654101Z 
+2025-08-16T16:51:22.390657451Z #13 exporting cache to client directory
+2025-08-16T16:51:22.390659551Z #13 preparing build cache for export
+2025-08-16T16:51:24.862681419Z #13 writing cache manifest sha256:380a5d61708de37c4cda438c5c3f6c3500f85d73e4efc4c5efc43fb9646fdd90 done
+2025-08-16T16:51:24.862698Z #13 DONE 2.4s
+2025-08-16T16:51:28.710985747Z Pushing image to registry...
+2025-08-16T16:51:35.632200038Z Upload succeeded
+2025-08-16T16:51:37.97587508Z ==> Deploying...
+2025-08-16T16:51:51.180648185Z 
+2025-08-16T16:51:51.180690846Z > rest-express@1.0.0 start
+2025-08-16T16:51:51.180696667Z > NODE_ENV=production node dist/index.js
+2025-08-16T16:51:51.180698877Z 
+2025-08-16T16:51:54.466748412Z node:internal/errors:496
+2025-08-16T16:51:54.466793003Z     ErrorCaptureStackTrace(err);
+2025-08-16T16:51:54.466798513Z     ^
+2025-08-16T16:51:54.466800933Z 
+2025-08-16T16:51:54.466803763Z TypeError [ERR_INVALID_ARG_TYPE]: The "paths[0]" argument must be of type string. Received undefined
+2025-08-16T16:51:54.466810183Z     at new NodeError (node:internal/errors:405:5)
+2025-08-16T16:51:54.466812613Z     at validateString (node:internal/validators:162:11)
+2025-08-16T16:51:54.466816483Z     at Object.resolve (node:path:1115:7)
+2025-08-16T16:51:54.466818943Z     at file:///app/dist/index.js:788:18
+2025-08-16T16:51:54.466822963Z     at ModuleJob.run (node:internal/modules/esm/module_job:195:25)
+2025-08-16T16:51:54.466825533Z     at async ModuleLoader.import (node:internal/modules/esm/loader:337:24)
+2025-08-16T16:51:54.466827934Z     at async loadESM (node:internal/process/esm_loader:34:7)
+2025-08-16T16:51:54.466829963Z     at async handleMainPromise (node:internal/modules/run_main:106:12) {
+2025-08-16T16:51:54.466832454Z   code: 'ERR_INVALID_ARG_TYPE'
+2025-08-16T16:51:54.466834684Z }
+2025-08-16T16:51:54.466836684Z 
+2025-08-16T16:51:54.466838714Z Node.js v18.20.8
+2025-08-16T16:51:58.27091433Z ==> Exited with status 1
+2025-08-16T16:51:58.286107009Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+2025-08-16T16:51:59.58102604Z 
+2025-08-16T16:51:59.581076111Z > rest-express@1.0.0 start
+2025-08-16T16:51:59.581082821Z > NODE_ENV=production node dist/index.js
+2025-08-16T16:51:59.581085111Z 
+2025-08-16T16:52:02.787752528Z node:internal/errors:496
+2025-08-16T16:52:02.7878166Z     ErrorCaptureStackTrace(err);
+2025-08-16T16:52:02.78782235Z     ^
+2025-08-16T16:52:02.78782479Z 
+2025-08-16T16:52:02.78782811Z TypeError [ERR_INVALID_ARG_TYPE]: The "paths[0]" argument must be of type string. Received undefined
+2025-08-16T16:52:02.7878321Z     at new NodeError (node:internal/errors:405:5)
+2025-08-16T16:52:02.78783533Z     at validateString (node:internal/validators:162:11)
+2025-08-16T16:52:02.78783874Z     at Object.resolve (node:path:1115:7)
+2025-08-16T16:52:02.78784121Z     at file:///app/dist/index.js:788:18
+2025-08-16T16:52:02.78784388Z     at ModuleJob.run (node:internal/modules/esm/module_job:195:25)
+2025-08-16T16:52:02.7878461Z     at async ModuleLoader.import (node:internal/modules/esm/loader:337:24)
+2025-08-16T16:52:02.78784853Z     at async loadESM (node:internal/process/esm_loader:34:7)
+2025-08-16T16:52:02.78785109Z     at async handleMainPromise (node:internal/modules/run_main:106:12) {
+2025-08-16T16:52:02.787853461Z   code: 'ERR_INVALID_ARG_TYPE'
+2025-08-16T16:52:02.787855881Z }
+2025-08-16T16:52:02.78785829Z 
+2025-08-16T16:52:02.787860751Z Node.js v18.20.8
