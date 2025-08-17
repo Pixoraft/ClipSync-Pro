@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0080FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0060CC;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#333333" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  
+  <!-- Logo -->
+  <g transform="translate(100, 200)">
+    <rect width="120" height="120" rx="24" fill="url(#logoGrad)"/>
+    <g fill="white">
+      <!-- Clipboard icon -->
+      <rect x="30" y="22.5" width="60" height="75" rx="7.5" fill="none" stroke="white" stroke-width="6"/>
+      <rect x="41.25" y="15" width="37.5" height="15" rx="3.75" fill="white"/>
+      <!-- Checkmarks -->
+      <path d="M41.25 45 L48.75 52.5 L63.75 37.5" stroke="white" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M41.25 60 L48.75 67.5 L63.75 52.5" stroke="white" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M41.25 75 L48.75 82.5 L63.75 67.5" stroke="white" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+  
+  <!-- Title -->
+  <text x="280" y="280" fill="white" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="800">ClipSync Pro</text>
+  
+  <!-- Subtitle -->
+  <text x="280" y="340" fill="#888888" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="400">Premium Clipboard Manager</text>
+  
+  <!-- Features -->
+  <g fill="#0080FF" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="500">
+    <text x="280" y="420">✓ AI-Powered Search</text>
+    <text x="280" y="460">✓ Secure Local Storage</text>
+    <text x="280" y="500">✓ Cross-Platform Sync</text>
+  </g>
+  
+  <!-- Free badge -->
+  <g transform="translate(950, 100)">
+    <rect width="200" height="80" rx="40" fill="#0080FF"/>
+    <text x="100" y="55" fill="white" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700" text-anchor="middle">FREE</text>
+  </g>
+</svg>

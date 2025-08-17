@@ -19,6 +19,11 @@ async function build() {
     await execAsync('mkdir -p public');
     await execAsync('cp -r dist/public/* public/');
     
+    // Ensure favicon and other static assets are available
+    console.log('Copying favicon and static assets...');
+    await execAsync('cp client/public/favicon.* public/ 2>/dev/null || true');
+    await execAsync('cp client/public/og-image.svg public/ 2>/dev/null || true');
+    
     console.log('Build completed successfully!');
   } catch (error) {
     console.error('Build failed:', error.message);
