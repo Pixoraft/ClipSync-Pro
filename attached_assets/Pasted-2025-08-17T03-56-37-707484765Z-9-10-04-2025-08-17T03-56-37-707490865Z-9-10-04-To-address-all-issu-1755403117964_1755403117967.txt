@@ -1,0 +1,51 @@
+2025-08-17T03:56:37.707484765Z #9 10.04 
+2025-08-17T03:56:37.707490865Z #9 10.04 To address all issues (including breaking changes), run:
+2025-08-17T03:56:37.707496935Z #9 10.04   npm audit fix --force
+2025-08-17T03:56:37.707502255Z #9 10.04 
+2025-08-17T03:56:37.707508306Z #9 10.04 Run `npm audit` for details.
+2025-08-17T03:56:37.857785608Z #9 10.04 npm notice
+2025-08-17T03:56:37.857799029Z #9 10.04 npm notice New major version of npm available! 10.8.2 -> 11.5.2
+2025-08-17T03:56:37.857802399Z #9 10.04 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.5.2
+2025-08-17T03:56:37.857805959Z #9 10.04 npm notice To update run: npm install -g npm@11.5.2
+2025-08-17T03:56:37.857808779Z #9 10.04 npm notice
+2025-08-17T03:56:39.962631749Z #9 DONE 12.2s
+2025-08-17T03:56:39.96264944Z 
+2025-08-17T03:56:39.96265406Z #10 [5/6] COPY . .
+2025-08-17T03:56:40.263518553Z #10 DONE 0.3s
+2025-08-17T03:56:40.263537003Z 
+2025-08-17T03:56:40.263542273Z #11 [6/6] RUN node build.js
+2025-08-17T03:56:40.414152874Z #11 0.111 Building frontend...
+2025-08-17T03:56:46.425543859Z #11 6.164 Building server...
+2025-08-17T03:56:46.829836714Z #11 6.630 Moving built files for Docker compatibility...
+2025-08-17T03:56:46.980266561Z #11 6.643 Build completed successfully!
+2025-08-17T03:56:46.980287201Z #11 DONE 6.7s
+2025-08-17T03:56:46.980293322Z 
+2025-08-17T03:56:46.980298932Z #12 exporting to docker image format
+2025-08-17T03:56:46.980304822Z #12 exporting layers
+2025-08-17T03:57:01.402706712Z #12 exporting layers 14.5s done
+2025-08-17T03:57:01.616514862Z #12 exporting manifest sha256:f029b06c23f6d7668e36683871b8bb57ec8dc761208e756f37d55bfe18280270 done
+2025-08-17T03:57:01.616541993Z #12 exporting config sha256:48a62f8414fb6af5f1f5f9bf3b336491a985e1181a3203ceea61d081c3f602b1 done
+2025-08-17T03:57:03.923080142Z #12 DONE 16.9s
+2025-08-17T03:57:03.923101213Z 
+2025-08-17T03:57:03.923106603Z #13 exporting cache to client directory
+2025-08-17T03:57:03.923110543Z #13 preparing build cache for export
+2025-08-17T03:57:06.235848131Z #13 writing cache manifest sha256:4511c9615da5dff79b5de28d2e755fd2034463851101e4f00402c2014d800d47 done
+2025-08-17T03:57:06.235868312Z #13 DONE 2.3s
+2025-08-17T03:57:11.768908348Z Pushing image to registry...
+2025-08-17T03:57:18.821773664Z Upload succeeded
+2025-08-17T03:57:21.032131275Z ==> Deploying...
+2025-08-17T03:57:33.027301994Z 
+2025-08-17T03:57:33.027343386Z > rest-express@1.0.0 start
+2025-08-17T03:57:33.027348166Z > NODE_ENV=production node dist/index.js
+2025-08-17T03:57:33.027350396Z 
+2025-08-17T03:57:36.878837204Z 3:57:36 AM [express] serving on port 10000
+2025-08-17T03:57:36.928137107Z Error: ENOENT: no such file or directory, stat '/app/public/index.html'
+2025-08-17T03:57:42.42099859Z ==> Your service is live 🎉
+2025-08-17T03:57:42.445349287Z ==> 
+2025-08-17T03:57:42.466800874Z ==> ///////////////////////////////////////////////////////////
+2025-08-17T03:57:42.489032471Z ==> 
+2025-08-17T03:57:42.512422098Z ==> Available at your primary URL https://clipsyncpro.onrender.com
+2025-08-17T03:57:42.537646085Z ==> 
+2025-08-17T03:57:42.560314262Z ==> ///////////////////////////////////////////////////////////
+2025-08-17T03:57:43.498997051Z Error: ENOENT: no such file or directory, stat '/app/public/index.html'
+2025-08-17T03:58:15.649219662Z Error: ENOENT: no such file or directory, stat '/app/public/index.html'

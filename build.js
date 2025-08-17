@@ -14,11 +14,10 @@ async function build() {
     await execAsync('npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist --define:import.meta.dirname=\'"."\'');
     
     console.log('Moving built files for Docker compatibility...');
-    // Copy built frontend files to dist/public so the server can find them
-    await execAsync('cp -r dist/public dist/public_backup 2>/dev/null || true');
-    await execAsync('mkdir -p dist/public');
-    await execAsync('cp -r dist/public_backup/* dist/public/ 2>/dev/null || true');
-    await execAsync('rm -rf dist/public_backup 2>/dev/null || true');
+    // For Docker: copy frontend files to the root public directory where the server expects them
+    // In Docker, the app runs from /app and looks for ./public which is /app/public
+    await execAsync('mkdir -p public');
+    await execAsync('cp -r dist/public/* public/');
     
     console.log('Build completed successfully!');
   } catch (error) {
