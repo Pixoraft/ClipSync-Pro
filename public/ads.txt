@@ -1,0 +1,7 @@
+# ClipSync Pro ads.txt
+# This file is used by advertising networks to verify authorized sellers
+# Add your advertising partner information here when you start monetizing
+
+# Example format:
+# google.com, pub-1234567890123456, DIRECT, f08c47fec0942fa0
+# Replace with your actual Publisher ID when you set up Google AdSense

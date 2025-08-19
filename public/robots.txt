@@ -1,0 +1,41 @@
+User-agent: *
+Allow: /
+
+# Allow crawling of all pages
+Allow: /home
+Allow: /about
+Allow: /pricing
+Allow: /downloads
+Allow: /contact
+Allow: /blog
+Allow: /blog/*
+
+# Block crawling of admin areas and forms
+Disallow: /admin
+Disallow: /api
+Disallow: /uploads
+Disallow: /*.json$
+
+# Sitemap location
+Sitemap: https://clipsync-pro.replit.app/sitemap.xml
+Sitemap: https://clipsync-pro.replit.app/blog-sitemap.xml
+
+# Crawl delay (optional - removes if too aggressive)
+Crawl-delay: 1
+
+# Archive.org crawling
+User-agent: ia_archiver
+Allow: /
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing specific  
+User-agent: Bingbot
+Allow: /
+
+# Yandex specific
+User-agent: Yandexbot
+Allow: /

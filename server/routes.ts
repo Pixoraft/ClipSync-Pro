@@ -6,6 +6,7 @@ import { fromZodError } from "zod-validation-error";
 import multer from "multer";
 import path from "path";
 import fs from "fs/promises";
+import { handleSitemap, handleBlogSitemap, handleSitemapIndex } from "./sitemap";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Ensure uploads directory exists
@@ -329,6 +330,49 @@ export async function registerRoutes(app: Express): Promise<Server> {
         redirectTo: "vivekrvt84@gmail.com" 
       });
     }
+  });
+
+  // SEO Routes - Sitemaps and robots.txt
+  app.get('/sitemap.xml', handleSitemap);
+  app.get('/blog-sitemap.xml', handleBlogSitemap);
+  app.get('/sitemap-index.xml', handleSitemapIndex);
+  
+  // Robots.txt is served statically from public/robots.txt
+  // but we can also provide a dynamic version if needed
+  app.get('/robots.txt', (req, res) => {
+    const protocol = req.secure ? 'https' : 'http';
+    const baseUrl = `${protocol}://${req.get('host')}`;
+    
+    res.type('text/plain');
+    res.send(`User-agent: *
+Allow: /
+
+# Allow crawling of all pages
+Allow: /home
+Allow: /about
+Allow: /pricing
+Allow: /downloads
+Allow: /contact
+Allow: /blog
+Allow: /blog/*
+
+# Block crawling of admin areas and forms
+Disallow: /admin
+Disallow: /api
+Disallow: /uploads
+Disallow: /*.json$
+
+# Sitemap locations
+Sitemap: ${baseUrl}/sitemap.xml
+Sitemap: ${baseUrl}/blog-sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0`);
   });
 
   const httpServer = createServer(app);

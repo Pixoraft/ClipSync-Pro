@@ -16,11 +16,17 @@ import Navigation from "@/components/layout/navigation";
 import Footer from "@/components/layout/footer";
 import ParticleBackground from "@/components/ui/particle-background";
 import ScrollToTop from "@/components/ui/scroll-to-top";
+import GoogleAnalytics from "@/components/seo/GoogleAnalytics";
+import GoogleSearchConsole from "@/components/seo/GoogleSearchConsole";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { useEffect, useState } from "react";
 
 function Router() {
   const [location] = useLocation();
   const isAdminRoute = location.startsWith('/admin');
+  
+  // Track page views automatically
+  useAnalytics();
 
   return (
     <div className="min-h-screen bg-midnight text-white relative overflow-x-hidden">
@@ -61,6 +67,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        {/* SEO and Analytics Components */}
+        <GoogleAnalytics measurementId={import.meta.env.VITE_GA_MEASUREMENT_ID} />
+        <GoogleSearchConsole verificationCode={import.meta.env.VITE_GOOGLE_SEARCH_CONSOLE_META_TAG} />
+        
         <Toaster />
         <Router />
       </TooltipProvider>

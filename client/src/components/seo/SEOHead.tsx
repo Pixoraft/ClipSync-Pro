@@ -9,6 +9,12 @@ interface SEOHeadProps {
   ogType?: string;
   structuredData?: object;
   noIndex?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
+  section?: string;
+  tags?: string[];
+  locale?: string;
+  alternateLocales?: string[];
 }
 
 export default function SEOHead({
@@ -19,7 +25,13 @@ export default function SEOHead({
   ogImage = "https://clipsync-pro.replit.app/og-image.svg",
   ogType = "website",
   structuredData,
-  noIndex = false
+  noIndex = false,
+  publishedTime,
+  modifiedTime,
+  section,
+  tags = [],
+  locale = "en_US",
+  alternateLocales = []
 }: SEOHeadProps) {
   
   useEffect(() => {
@@ -44,9 +56,23 @@ export default function SEOHead({
     // Update basic meta tags
     updateMetaTag('description', description);
     updateMetaTag('keywords', keywords);
-    updateMetaTag('robots', noIndex ? 'noindex, nofollow' : 'index, follow');
+    updateMetaTag('robots', noIndex ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
     updateMetaTag('author', 'ClipSync Pro Team');
     updateMetaTag('viewport', 'width=device-width, initial-scale=1.0');
+    updateMetaTag('googlebot', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
+    updateMetaTag('bingbot', 'index, follow');
+    updateMetaTag('slurp', 'index, follow');
+    
+    // Additional SEO meta tags
+    updateMetaTag('theme-color', '#0066ff');
+    updateMetaTag('msapplication-TileColor', '#0066ff');
+    updateMetaTag('apple-mobile-web-app-capable', 'yes');
+    updateMetaTag('apple-mobile-web-app-status-bar-style', 'black-translucent');
+    updateMetaTag('application-name', 'ClipSync Pro');
+    updateMetaTag('apple-mobile-web-app-title', 'ClipSync Pro');
+    updateMetaTag('format-detection', 'telephone=no');
+    updateMetaTag('mobile-web-app-capable', 'yes');
+    updateMetaTag('msapplication-tap-highlight', 'no');
     
     // Open Graph tags
     updateMetaTag('og:title', title, true);
@@ -54,21 +80,54 @@ export default function SEOHead({
     updateMetaTag('og:type', ogType, true);
     updateMetaTag('og:url', window.location.href, true);
     updateMetaTag('og:image', ogImage, true);
+    updateMetaTag('og:image:width', '1200', true);
+    updateMetaTag('og:image:height', '630', true);
+    updateMetaTag('og:image:alt', title, true);
     updateMetaTag('og:site_name', 'ClipSync Pro - Best Clipboard Manager', true);
-    updateMetaTag('og:locale', 'en_US', true);
+    updateMetaTag('og:locale', locale, true);
+    
+    // Additional Open Graph tags for articles
+    if (publishedTime) {
+      updateMetaTag('article:published_time', publishedTime, true);
+    }
+    if (modifiedTime) {
+      updateMetaTag('article:modified_time', modifiedTime, true);
+    }
+    if (section) {
+      updateMetaTag('article:section', section, true);
+    }
+    if (tags.length > 0) {
+      tags.forEach(tag => {
+        const meta = document.createElement('meta');
+        meta.setAttribute('property', 'article:tag');
+        meta.content = tag;
+        document.head.appendChild(meta);
+      });
+    }
+    
+    // Alternate locales
+    alternateLocales.forEach(altLocale => {
+      updateMetaTag(`og:locale:alternate`, altLocale, true);
+    });
     
     // Twitter Card tags
     updateMetaTag('twitter:card', 'summary_large_image');
     updateMetaTag('twitter:title', title);
     updateMetaTag('twitter:description', description);
     updateMetaTag('twitter:image', ogImage);
+    updateMetaTag('twitter:image:alt', title);
     updateMetaTag('twitter:creator', '@ClipSyncPro');
+    updateMetaTag('twitter:site', '@ClipSyncPro');
+    updateMetaTag('twitter:domain', window.location.hostname);
     
-    // Additional SEO meta tags
-    updateMetaTag('theme-color', '#0066ff');
-    updateMetaTag('apple-mobile-web-app-capable', 'yes');
-    updateMetaTag('apple-mobile-web-app-status-bar-style', 'black-translucent');
-    updateMetaTag('application-name', 'ClipSync Pro');
+    // LinkedIn specific tags
+    updateMetaTag('linkedin:owner', 'ClipSync Pro', true);
+    
+    // Pinterest specific tags
+    updateMetaTag('pinterest-rich-pin', 'true');
+    
+    // Facebook specific tags
+    updateMetaTag('fb:app_id', '1234567890', true); // Replace with actual Facebook App ID if available
     
     // Canonical URL
     let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
