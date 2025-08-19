@@ -18,6 +18,10 @@ import ParticleBackground from "@/components/ui/particle-background";
 import ScrollToTop from "@/components/ui/scroll-to-top";
 import GoogleAnalytics from "@/components/seo/GoogleAnalytics";
 import GoogleSearchConsole from "@/components/seo/GoogleSearchConsole";
+import PerformanceOptimizer from "@/components/seo/PerformanceOptimizer";
+import LocalBusinessSchema from "@/components/seo/LocalBusinessSchema";
+import WebVitalsTracker from "@/components/seo/WebVitalsTracker";
+import PWAOptimizer from "@/components/seo/PWAOptimizer";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { useEffect, useState } from "react";
 
@@ -70,6 +74,10 @@ function App() {
         {/* SEO and Analytics Components */}
         <GoogleAnalytics measurementId={import.meta.env.VITE_GA_MEASUREMENT_ID} />
         <GoogleSearchConsole verificationCode={import.meta.env.VITE_GOOGLE_SEARCH_CONSOLE_META_TAG} />
+        <PerformanceOptimizer />
+        <LocalBusinessSchema />
+        <WebVitalsTracker />
+        <PWAOptimizer />
         
         <Toaster />
         <Router />
