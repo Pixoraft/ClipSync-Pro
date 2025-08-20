@@ -16,26 +16,14 @@ Disallow: /api
 Disallow: /uploads
 Disallow: /*.json$
 
-# Sitemap location
-Sitemap: https://clipsync-pro.replit.app/sitemap.xml
-Sitemap: https://clipsync-pro.replit.app/blog-sitemap.xml
+# Sitemap locations (always use HTTPS)
+Sitemap: https://clipsync-pro.onrender.com/sitemap.xml
+Sitemap: https://clipsync-pro.onrender.com/blog-sitemap.xml
 
-# Crawl delay (optional - removes if too aggressive)
+# Crawl delay
 Crawl-delay: 1
-
-# Archive.org crawling
-User-agent: ia_archiver
-Allow: /
 
 # Google specific
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 0
-
-# Bing specific  
-User-agent: Bingbot
-Allow: /
-
-# Yandex specific
-User-agent: Yandexbot
-Allow: /
